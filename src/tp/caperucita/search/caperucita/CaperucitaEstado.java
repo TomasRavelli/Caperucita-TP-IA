@@ -1,14 +1,9 @@
 package tp.caperucita.search.caperucita;
 
-import java.util.ArrayList;
-import java.util.List;
-
-
-import frsf.cidisi.faia.agent.Action;
 import frsf.cidisi.faia.agent.Perception;
 import frsf.cidisi.faia.agent.search.SearchBasedAgentState;
-import tp.caperucita.search.auxiliar.PosicionCelda;
 import tp.caperucita.search.auxiliar.ContenidoCelda;
+import tp.caperucita.search.auxiliar.PosicionCelda;
 
 public class CaperucitaEstado extends SearchBasedAgentState {
 
@@ -16,6 +11,12 @@ public class CaperucitaEstado extends SearchBasedAgentState {
 	private Integer cantidadDulces;
 	private PosicionCelda posicionActual;
 	private ContenidoCelda[][] mapaConocidoAgente;
+	
+	//Segun el codigo de FAIA, el Estado de caperucita tiene que tener como atributo  las percepciones que recibe del ambiente, 
+	// no refleja el modelo del problema, pero se utiliza en el execute() de cada accion.
+		
+	private CaperucitaPercepcion percepcion;
+	
 	
 	public CaperucitaEstado() {
 		this.mapaConocidoAgente = new ContenidoCelda[9][14];
@@ -52,6 +53,16 @@ public class CaperucitaEstado extends SearchBasedAgentState {
 	public void actualizarMapaConocidoAgente(PosicionCelda celda, ContenidoCelda contenido) {
 		this.mapaConocidoAgente[celda.getPosicionFila()][celda.getPosicionColumna()] = contenido;
 	}
+	
+
+	public CaperucitaPercepcion getPercepcion() {
+		return percepcion;
+	}
+
+
+	public void setPercepcion(CaperucitaPercepcion percepcion) {
+		this.percepcion = percepcion;
+	}
 
 
 	@Override
@@ -62,7 +73,7 @@ public class CaperucitaEstado extends SearchBasedAgentState {
 		this.posicionActual.setPosicionColumna(0);
 		
 		for (int i = 0 ; i<9; i++) {
-			for(int j=0;j<14; i++) {
+			for(int j=0;j<14; j++) {
 				this.mapaConocidoAgente[i][j] = ContenidoCelda.NOCONOCIDO;
 			}
 		}
@@ -92,7 +103,7 @@ public class CaperucitaEstado extends SearchBasedAgentState {
 		ContenidoCelda[][] newMapaConocidoAgente = new ContenidoCelda[9][14];
 		
 		for (int i = 0 ; i<9; i++) {
-			for(int j=0;j<14; i++) {
+			for(int j=0;j<14; j++) {
 				newMapaConocidoAgente[i][j]= mapaConocidoAgente[i][j];
 			}
 		}
@@ -106,8 +117,10 @@ public class CaperucitaEstado extends SearchBasedAgentState {
 
 	@Override
 	public void updateState(Perception p) {
-		// TODO Auto-generated method stub
-		CaperucitaPercepcion percepcion = (CaperucitaPercepcion) p;
+		
+		//TODO estos e ejecuta en el see(Percepcion) de GoalBasedAgentSimulator, cada vez que percibe el agente.
+		
+		percepcion=(CaperucitaPercepcion)p;
 		
 	}
 

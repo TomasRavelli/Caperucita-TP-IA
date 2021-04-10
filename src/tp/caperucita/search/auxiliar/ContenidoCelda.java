@@ -6,5 +6,6 @@ public enum ContenidoCelda {
 	LOBO, 
 	OBSTACULO, 
 	DULCE, 
-	FLORES
+	FLORES,
+	CONOCIDO
 }

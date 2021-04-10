@@ -6,6 +6,8 @@ import frsf.cidisi.faia.agent.Perception;
 import frsf.cidisi.faia.environment.Environment;
 import tp.caperucita.search.ambiente.AmbienteCaperucita;
 import tp.caperucita.search.ambiente.AmbienteEstado;
+import tp.caperucita.search.auxiliar.ContenidoCelda;
+import tp.caperucita.search.auxiliar.PosicionCelda;
 
 public class CaperucitaPercepcion extends Perception {
 	
@@ -29,14 +31,175 @@ public class CaperucitaPercepcion extends Perception {
 	public CaperucitaPercepcion(Agent agent, Environment environment) {
 		super(agent, environment);
 	}
+	
 	@Override
 	public void initPerception(Agent agentIn, Environment environmentIn) {
-		// TODO Auto-generated method stub
+		
+		cantidadCeldasLibresArriba=0;
+		cantidadCeldasLibresDerecha=0;
+		cantidadCeldasLibresAbajo = 0;
+		cantidadCeldasLibresIzquierda=0;
+		
+		cantidadDulcesArriba=0;
+		cantidadDulcesDerecha=0;
+		cantidadDulcesAbajo=0;
+		cantidadDulcesIzquierda=0;
+		
+		hayLoboArriba = false;
+		hayLoboDerecha = false;
+		hayLoboAbajo = false;
+		hayLoboIzquierda = false;
 		
 		Caperucita agent = (Caperucita) agentIn;
         AmbienteCaperucita ambiente = (AmbienteCaperucita) environmentIn;
         AmbienteEstado environmentState = ambiente.getEnvironmentState();
+        ContenidoCelda[][] mapaAmbiente = environmentState.getMapaAmbiente();
+        PosicionCelda posicionCaperucita = environmentState.getPosicionCaperucita();
         
+        //0=arriba, 1=derecha, 2=abajo, 3=izquierda
+        contarCeldasLibresYDulces(0, mapaAmbiente, posicionCaperucita);
+        contarCeldasLibresYDulces(1, mapaAmbiente, posicionCaperucita);
+        contarCeldasLibresYDulces(2, mapaAmbiente, posicionCaperucita);
+        contarCeldasLibresYDulces(3, mapaAmbiente, posicionCaperucita);
+      
 	}
+	private void contarCeldasLibresYDulces(int orientacion, ContenidoCelda[][] mapaAmbiente, PosicionCelda posicionCaperucita ) {
+		int fila = posicionCaperucita.getPosicionFila();
+		int columna = posicionCaperucita.getPosicionColumna();
+		
+		switch(orientacion){
+			case 0:{//Arriba
+				
+				while(fila>=0 && !mapaAmbiente[fila][columna].equals(ContenidoCelda.OBSTACULO) && !hayLoboArriba) {
+					if(mapaAmbiente[fila][columna].equals(ContenidoCelda.LOBO)) {
+						hayLoboArriba = true;
+					}
+					if(mapaAmbiente[fila][columna].equals(ContenidoCelda.DULCE)) {
+						cantidadDulcesArriba++;
+					}
+					cantidadCeldasLibresArriba++;
+					fila--;
+				}
+				break;
+			}
+			case 1:{//Derecha
+				
+				while(columna<mapaAmbiente[0].length && !mapaAmbiente[fila][columna].equals(ContenidoCelda.OBSTACULO) && !hayLoboDerecha) {
+					if(mapaAmbiente[fila][columna].equals(ContenidoCelda.LOBO)) {
+						hayLoboDerecha = true;
+					}
+					if(mapaAmbiente[fila][columna].equals(ContenidoCelda.DULCE)) {
+						cantidadDulcesDerecha++;
+					}
+					cantidadCeldasLibresDerecha++;
+					columna++;
+				}
+				break;
+			}
+			case 2:{//Abajo
+				
+				while(fila<mapaAmbiente.length && !mapaAmbiente[fila][columna].equals(ContenidoCelda.OBSTACULO) && !hayLoboAbajo) {
+					if(mapaAmbiente[fila][columna].equals(ContenidoCelda.LOBO)) {
+						hayLoboAbajo = true;
+					}
+					if(mapaAmbiente[fila][columna].equals(ContenidoCelda.DULCE)) {
+						cantidadDulcesAbajo++;
+					}
+					cantidadCeldasLibresAbajo++;
+					fila++;
+				}
+				break;
+			}
+			case 3:{
+				//Izquierda
+				
+				while(columna>=0 && !mapaAmbiente[fila][columna].equals(ContenidoCelda.OBSTACULO) && !hayLoboIzquierda) {
+					if(mapaAmbiente[fila][columna].equals(ContenidoCelda.LOBO)) {
+						hayLoboIzquierda = true;
+					}
+					if(mapaAmbiente[fila][columna].equals(ContenidoCelda.DULCE)) {
+						cantidadDulcesIzquierda++;
+					}
+					cantidadCeldasLibresIzquierda++;
+					columna--;
+				}
+				break;
+			}
+		}
+	}
+	public Integer getCantidadCeldasLibresArriba() {
+		return cantidadCeldasLibresArriba;
+	}
+	public void setCantidadCeldasLibresArriba(Integer cantidadCeldasLibresArriba) {
+		this.cantidadCeldasLibresArriba = cantidadCeldasLibresArriba;
+	}
+	public Integer getCantidadCeldasLibresDerecha() {
+		return cantidadCeldasLibresDerecha;
+	}
+	public void setCantidadCeldasLibresDerecha(Integer cantidadCeldasLibresDerecha) {
+		this.cantidadCeldasLibresDerecha = cantidadCeldasLibresDerecha;
+	}
+	public Integer getCantidadCeldasLibresAbajo() {
+		return cantidadCeldasLibresAbajo;
+	}
+	public void setCantidadCeldasLibresAbajo(Integer cantidadCeldasLibresAbajo) {
+		this.cantidadCeldasLibresAbajo = cantidadCeldasLibresAbajo;
+	}
+	public Integer getCantidadCeldasLibresIzquierda() {
+		return cantidadCeldasLibresIzquierda;
+	}
+	public void setCantidadCeldasLibresIzquierda(Integer cantidadCeldasLibresIzquierda) {
+		this.cantidadCeldasLibresIzquierda = cantidadCeldasLibresIzquierda;
+	}
+	public Integer getCantidadDulcesArriba() {
+		return cantidadDulcesArriba;
+	}
+	public void setCantidadDulcesArriba(Integer cantidadDulcesArriba) {
+		this.cantidadDulcesArriba = cantidadDulcesArriba;
+	}
+	public Integer getCantidadDulcesDerecha() {
+		return cantidadDulcesDerecha;
+	}
+	public void setCantidadDulcesDerecha(Integer cantidadDulcesDerecha) {
+		this.cantidadDulcesDerecha = cantidadDulcesDerecha;
+	}
+	public Integer getCantidadDulcesAbajo() {
+		return cantidadDulcesAbajo;
+	}
+	public void setCantidadDulcesAbajo(Integer cantidadDulcesAbajo) {
+		this.cantidadDulcesAbajo = cantidadDulcesAbajo;
+	}
+	public Integer getCantidadDulcesIzquierda() {
+		return cantidadDulcesIzquierda;
+	}
+	public void setCantidadDulcesIzquierda(Integer cantidadDulcesIzquierda) {
+		this.cantidadDulcesIzquierda = cantidadDulcesIzquierda;
+	}
+	public Boolean getHayLoboArriba() {
+		return hayLoboArriba;
+	}
+	public void setHayLoboArriba(Boolean hayLoboArriba) {
+		this.hayLoboArriba = hayLoboArriba;
+	}
+	public Boolean getHayLoboDerecha() {
+		return hayLoboDerecha;
+	}
+	public void setHayLoboDerecha(Boolean hayLoboDerecha) {
+		this.hayLoboDerecha = hayLoboDerecha;
+	}
+	public Boolean getHayLoboAbajo() {
+		return hayLoboAbajo;
+	}
+	public void setHayLoboAbajo(Boolean hayLoboAbajo) {
+		this.hayLoboAbajo = hayLoboAbajo;
+	}
+	public Boolean getHayLoboIzquierda() {
+		return hayLoboIzquierda;
+	}
+	public void setHayLoboIzquierda(Boolean hayLoboIzquierda) {
+		this.hayLoboIzquierda = hayLoboIzquierda;
+	}
+	
+	
 
 }
