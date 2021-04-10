@@ -41,17 +41,22 @@ public class AmbienteEstado extends EnvironmentState {
 		String mapaString = "\n";
 
 		for(int fila = 0; fila < mapaAmbiente.length; fila++){
-			mapaString += "[";
 			for(int col = 0; col < mapaAmbiente[fila].length; col++){
-				mapaString += mapaAmbiente[fila][col].name() + " ";
+				mapaString += "|";
+				if(posicionCaperucita.getPosicionFila() == fila && posicionCaperucita.getPosicionColumna() == col){
+					mapaString += "CAPERUCITA";
+				}else {
+					mapaString += mapaAmbiente[fila][col].toString() + "";
+				}
+				mapaString += "| ";
 			}
-			mapaString += "]\n";
+			mapaString += "\n";
 		}
 
 		return "AmbienteEstado{\n" +
 				"posicionCaperucita=" + posicionCaperucita + "\n" +
-				", mapaAmbiente=" + mapaString + "\n" +
-				'}';
+				", mapaAmbiente=" + mapaString +
+				"} fin AmbienteEstado\n";
 	}
 
 	public PosicionCelda getPosicionCaperucita() {

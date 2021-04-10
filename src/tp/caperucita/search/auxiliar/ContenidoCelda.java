@@ -7,5 +7,14 @@ public enum ContenidoCelda {
 	OBSTACULO, 
 	DULCE, 
 	FLORES,
-	CONOCIDO
+	CONOCIDO;
+
+	@Override
+	public String toString() {
+		String name = name();
+		for(int i = name.length(); i < 10; i++){
+			name += " ";
+		}
+		return name;
+	}
 }

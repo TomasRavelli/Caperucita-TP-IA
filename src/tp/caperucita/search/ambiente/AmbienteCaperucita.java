@@ -23,7 +23,7 @@ public class AmbienteCaperucita extends Environment {
 	@Override
 	public String toString() {
 		return "AmbienteCaperucita{\n" +
-				"environmentState=" + environmentState + "\n" +
-				'}';
+				"environmentState=" + environmentState +
+				"} fin AmbienteCaperucita\n";
 	}
 }

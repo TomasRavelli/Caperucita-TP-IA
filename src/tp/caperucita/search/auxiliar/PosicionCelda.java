@@ -36,6 +36,6 @@ public class PosicionCelda {
 		return "PosicionCelda{\n" +
 				"posicionFila=" + posicionFila + "\n" +
 				", posicionColumna=" + posicionColumna + "\n" +
-				'}';
+				"} fin PosicionCelda";
 	}
 }
