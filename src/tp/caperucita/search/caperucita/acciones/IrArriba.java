@@ -64,7 +64,7 @@ public class IrArriba extends SearchAction {
 				
 			estadoCaperucita.setPosicionActual(nuevaPosicion);
 			for(int i = 0; i<=estadoCaperucita.getPercepcion().getCantidadCeldasLibresArriba(); i++) {
-				estadoCaperucita.actualizarMapaConocidoAgente(new PosicionCelda(estadoCaperucita.getPosicionActual().getPosicionFila()+i, estadoCaperucita.getPosicionActual().getPosicionColumna()), ContenidoCelda.CONOCIDO);
+				estadoCaperucita.actualizarMapaConocidoAgente(new PosicionCelda(estadoCaperucita.getPosicionActual().getPosicionFila()+i, estadoCaperucita.getPosicionActual().getPosicionColumna()), estadoAmbiente.getMapaAmbiente()[estadoCaperucita.getPosicionActual().getPosicionFila()+i][ estadoCaperucita.getPosicionActual().getPosicionColumna()]);
 				
 //				Esto va en IrArribaYJuntarDulce
 //				//Si hay dulce en la celda actual, lo consume				

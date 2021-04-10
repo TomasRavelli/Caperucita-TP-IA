@@ -12,10 +12,11 @@ public class CaperucitaEstado extends SearchBasedAgentState {
 	private PosicionCelda posicionActual;
 	private ContenidoCelda[][] mapaConocidoAgente;
 	
-	//Segun el codigo de FAIA, el Estado de caperucita tiene que tener como atributo  las percepciones que recibe del ambiente, 
-	// no refleja el modelo del problema, pero se utiliza en el execute() de cada accion.
-		
+	//Segun el codigo de FAIA, el Estado de caperucita tiene que tener como atributo  las percepciones que recibe del ambiente
+	//o tendrian que actualizarse varibles dentro de esta clase.
 	private CaperucitaPercepcion percepcion;
+	//No sabemos si esta bien, para actualizar el estado deberiamos tener las mismas variables de la percepcion dentro de esta clase.
+	
 	
 	
 	public CaperucitaEstado() {
