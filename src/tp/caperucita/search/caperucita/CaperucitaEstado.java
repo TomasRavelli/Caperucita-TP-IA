@@ -1,5 +1,8 @@
 package tp.caperucita.search.caperucita;
 
+import java.util.Arrays;
+import java.util.Objects;
+
 import frsf.cidisi.faia.agent.Perception;
 import frsf.cidisi.faia.agent.search.SearchBasedAgentState;
 import tp.caperucita.search.auxiliar.ContenidoCelda;
@@ -80,13 +83,13 @@ public class CaperucitaEstado extends SearchBasedAgentState {
 		}
 	}
 
-
 	@Override
-	public boolean equals(Object obj) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+		CaperucitaEstado that = (CaperucitaEstado) o;
+		return Objects.equals(cantidadVidas, that.cantidadVidas) && Objects.equals(cantidadDulces, that.cantidadDulces) && Objects.equals(posicionActual, that.posicionActual) && Arrays.equals(mapaConocidoAgente, that.mapaConocidoAgente) && Objects.equals(percepcion, that.percepcion);
 	}
-
 
 	@Override
 	public SearchBasedAgentState clone() {

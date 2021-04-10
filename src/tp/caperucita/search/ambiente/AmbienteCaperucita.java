@@ -16,8 +16,14 @@ public class AmbienteCaperucita extends Environment {
 
 	@Override
 	public Perception getPercept() {
-		// TODO Auto-generated method stub
+		// TODO Crear la percepción según la posición actual de caperucita (en las 4 direcciones.
 		return null;
 	}
 
+	@Override
+	public String toString() {
+		return "AmbienteCaperucita{\n" +
+				"environmentState=" + environmentState + "\n" +
+				'}';
+	}
 }

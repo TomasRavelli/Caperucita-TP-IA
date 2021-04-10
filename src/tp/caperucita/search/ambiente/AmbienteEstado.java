@@ -1,5 +1,7 @@
 package tp.caperucita.search.ambiente;
 
+import java.util.Arrays;
+
 import frsf.cidisi.faia.state.EnvironmentState;
 import tp.caperucita.search.auxiliar.ContenidoCelda;
 import tp.caperucita.search.auxiliar.PosicionCelda;
@@ -35,8 +37,21 @@ public class AmbienteEstado extends EnvironmentState {
 
 	@Override
 	public String toString() {
-		// TODO Auto-generated method stub
-		return this.toString();
+
+		String mapaString = "\n";
+
+		for(int fila = 0; fila < mapaAmbiente.length; fila++){
+			mapaString += "[";
+			for(int col = 0; col < mapaAmbiente[fila].length; col++){
+				mapaString += mapaAmbiente[fila][col].name() + " ";
+			}
+			mapaString += "]\n";
+		}
+
+		return "AmbienteEstado{\n" +
+				"posicionCaperucita=" + posicionCaperucita + "\n" +
+				", mapaAmbiente=" + mapaString + "\n" +
+				'}';
 	}
 
 	public PosicionCelda getPosicionCaperucita() {

@@ -30,4 +30,12 @@ public class PosicionCelda {
 	public PosicionCelda clone() {
 		return new PosicionCelda(this.posicionFila, this.posicionColumna);
 	}
+
+	@Override
+	public String toString() {
+		return "PosicionCelda{\n" +
+				"posicionFila=" + posicionFila + "\n" +
+				", posicionColumna=" + posicionColumna + "\n" +
+				'}';
+	}
 }
