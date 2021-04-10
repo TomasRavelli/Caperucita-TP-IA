@@ -35,8 +35,8 @@ public class CaperucitaPercepcion extends Perception {
 		
 		Caperucita agent = (Caperucita) agentIn;
         AmbienteCaperucita ambiente = (AmbienteCaperucita) environmentIn;
-        AmbienteEstado environmentState = (AmbienteEstado) ambiente.getEnvironmentState();
-		
+        AmbienteEstado environmentState = ambiente.getEnvironmentState();
+        
 	}
 
 }

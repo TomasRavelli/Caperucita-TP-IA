@@ -10,6 +10,10 @@ public class PosicionCelda {
 		this.posicionColumna = columna;
 	}
 	
+	public PosicionCelda() {
+		// TODO Auto-generated constructor stub
+	}
+
 	public Integer getPosicionFila() {
 		return posicionFila;
 	}

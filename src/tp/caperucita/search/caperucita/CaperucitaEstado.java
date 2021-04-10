@@ -18,6 +18,8 @@ public class CaperucitaEstado extends SearchBasedAgentState {
 	private ContenidoCelda[][] mapaConocidoAgente;
 	
 	public CaperucitaEstado() {
+		this.mapaConocidoAgente = new ContenidoCelda[9][14];
+		this.posicionActual = new PosicionCelda();
 		this.initState();
 	}
 	
@@ -54,13 +56,14 @@ public class CaperucitaEstado extends SearchBasedAgentState {
 
 	@Override
 	public void initState() {
-		cantidadVidas = 3;
-		cantidadDulces = 0;
-		posicionActual = new PosicionCelda(0,0);
-		mapaConocidoAgente = new ContenidoCelda[9][14];
+		this.cantidadVidas = 3;
+		this.cantidadDulces = 0;
+		this.posicionActual.setPosicionFila(0);
+		this.posicionActual.setPosicionColumna(0);
+		
 		for (int i = 0 ; i<9; i++) {
 			for(int j=0;j<14; i++) {
-				mapaConocidoAgente[i][j] = ContenidoCelda.NOCONOCIDO;
+				this.mapaConocidoAgente[i][j] = ContenidoCelda.NOCONOCIDO;
 			}
 		}
 	}
