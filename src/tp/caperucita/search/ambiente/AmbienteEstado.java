@@ -30,7 +30,7 @@ public class AmbienteEstado extends EnvironmentState {
 	public void initState() {
 		// TODO Auto-generated method stub
 		this.posicionCaperucita.setPosicionFila(0);
-		this.posicionCaperucita.setPosicionFila(0);
+		this.posicionCaperucita.setPosicionColumna(0);
 	}
 
 	@Override
