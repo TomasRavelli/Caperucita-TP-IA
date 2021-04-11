@@ -81,8 +81,7 @@ public class CaperucitaPercepcion extends Perception {
 		switch(orientacion){
 			case 0:{//Arriba
 
-				//Si la fila es igual a cero no puedo fijarme que hay arriba, porque no hay nada.
-				while(fila > 0 && !mapaAmbiente[fila][columna].equals(ContenidoCelda.OBSTACULO) && !hayLoboArriba) {
+				while(fila >= 0 && !mapaAmbiente[fila][columna].equals(ContenidoCelda.OBSTACULO) && !hayLoboArriba) {
 					if(mapaAmbiente[fila][columna].equals(ContenidoCelda.LOBO)) {
 						hayLoboArriba = true;
 					}
@@ -124,8 +123,7 @@ public class CaperucitaPercepcion extends Perception {
 			}
 			case 3:{
 				//Izquierda
-				//Si la columna es igual a cero no puedo ir a la derecha, porque no hay nada a la derecha
-				while(columna > 0 && !mapaAmbiente[fila][columna].equals(ContenidoCelda.OBSTACULO) && !hayLoboIzquierda) {
+				while(columna >= 0 && !mapaAmbiente[fila][columna].equals(ContenidoCelda.OBSTACULO) && !hayLoboIzquierda) {
 					if(mapaAmbiente[fila][columna].equals(ContenidoCelda.LOBO)) {
 						hayLoboIzquierda = true;
 					}
