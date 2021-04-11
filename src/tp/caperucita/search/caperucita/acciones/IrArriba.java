@@ -19,27 +19,30 @@ public class IrArriba extends SearchAction {
 	public SearchBasedAgentState execute(SearchBasedAgentState s) {
 		
 		CaperucitaEstado estadoCaperucita = (CaperucitaEstado)s;
-		PosicionCelda nuevaPosicion = new PosicionCelda(estadoCaperucita.getPosicionActual().getPosicionFila() - estadoCaperucita.getPercepcion().getCantidadCeldasLibresArriba(),estadoCaperucita.getPosicionActual().getPosicionColumna());
-		int cantidadDulcesArriba = estadoCaperucita.getPercepcion().getCantidadDulcesArriba();
-		boolean hayLoboArriba = estadoCaperucita.getPercepcion().getHayLoboArriba();
+		int cantidadCeldasLibreArriba = estadoCaperucita.getCantidadCeldasArriba();
+		PosicionCelda posicionActual = estadoCaperucita.getPosicionActual(), nuevaPosicion = new PosicionCelda();
+		int cantidadDulcesArriba = estadoCaperucita.getCantidadDulcesArriba();
+		boolean hayLoboArriba = estadoCaperucita.getHayLoboArriba();
 		
-		if(!hayLoboArriba) {
-			if(cantidadDulcesArriba==0) {
+		if(cantidadCeldasLibreArriba > 0 && cantidadDulcesArriba == 0) {
+			if(!hayLoboArriba) {
+			
+				nuevaPosicion.setPosicionColumna(posicionActual.getPosicionColumna());
+				nuevaPosicion.setPosicionFila(posicionActual.getPosicionFila()-cantidadCeldasLibreArriba);
 				estadoCaperucita.setPosicionActual(nuevaPosicion);
-				//TODO NO hay que usar la percepción acá, el estado de caperucita tiene que calcular cuántas celdas puede moverse.
-				for(int i = 0; i<=estadoCaperucita.getPercepcion().getCantidadCeldasLibresArriba(); i++) {
-					estadoCaperucita.actualizarMapaConocidoAgente(new PosicionCelda(estadoCaperucita.getPosicionActual().getPosicionFila()+i, estadoCaperucita.getPosicionActual().getPosicionColumna()), ContenidoCelda.CONOCIDO);
-				}
+				return estadoCaperucita;
+			
 			}
-		}
-		else {
+			//Esta el lobo, caperucita piede una vida y todos los dulces.
+			nuevaPosicion.setPosicionColumna(0);
+			nuevaPosicion.setPosicionFila(0);
 			estadoCaperucita.setCantidadDulces(0);
-			estadoCaperucita.setPosicionActual(new PosicionCelda(0, 0));
+			estadoCaperucita.setPosicionActual(nuevaPosicion);
 			estadoCaperucita.setCantidadVidas(estadoCaperucita.getCantidadVidas()-1);
+			return estadoCaperucita;
+		
 		}
-
-		//TODO hay que retornar null si no se cumplen las precondiciones, así le decimos a faia que esta acción no es válida.
-		return estadoCaperucita;
+		return null;
 	}
 
 	@Override
@@ -56,39 +59,33 @@ public class IrArriba extends SearchAction {
 	public EnvironmentState execute(AgentState ast, EnvironmentState est) {
 		
 		CaperucitaEstado estadoCaperucita = (CaperucitaEstado)ast;
-		PosicionCelda nuevaPosicion = new PosicionCelda(estadoCaperucita.getPosicionActual().getPosicionFila() - estadoCaperucita.getPercepcion().getCantidadCeldasLibresArriba(),estadoCaperucita.getPosicionActual().getPosicionColumna());
-		int cantidadDulcesArriba = estadoCaperucita.getPercepcion().getCantidadDulcesArriba();
-		boolean hayLoboArriba = estadoCaperucita.getPercepcion().getHayLoboArriba();
+		PosicionCelda nuevaPosicion = new PosicionCelda(), posicionActual = estadoCaperucita.getPosicionActual();
+		int cantidadDulcesArriba = estadoCaperucita.getCantidadDulcesArriba(), cantidadCeldasLibresArriba = estadoCaperucita.getCantidadCeldasArriba();
+		boolean hayLoboArriba = estadoCaperucita.getHayLoboArriba();
 		
 		AmbienteEstado estadoAmbiente =  (AmbienteEstado) est;
 	
-		if(!hayLoboArriba) {
-			if(cantidadDulcesArriba==0) {
+		if(cantidadCeldasLibresArriba > 0 && cantidadDulcesArriba == 0) {
+			if(!hayLoboArriba) {
+				nuevaPosicion.setPosicionColumna(posicionActual.getPosicionColumna());
+				nuevaPosicion.setPosicionFila(posicionActual.getPosicionFila()-cantidadCeldasLibresArriba);
 				//TODO Cuidado! la nueva posición puede tener valores negativos is caperucita está en el 0. Hay que validar las precondiciones para evitar esto
 				estadoCaperucita.setPosicionActual(nuevaPosicion);
-				//Problema! Si la cantidad de celdas libres arriba se ejecuta este for y no debería. Hay que validar las precondiciones antes.
-				for(int i = 0; i<=estadoCaperucita.getPercepcion().getCantidadCeldasLibresArriba(); i++) {
-					estadoCaperucita.actualizarMapaConocidoAgente(new PosicionCelda(estadoCaperucita.getPosicionActual().getPosicionFila()+i, estadoCaperucita.getPosicionActual().getPosicionColumna()), estadoAmbiente.getMapaAmbiente()[estadoCaperucita.getPosicionActual().getPosicionFila()+i][ estadoCaperucita.getPosicionActual().getPosicionColumna()]);
-
-	//				Esto va en IrArribaYJuntarDulce
-	//				//Si hay dulce en la celda actual, lo consume
-	//				if(estadoAmbiente.getMapaAmbiente()[estadoCaperucita.getPosicionActual().getPosicionFila()+i][estadoCaperucita.getPosicionActual().getPosicionColumna()].equals(ContenidoCelda.DULCE)){
-	//					ContenidoCelda[][] mapaAmbienteActualizado = estadoAmbiente.getMapaAmbiente();
-	//					mapaAmbienteActualizado[estadoCaperucita.getPosicionActual().getPosicionFila()+i][estadoCaperucita.getPosicionActual().getPosicionColumna()] = ContenidoCelda.LIBRE;
-	//					estadoAmbiente.setMapaAmbiente(mapaAmbienteActualizado);
-	//				}
-				}
 				estadoAmbiente.setPosicionCaperucita(estadoCaperucita.getPosicionActual());
+				return estadoAmbiente;
 			}
-		}
-		else {
+			//Esta el lobo, caperucita pierde una vida y todos los dulces
 			estadoCaperucita.setCantidadDulces(0);
-			estadoCaperucita.setPosicionActual(new PosicionCelda(0, 0));
+			posicionActual.setPosicionColumna(0);
+			posicionActual.setPosicionFila(0);
+			estadoCaperucita.setPosicionActual(posicionActual);
 			estadoCaperucita.setCantidadVidas(estadoCaperucita.getCantidadVidas()-1);
 			estadoAmbiente.setPosicionCaperucita(estadoCaperucita.getPosicionActual());
+			return estadoAmbiente;
+		
 		}
-		//TODO Hay que retornar null si no se cumplen las precondiciones
-		return estadoAmbiente;
+		
+		return null;
 	}
 
 	@Override
