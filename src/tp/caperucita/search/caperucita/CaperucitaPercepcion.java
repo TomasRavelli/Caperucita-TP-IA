@@ -25,8 +25,9 @@ public class CaperucitaPercepcion extends Perception {
 	private Boolean hayLoboDerecha;
 	private Boolean hayLoboAbajo;
 	private Boolean hayLoboIzquierda;
-	
-	
+
+	public CaperucitaPercepcion() {
+	}
 
 	public CaperucitaPercepcion(Agent agent, Environment environment) {
 		super(agent, environment);
@@ -55,13 +56,23 @@ public class CaperucitaPercepcion extends Perception {
         AmbienteEstado environmentState = ambiente.getEnvironmentState();
         ContenidoCelda[][] mapaAmbiente = environmentState.getMapaAmbiente();
         PosicionCelda posicionCaperucita = environmentState.getPosicionCaperucita();
-        
-        //0=arriba, 1=derecha, 2=abajo, 3=izquierda
-        contarCeldasLibresYDulces(0, mapaAmbiente, posicionCaperucita);
-        contarCeldasLibresYDulces(1, mapaAmbiente, posicionCaperucita);
-        contarCeldasLibresYDulces(2, mapaAmbiente, posicionCaperucita);
-        contarCeldasLibresYDulces(3, mapaAmbiente, posicionCaperucita);
+
+        //movi esto a otro método para usarlo en el ambiente.getPercept()
+        contarCeldasLibresYDulces(mapaAmbiente, posicionCaperucita);
       
+	}
+
+	public void contarCeldasLibresYDulces(ContenidoCelda[][] mapaAmbiente, PosicionCelda posicionCaperucita){
+		//inicializar parametros
+		cantidadCeldasLibresArriba=0;
+		cantidadCeldasLibresDerecha=0;
+		cantidadCeldasLibresAbajo = 0;
+		cantidadCeldasLibresIzquierda=0;
+		//0=arriba, 1=derecha, 2=abajo, 3=izquierda
+		contarCeldasLibresYDulces(0, mapaAmbiente, posicionCaperucita);
+		contarCeldasLibresYDulces(1, mapaAmbiente, posicionCaperucita);
+		contarCeldasLibresYDulces(2, mapaAmbiente, posicionCaperucita);
+		contarCeldasLibresYDulces(3, mapaAmbiente, posicionCaperucita);
 	}
 	private void contarCeldasLibresYDulces(int orientacion, ContenidoCelda[][] mapaAmbiente, PosicionCelda posicionCaperucita ) {
 		int fila = posicionCaperucita.getPosicionFila();
@@ -69,8 +80,9 @@ public class CaperucitaPercepcion extends Perception {
 		
 		switch(orientacion){
 			case 0:{//Arriba
-				
-				while(fila>=0 && !mapaAmbiente[fila][columna].equals(ContenidoCelda.OBSTACULO) && !hayLoboArriba) {
+
+				//Si la fila es igual a cero no puedo fijarme que hay arriba, porque no hay nada.
+				while(fila > 0 && !mapaAmbiente[fila][columna].equals(ContenidoCelda.OBSTACULO) && !hayLoboArriba) {
 					if(mapaAmbiente[fila][columna].equals(ContenidoCelda.LOBO)) {
 						hayLoboArriba = true;
 					}
@@ -84,7 +96,7 @@ public class CaperucitaPercepcion extends Perception {
 			}
 			case 1:{//Derecha
 				
-				while(columna<mapaAmbiente[0].length && !mapaAmbiente[fila][columna].equals(ContenidoCelda.OBSTACULO) && !hayLoboDerecha) {
+				while(columna < mapaAmbiente[0].length && !mapaAmbiente[fila][columna].equals(ContenidoCelda.OBSTACULO) && !hayLoboDerecha) {
 					if(mapaAmbiente[fila][columna].equals(ContenidoCelda.LOBO)) {
 						hayLoboDerecha = true;
 					}
@@ -98,7 +110,7 @@ public class CaperucitaPercepcion extends Perception {
 			}
 			case 2:{//Abajo
 				
-				while(fila<mapaAmbiente.length && !mapaAmbiente[fila][columna].equals(ContenidoCelda.OBSTACULO) && !hayLoboAbajo) {
+				while(fila < mapaAmbiente.length && !mapaAmbiente[fila][columna].equals(ContenidoCelda.OBSTACULO) && !hayLoboAbajo) {
 					if(mapaAmbiente[fila][columna].equals(ContenidoCelda.LOBO)) {
 						hayLoboAbajo = true;
 					}
@@ -112,8 +124,8 @@ public class CaperucitaPercepcion extends Perception {
 			}
 			case 3:{
 				//Izquierda
-				
-				while(columna>=0 && !mapaAmbiente[fila][columna].equals(ContenidoCelda.OBSTACULO) && !hayLoboIzquierda) {
+				//Si la columna es igual a cero no puedo ir a la derecha, porque no hay nada a la derecha
+				while(columna > 0 && !mapaAmbiente[fila][columna].equals(ContenidoCelda.OBSTACULO) && !hayLoboIzquierda) {
 					if(mapaAmbiente[fila][columna].equals(ContenidoCelda.LOBO)) {
 						hayLoboIzquierda = true;
 					}
@@ -199,7 +211,22 @@ public class CaperucitaPercepcion extends Perception {
 	public void setHayLoboIzquierda(Boolean hayLoboIzquierda) {
 		this.hayLoboIzquierda = hayLoboIzquierda;
 	}
-	
-	
 
+	@Override
+	public String toString() {
+		return "CaperucitaPercepcion{" +
+				"cantidadCeldasLibresArriba=" + cantidadCeldasLibresArriba +
+				", cantidadCeldasLibresDerecha=" + cantidadCeldasLibresDerecha +
+				", cantidadCeldasLibresAbajo=" + cantidadCeldasLibresAbajo +
+				", cantidadCeldasLibresIzquierda=" + cantidadCeldasLibresIzquierda +
+				", cantidadDulcesArriba=" + cantidadDulcesArriba +
+				", cantidadDulcesDerecha=" + cantidadDulcesDerecha +
+				", cantidadDulcesAbajo=" + cantidadDulcesAbajo +
+				", cantidadDulcesIzquierda=" + cantidadDulcesIzquierda +
+				", hayLoboArriba=" + hayLoboArriba +
+				", hayLoboDerecha=" + hayLoboDerecha +
+				", hayLoboAbajo=" + hayLoboAbajo +
+				", hayLoboIzquierda=" + hayLoboIzquierda +
+				'}';
+	}
 }

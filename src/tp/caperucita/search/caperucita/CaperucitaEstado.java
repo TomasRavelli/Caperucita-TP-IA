@@ -99,6 +99,7 @@ public class CaperucitaEstado extends SearchBasedAgentState {
     	
 		newState.setCantidadVidas(this.cantidadVidas);
 		newState.setCantidadDulces(this.cantidadDulces);
+		newState.setPercepcion(this.percepcion);
 		
 		//Los atributos que son objetos se pasan por
     	//referencia; luego, es necesario clonarlos
@@ -112,7 +113,7 @@ public class CaperucitaEstado extends SearchBasedAgentState {
 			}
 		}
 		newState.setMapaConocidoAgente(newMapaConocidoAgente);
-    	  
+
     	
         return newState;
         

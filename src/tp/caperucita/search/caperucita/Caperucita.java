@@ -43,7 +43,6 @@ public class Caperucita extends SearchBasedAgent{
 	public void see(Perception p) {
 		//TODO ver si en este caso es necesario porque el agente en nuestro problema solo se actualiza cuando realiza una accion.
 		this.getAgentState().updateState(p);
-		
 	}
 
 	@Override
