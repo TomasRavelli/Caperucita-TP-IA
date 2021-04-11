@@ -78,7 +78,7 @@ public class CaperucitaEstado extends SearchBasedAgentState {
 		
 		for (int i = 0 ; i<9; i++) {
 			for(int j=0;j<14; j++) {
-				this.mapaConocidoAgente[i][j] = ContenidoCelda.NOCONOCIDO;
+				this.mapaConocidoAgente[i][j] = ContenidoCelda.DESCONOCIDO;
 			}
 		}
 	}
@@ -138,7 +138,7 @@ public class CaperucitaEstado extends SearchBasedAgentState {
 			for(int col = 0; col < mapaConocidoAgente[fila].length; col++){
 				mapaString += "|";
 				if(posicionActual.getPosicionFila() == fila && posicionActual.getPosicionColumna() == col){
-					mapaString += "CAPERUCITA";
+					mapaString += "CAPERUCITA "; //Espacio al final para que tenga 11 caracteres, como DESCONOCIDO.
 				}else {
 					mapaString += mapaConocidoAgente[fila][col].toString() + "";
 				}

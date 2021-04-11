@@ -44,7 +44,7 @@ public class AmbienteEstado extends EnvironmentState {
 			for(int col = 0; col < mapaAmbiente[fila].length; col++){
 				mapaString += "|";
 				if(posicionCaperucita.getPosicionFila() == fila && posicionCaperucita.getPosicionColumna() == col){
-					mapaString += "CAPERUCITA";
+					mapaString += "CAPERUCITA "; //Espacio al final para que tenga 11 caracteres, como DESCONOCIDO.
 				}else {
 					mapaString += mapaAmbiente[fila][col].toString() + "";
 				}

@@ -1,7 +1,7 @@
 package tp.caperucita.search.auxiliar;
 
 public enum ContenidoCelda {
-	NOCONOCIDO,
+	DESCONOCIDO,
 	LIBRE, 
 	LOBO, 
 	OBSTACULO, 
@@ -12,7 +12,8 @@ public enum ContenidoCelda {
 	@Override
 	public String toString() {
 		String name = name();
-		for(int i = name.length(); i < 10; i++){
+		//agrego espacios al final para que quede mejor cuando se muestra el mapa.
+		for(int i = name.length(); i < 11; i++){
 			name += " ";
 		}
 		return name;
