@@ -76,6 +76,7 @@ public class CaperucitaPercepcion extends Perception {
 	}
 
 	//TODO este método es bastante feo, creo que se podría dividir en 4, o hacer que no reciba una dirección si igual hay que calcular las 4 siempre
+	//TODO REVISAR, me parece que si caperucita está en algún borde esto no funciona bien.
 	private void contarCeldasLibresYDulces(int orientacion, ContenidoCelda[][] mapaAmbiente, PosicionCelda posicionCaperucita ) {
 		int fila = posicionCaperucita.getPosicionFila();
 		int columna = posicionCaperucita.getPosicionColumna();

@@ -160,20 +160,56 @@ public class CaperucitaEstado extends SearchBasedAgentState {
 				'}';
 	}
 
-	//TODO estos métodos prdrían hacerce como métodos nomás, o hacer que sean variables en el objeto, y que se calculen en updateState()
+	//Estos no pueden ser variables, porque hay que calcularlo según la posición de caperucita.
 	public int getCantidadCeldasArriba() {
-		//TODO calcular la cantidad de celdas libres según la posición de caperucita y el mapa.
+		//TODO calcular la cantidad de celdas libres arriba según la posición de caperucita y el mapa.
+		return 0;
+	}
+	public int getCantidadCeldasAbajo() {
+		//TODO calcular la cantidad de celdas libres abajo según la posición de caperucita y el mapa.
+		return 0;
+	}
+	public int getCantidadCeldasIzquierda() {
+		//TODO calcular la cantidad de celdas libres a la izquierda según la posición de caperucita y el mapa.
+		return 0;
+	}
+	public int getCantidadCeldasDerecha() {
+		//TODO calcular la cantidad de celdas libres a la derecha según la posición de caperucita y el mapa.
 		return 0;
 	}
 
 	public int getCantidadDulcesArriba() {
-		//TODO calcular la cantidad de dulces arriba segun el mapa y la posición de caperucita.
+		//TODO calcular la cantidad de dulces arriba según el mapa y la posición de caperucita.
+		return 0;
+	}
+	public int getCantidadDulcesAbajo() {
+		//TODO calcular la cantidad de dulces abajo según el mapa y la posición de caperucita.
+		return 0;
+	}
+	public int getCantidadDulcesIzquierda() {
+		//TODO calcular la cantidad de dulces a la izquierda según el mapa y la posición de caperucita.
+		return 0;
+	}
+	public int getCantidadDulcesDerecha() {
+		//TODO calcular la cantidad de dulces a la derecha según el mapa y la posición de caperucita.
 		return 0;
 	}
 
 
 	public boolean getHayLoboArriba() {
 		//TODO, al igual que los otros, hay que ver si el lobo está arriba de caperucita en el mapa, o ver una variable que se actualiza en updateState()
+		return false;
+	}
+	public boolean getHayLoboAbajo() {
+		//TODO, al igual que los otros, hay que ver si el lobo está abajo de caperucita en el mapa, o ver una variable que se actualiza en updateState()
+		return false;
+	}
+	public boolean getHayLoboIzquierda() {
+		//TODO, al igual que los otros, hay que ver si el lobo está a la izquierda de caperucita en el mapa, o ver una variable que se actualiza en updateState()
+		return false;
+	}
+	public boolean getHayLoboDerecha() {
+		//TODO, al igual que los otros, hay que ver si el lobo está a la derecha de caperucita en el mapa, o ver una variable que se actualiza en updateState()
 		return false;
 	}
 }

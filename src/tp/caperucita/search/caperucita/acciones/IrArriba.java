@@ -26,6 +26,7 @@ public class IrArriba extends SearchAction {
 		if(!hayLoboArriba) {
 			if(cantidadDulcesArriba==0) {
 				estadoCaperucita.setPosicionActual(nuevaPosicion);
+				//TODO NO hay que usar la percepción acá, el estado de caperucita tiene que calcular cuántas celdas puede moverse.
 				for(int i = 0; i<=estadoCaperucita.getPercepcion().getCantidadCeldasLibresArriba(); i++) {
 					estadoCaperucita.actualizarMapaConocidoAgente(new PosicionCelda(estadoCaperucita.getPosicionActual().getPosicionFila()+i, estadoCaperucita.getPosicionActual().getPosicionColumna()), ContenidoCelda.CONOCIDO);
 				}
@@ -36,6 +37,8 @@ public class IrArriba extends SearchAction {
 			estadoCaperucita.setPosicionActual(new PosicionCelda(0, 0));
 			estadoCaperucita.setCantidadVidas(estadoCaperucita.getCantidadVidas()-1);
 		}
+
+		//TODO hay que retornar null si no se cumplen las precondiciones, así le decimos a faia que esta acción no es válida.
 		return estadoCaperucita;
 	}
 
@@ -61,7 +64,7 @@ public class IrArriba extends SearchAction {
 	
 		if(!hayLoboArriba) {
 			if(cantidadDulcesArriba==0) {
-				//TODO Cuidado! la nueva posición puede tener valores negativos is caperucita está en el 0. Hay que tener eso en cuenta...
+				//TODO Cuidado! la nueva posición puede tener valores negativos is caperucita está en el 0. Hay que validar las precondiciones para evitar esto
 				estadoCaperucita.setPosicionActual(nuevaPosicion);
 				//Problema! Si la cantidad de celdas libres arriba se ejecuta este for y no debería. Hay que validar las precondiciones antes.
 				for(int i = 0; i<=estadoCaperucita.getPercepcion().getCantidadCeldasLibresArriba(); i++) {
@@ -84,7 +87,7 @@ public class IrArriba extends SearchAction {
 			estadoCaperucita.setCantidadVidas(estadoCaperucita.getCantidadVidas()-1);
 			estadoAmbiente.setPosicionCaperucita(estadoCaperucita.getPosicionActual());
 		}
-		//Hay que retornar el nuevo estado del ambiente.
+		//TODO Hay que retornar null si no se cumplen las precondiciones
 		return estadoAmbiente;
 	}
 
