@@ -195,7 +195,6 @@ public class CaperucitaEstado extends SearchBasedAgentState {
 		return 0;
 	}
 
-
 	public boolean getHayLoboArriba() {
 		//TODO, al igual que los otros, hay que ver si el lobo está arriba de caperucita en el mapa, o ver una variable que se actualiza en updateState()
 		return false;
