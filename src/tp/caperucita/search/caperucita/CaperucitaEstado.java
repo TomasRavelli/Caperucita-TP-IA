@@ -128,11 +128,30 @@ public class CaperucitaEstado extends SearchBasedAgentState {
 		
 	}
 
-
 	@Override
 	public String toString() {
-		// TODO Auto-generated method stub
-		return null;
+
+		String mapaString = "\n";
+
+		for(int fila = 0; fila < mapaConocidoAgente.length; fila++){
+			for(int col = 0; col < mapaConocidoAgente[fila].length; col++){
+				mapaString += "|";
+				if(posicionActual.getPosicionFila() == fila && posicionActual.getPosicionColumna() == col){
+					mapaString += "CAPERUCITA";
+				}else {
+					mapaString += mapaConocidoAgente[fila][col].toString() + "";
+				}
+				mapaString += "| ";
+			}
+			mapaString += "\n";
+		}
+
+		return "CaperucitaEstado{" +
+				"cantidadVidas=" + cantidadVidas +
+				", cantidadDulces=" + cantidadDulces +
+				", posicionActual=" + posicionActual +
+				", mapaConocidoAgente=" + mapaString +
+				", percepcion=" + percepcion +
+				'}';
 	}
-	
 }
