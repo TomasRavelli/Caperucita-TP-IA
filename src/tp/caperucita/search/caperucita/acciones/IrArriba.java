@@ -63,6 +63,7 @@ public class IrArriba extends SearchAction {
 			if(cantidadDulcesArriba==0) {
 				//TODO Cuidado! la nueva posición puede tener valores negativos is caperucita está en el 0. Hay que tener eso en cuenta...
 				estadoCaperucita.setPosicionActual(nuevaPosicion);
+				//Problema! Si la cantidad de celdas libres arriba se ejecuta este for y no debería. Hay que validar las precondiciones antes.
 				for(int i = 0; i<=estadoCaperucita.getPercepcion().getCantidadCeldasLibresArriba(); i++) {
 					estadoCaperucita.actualizarMapaConocidoAgente(new PosicionCelda(estadoCaperucita.getPosicionActual().getPosicionFila()+i, estadoCaperucita.getPosicionActual().getPosicionColumna()), estadoAmbiente.getMapaAmbiente()[estadoCaperucita.getPosicionActual().getPosicionFila()+i][ estadoCaperucita.getPosicionActual().getPosicionColumna()]);
 
@@ -74,7 +75,6 @@ public class IrArriba extends SearchAction {
 	//					estadoAmbiente.setMapaAmbiente(mapaAmbienteActualizado);
 	//				}
 				}
-				//TODO ver si se tiene que actualizar el ambiente acá también
 				estadoAmbiente.setPosicionCaperucita(estadoCaperucita.getPosicionActual());
 			}
 		}
@@ -84,13 +84,13 @@ public class IrArriba extends SearchAction {
 			estadoCaperucita.setCantidadVidas(estadoCaperucita.getCantidadVidas()-1);
 			estadoAmbiente.setPosicionCaperucita(estadoCaperucita.getPosicionActual());
 		}
-		return est;
+		//Hay que retornar el nuevo estado del ambiente.
+		return estadoAmbiente;
 	}
 
 	@Override
 	public String toString() {
-		// TODO Auto-generated method stub
-		return null;
+		return "Ir arriba";
 	}
 
 }

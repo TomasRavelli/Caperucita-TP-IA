@@ -4,6 +4,8 @@ import frsf.cidisi.faia.agent.search.SearchAction;
 import frsf.cidisi.faia.agent.search.SearchBasedAgentState;
 import frsf.cidisi.faia.state.AgentState;
 import frsf.cidisi.faia.state.EnvironmentState;
+import tp.caperucita.search.ambiente.AmbienteEstado;
+import tp.caperucita.search.auxiliar.ContenidoCelda;
 import tp.caperucita.search.auxiliar.PosicionCelda;
 import tp.caperucita.search.caperucita.CaperucitaEstado;
 import tp.caperucita.search.caperucita.CaperucitaPercepcion;
@@ -15,14 +17,18 @@ public class IrArribaYJuntarDulce extends SearchAction{
 
 		CaperucitaEstado estadoCaperucita = (CaperucitaEstado) s;
 		PosicionCelda nuevaPosicion = new PosicionCelda(), posicionActual = estadoCaperucita.getPosicionActual();
-		CaperucitaPercepcion percepcion = estadoCaperucita.getPercepcion();
-		int cantDulces = percepcion.getCantidadDulcesArriba();
-		// La nueva posicion es "cantidad de cledas libres" arriba de capeucita (arriba es restar filas)
-		nuevaPosicion.setPosicionFila(posicionActual.getPosicionFila() - percepcion.getCantidadCeldasLibresArriba());
+		int cantCeldasArriba = estadoCaperucita.getCantidadCeldasArriba();
+		int cantDulces = estadoCaperucita.getCantidadDulcesArriba();
+		boolean hayLobo = estadoCaperucita.getHayLoboArriba();
+		// La nueva posición es "cantidad de celdas libres" arriba de caperucita (arriba es restar filas)
+		//No hay que usar la percepción acá, porque este método se llama varias veces sin percibir antes, entonces la percepción no es válida.
+		//Hay que usar el mapa de caperucita
+		nuevaPosicion.setPosicionFila(posicionActual.getPosicionFila() - cantCeldasArriba);
 		nuevaPosicion.setPosicionColumna(posicionActual.getPosicionColumna()); //la columna no cambia.
 
-		if(cantDulces > 0) {
-			if (percepcion.getHayLoboArriba()) {
+		if(cantCeldasArriba > 0 && cantDulces > 0) {
+			//Hay celdas arriba y hay dulces, se cumplen las precondiciones.
+			if (hayLobo) {
 				//Hay lobo pierdo una vida
 				estadoCaperucita.setCantidadDulces(0);
 				//TODO cambiar posición 0,0 por la posición inicial.
@@ -43,20 +49,56 @@ public class IrArribaYJuntarDulce extends SearchAction{
 
 	@Override
 	public Double getCost() {
-		// TODO Auto-generated method stub
+		// TODO Ver como calcular el costo
+		// Perder una vida aumenta el costo?
+		// Juntar dulces lo baja?
 		return null;
 	}
 
 	@Override
 	public EnvironmentState execute(AgentState ast, EnvironmentState est) {
-		// TODO Auto-generated method stub
+
+		CaperucitaEstado estadoCaperucita = (CaperucitaEstado) ast;
+		AmbienteEstado estadoAmbiente = (AmbienteEstado) est;
+		PosicionCelda nuevaPosicion = new PosicionCelda(), posicionActual = estadoCaperucita.getPosicionActual();
+		int cantCeldasArriba = estadoCaperucita.getCantidadCeldasArriba();
+		int cantDulces = estadoCaperucita.getCantidadDulcesArriba();
+		boolean hayLobo = estadoCaperucita.getHayLoboArriba();
+		// La nueva posición es "cantidad de celdas libres" arriba de caperucita (arriba es restar filas)
+		//No hay que usar la percepción acá, porque este método se llama varias veces sin percibir antes, entonces la percepción no es válida.
+		//Hay que usar el mapa de caperucita
+		nuevaPosicion.setPosicionFila(posicionActual.getPosicionFila() - cantCeldasArriba);
+		nuevaPosicion.setPosicionColumna(posicionActual.getPosicionColumna()); //la columna no cambia.
+
+		if(cantCeldasArriba > 0 && cantDulces > 0) {
+			//Hay celdas arriba y hay dulces, se cumplen las precondiciones.
+			if (hayLobo) {
+				//Hay lobo pierdo una vida
+				estadoCaperucita.setCantidadDulces(0);
+				//TODO cambiar posición 0,0 por la posición inicial.
+				estadoCaperucita.setPosicionActual(new PosicionCelda(0, 0));
+				estadoCaperucita.setCantidadVidas(estadoCaperucita.getCantidadVidas()-1);
+				//Si ahy lobo el estado del ambiente no cambia.
+				return estadoAmbiente;
+			}
+			//No hay lobo, me puedo mover y juntar dulces
+
+			//Actualizar el estado del ambiente.
+			estadoAmbiente.eliminarDulcesEnCamino(posicionActual, nuevaPosicion);
+
+			//actualizo el estado de caperucita
+			estadoCaperucita.setCantidadDulces(estadoCaperucita.getCantidadDulces() + cantDulces);
+			estadoCaperucita.setPosicionActual(nuevaPosicion);
+			return estadoAmbiente;
+		}
+
+		//Si no se cumplen las precondiciones esta acción no es válida.
 		return null;
 	}
 
 	@Override
 	public String toString() {
-		// TODO Auto-generated method stub
-		return null;
+		return "Ir arriba y juntar dulce";
 	}
 
 }

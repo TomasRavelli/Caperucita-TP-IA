@@ -85,6 +85,9 @@ public class CaperucitaEstado extends SearchBasedAgentState {
 
 	@Override
 	public boolean equals(Object o) {
+		//TODO creo que el equals no debería tener en cuenta la cantidad de dulces y vidas.
+		//porque lo usa el framework para saber si el ya paso por este estado, si ya pasoi pero junto dulces en el medio,
+		// va a creer que puede volver a este estado y se va a provocar un bucle infinito
 		if (this == o) return true;
 		if (o == null || getClass() != o.getClass()) return false;
 		CaperucitaEstado that = (CaperucitaEstado) o;
@@ -123,7 +126,8 @@ public class CaperucitaEstado extends SearchBasedAgentState {
 	@Override
 	public void updateState(Perception p) {
 		
-		//TODO estos e ejecuta en el see(Percepcion) de GoalBasedAgentSimulator, cada vez que percibe el agente.
+		//Esto e ejecuta en el see(Percepcion) de GoalBasedAgentSimulator, cada vez que percibe el agente.
+		//TODO Acá hay que actualizar el estado de caperucita (principalmente el mapa), con los datos que hay en la percepción
 		
 		percepcion=(CaperucitaPercepcion)p;
 		
@@ -154,5 +158,22 @@ public class CaperucitaEstado extends SearchBasedAgentState {
 				", mapaConocidoAgente=" + mapaString +
 				", percepcion=" + percepcion +
 				'}';
+	}
+
+	//TODO estos métodos prdrían hacerce como métodos nomás, o hacer que sean variables en el objeto, y que se calculen en updateState()
+	public int getCantidadCeldasArriba() {
+		//TODO calcular la cantidad de celdas libres según la posición de caperucita y el mapa.
+		return 0;
+	}
+
+	public int getCantidadDulcesArriba() {
+		//TODO calcular la cantidad de dulces arriba segun el mapa y la posición de caperucita.
+		return 0;
+	}
+
+
+	public boolean getHayLoboArriba() {
+		//TODO, al igual que los otros, hay que ver si el lobo está arriba de caperucita en el mapa, o ver una variable que se actualiza en updateState()
+		return false;
 	}
 }

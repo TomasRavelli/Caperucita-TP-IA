@@ -74,6 +74,8 @@ public class CaperucitaPercepcion extends Perception {
 		contarCeldasLibresYDulces(2, mapaAmbiente, posicionCaperucita);
 		contarCeldasLibresYDulces(3, mapaAmbiente, posicionCaperucita);
 	}
+
+	//TODO este método es bastante feo, creo que se podría dividir en 4, o hacer que no reciba una dirección si igual hay que calcular las 4 siempre
 	private void contarCeldasLibresYDulces(int orientacion, ContenidoCelda[][] mapaAmbiente, PosicionCelda posicionCaperucita ) {
 		int fila = posicionCaperucita.getPosicionFila();
 		int columna = posicionCaperucita.getPosicionColumna();

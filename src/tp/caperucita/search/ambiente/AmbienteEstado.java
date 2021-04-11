@@ -79,5 +79,72 @@ public class AmbienteEstado extends EnvironmentState {
 		this.mapaAmbiente[celda.getPosicionFila()][celda.getPosicionColumna()] = nuevoEstadoCelda;
 	}
 
-	
+
+	public void eliminarDulcesEnCamino(PosicionCelda inicioCamino, PosicionCelda finCamino) {
+		int filaInicio = inicioCamino.getPosicionFila();
+		int columnaInicio = inicioCamino.getPosicionColumna();
+		int filaFin = finCamino.getPosicionFila();
+		int columnaFin = finCamino.getPosicionColumna();
+
+		if(filaInicio == filaFin && columnaInicio == columnaFin){
+			//no es un camino válido porque la celda de inicio y fin son iguales.
+			return;
+		}
+
+		if(filaInicio == filaFin){
+			//Es un camino horizontal (izquierda <-> derecha)
+
+			if(columnaInicio < columnaFin){
+				//Es izquierda -> derecha
+				eliminarDulcesHorizontal(columnaInicio, columnaFin, filaInicio);
+				return;
+			}
+			//columnaInicio > columnaFin, no pueden ser iguales.
+			//Es derecha -> izquierda
+			eliminarDulcesHorizontal(columnaFin, columnaInicio, filaInicio);
+			return;
+		}
+
+		if(columnaInicio == columnaFin){
+			//Es un camino vertical (Arriba <-> Abajo)
+			if(filaInicio < filaFin){
+				//Es Arriba -> Abajo (ir arriba es restar filas, entonces arriba es menor que abajo)
+				eliminarDulcesVertical(filaInicio, filaFin, columnaInicio);
+				return;
+			}
+			//columnaInicio > columnaFin, no pueden ser iguales.
+			//Es derecha -> izquierda
+			eliminarDulcesHorizontal(filaFin, filaInicio, columnaInicio);
+			return;
+		}
+		//Si llega acá no es un camino válido porque no es ni vertical ni horizontal, puede ser un diagonal pero caperucita no se puede mover en diagonal
+	}
+
+	private void eliminarDulcesVertical(int inicio, int fin, int columna){
+		if(inicio > fin){
+			//No debería pasar, pero por las dudas. Es inválido.
+			return;
+		}
+
+		for(int i = inicio; i <= fin; i++){
+			if(mapaAmbiente[i][columna] == ContenidoCelda.DULCE){
+				mapaAmbiente[i][columna] = ContenidoCelda.LIBRE;
+			}
+		}
+
+	}
+
+	private void eliminarDulcesHorizontal(int inicio, int fin, int fila){
+		if(inicio > fin){
+			//No debería pasar, pero por las dudas. Es inválido.
+			return;
+		}
+
+		for(int j = inicio; j <= fin; j++){
+			if(mapaAmbiente[fila][j] == ContenidoCelda.DULCE){
+				//Si en esta posición del mapa había un dulce lo quito
+				mapaAmbiente[fila][j] = ContenidoCelda.LIBRE;
+			}
+		}
+	}
 }
