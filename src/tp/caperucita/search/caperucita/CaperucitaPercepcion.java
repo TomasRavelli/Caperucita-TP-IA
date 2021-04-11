@@ -78,63 +78,64 @@ public class CaperucitaPercepcion extends Perception {
 	//TODO este método es bastante feo, creo que se podría dividir en 4, o hacer que no reciba una dirección si igual hay que calcular las 4 siempre
 	//TODO REVISAR, me parece que si caperucita está en algún borde esto no funciona bien.
 	private void contarCeldasLibresYDulces(int orientacion, ContenidoCelda[][] mapaAmbiente, PosicionCelda posicionCaperucita ) {
-		int fila = posicionCaperucita.getPosicionFila();
-		int columna = posicionCaperucita.getPosicionColumna();
+		int filaActual = posicionCaperucita.getPosicionFila();
+		int columnaActual = posicionCaperucita.getPosicionColumna();
+		int ultimaFila = mapaAmbiente.length, ultimaColumna = mapaAmbiente[0].length;
 		
 		switch(orientacion){
 			case 0:{//Arriba
 
-				while(fila >= 0 && !mapaAmbiente[fila][columna].equals(ContenidoCelda.OBSTACULO) && !hayLoboArriba) {
-					if(mapaAmbiente[fila][columna].equals(ContenidoCelda.LOBO)) {
+				while(filaActual > 0 && !mapaAmbiente[filaActual-1][columnaActual].equals(ContenidoCelda.OBSTACULO) && !hayLoboArriba) {
+					if(mapaAmbiente[filaActual-1][columnaActual].equals(ContenidoCelda.LOBO)) {
 						hayLoboArriba = true;
 					}
-					if(mapaAmbiente[fila][columna].equals(ContenidoCelda.DULCE)) {
+					if(mapaAmbiente[filaActual-1][columnaActual].equals(ContenidoCelda.DULCE)) {
 						cantidadDulcesArriba++;
 					}
 					cantidadCeldasLibresArriba++;
-					fila--;
+					filaActual--;
 				}
 				break;
 			}
 			case 1:{//Derecha
 				
-				while(columna < mapaAmbiente[0].length && !mapaAmbiente[fila][columna].equals(ContenidoCelda.OBSTACULO) && !hayLoboDerecha) {
-					if(mapaAmbiente[fila][columna].equals(ContenidoCelda.LOBO)) {
+				while(columnaActual < ultimaColumna && !mapaAmbiente[filaActual][columnaActual+1].equals(ContenidoCelda.OBSTACULO) && !hayLoboDerecha) {
+					if(mapaAmbiente[filaActual][columnaActual+1].equals(ContenidoCelda.LOBO)) {
 						hayLoboDerecha = true;
 					}
-					if(mapaAmbiente[fila][columna].equals(ContenidoCelda.DULCE)) {
+					if(mapaAmbiente[filaActual][columnaActual+1].equals(ContenidoCelda.DULCE)) {
 						cantidadDulcesDerecha++;
 					}
 					cantidadCeldasLibresDerecha++;
-					columna++;
+					columnaActual++;
 				}
 				break;
 			}
 			case 2:{//Abajo
 				
-				while(fila < mapaAmbiente.length && !mapaAmbiente[fila][columna].equals(ContenidoCelda.OBSTACULO) && !hayLoboAbajo) {
-					if(mapaAmbiente[fila][columna].equals(ContenidoCelda.LOBO)) {
+				while(filaActual < ultimaFila && !mapaAmbiente[filaActual+1][columnaActual].equals(ContenidoCelda.OBSTACULO) && !hayLoboAbajo) {
+					if(mapaAmbiente[filaActual+1][columnaActual].equals(ContenidoCelda.LOBO)) {
 						hayLoboAbajo = true;
 					}
-					if(mapaAmbiente[fila][columna].equals(ContenidoCelda.DULCE)) {
+					if(mapaAmbiente[filaActual+1][columnaActual].equals(ContenidoCelda.DULCE)) {
 						cantidadDulcesAbajo++;
 					}
 					cantidadCeldasLibresAbajo++;
-					fila++;
+					filaActual++;
 				}
 				break;
 			}
 			case 3:{
 				//Izquierda
-				while(columna >= 0 && !mapaAmbiente[fila][columna].equals(ContenidoCelda.OBSTACULO) && !hayLoboIzquierda) {
-					if(mapaAmbiente[fila][columna].equals(ContenidoCelda.LOBO)) {
+				while(columnaActual > 0 && !mapaAmbiente[filaActual-1][columnaActual].equals(ContenidoCelda.OBSTACULO) && !hayLoboIzquierda) {
+					if(mapaAmbiente[filaActual-1][columnaActual].equals(ContenidoCelda.LOBO)) {
 						hayLoboIzquierda = true;
 					}
-					if(mapaAmbiente[fila][columna].equals(ContenidoCelda.DULCE)) {
+					if(mapaAmbiente[filaActual-1][columnaActual].equals(ContenidoCelda.DULCE)) {
 						cantidadDulcesIzquierda++;
 					}
 					cantidadCeldasLibresIzquierda++;
-					columna--;
+					columnaActual--;
 				}
 				break;
 			}
