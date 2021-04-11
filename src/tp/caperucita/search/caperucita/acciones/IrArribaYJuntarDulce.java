@@ -86,11 +86,11 @@ public class IrArribaYJuntarDulce extends SearchAction{
 
 			//Actualizar el estado del ambiente.
 			estadoAmbiente.eliminarDulcesEnCamino(posicionActual, nuevaPosicion);
-
+			estadoAmbiente.setPosicionCaperucita(estadoCaperucita.getPosicionActual());
 			//actualizo el estado de caperucita
 			estadoCaperucita.setCantidadDulces(estadoCaperucita.getCantidadDulces() + cantDulces);
 			estadoCaperucita.setPosicionActual(nuevaPosicion);
-			estadoAmbiente.setPosicionCaperucita(estadoCaperucita.getPosicionActual());
+
 			return estadoAmbiente;
 		}
 

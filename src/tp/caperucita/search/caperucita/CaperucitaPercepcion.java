@@ -98,7 +98,8 @@ public class CaperucitaPercepcion extends Perception {
 				break;
 			}
 			case 1:{//Derecha
-				
+
+				//TODO esto genera un out of bounds, porque cuando columnaActual es ultimaColumna-1 (el último valor válido), intenta accesder a la posicion ultimaColumna (columnaActual+1)
 				while(columnaActual < ultimaColumna && !mapaAmbiente[filaActual][columnaActual+1].equals(ContenidoCelda.OBSTACULO) && !hayLoboDerecha) {
 					if(mapaAmbiente[filaActual][columnaActual+1].equals(ContenidoCelda.LOBO)) {
 						hayLoboDerecha = true;
