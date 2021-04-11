@@ -15,10 +15,16 @@ public class CaperucitaEstado extends SearchBasedAgentState {
 	private PosicionCelda posicionActual;
 	private ContenidoCelda[][] mapaConocidoAgente;
 	
-	//Segun el codigo de FAIA, el Estado de caperucita tiene que tener como atributo  las percepciones que recibe del ambiente
-	//o tendrian que actualizarse varibles dentro de esta clase.
-	private CaperucitaPercepcion percepcion;
-	//No sabemos si esta bien, para actualizar el estado deberiamos tener las mismas variables de la percepcion dentro de esta clase.
+	
+	//Variables que se actualizan en updateState cada vez que se obtiene una percepcion.
+	private Boolean hayLoboArriba;
+	private Boolean hayLoboDerecha;
+	private Boolean hayLoboAbajo;
+	private Integer cantidadDulcesArriba;
+	private Boolean hayLoboIzquierda;
+	private Integer cantidadDulcesDerecha;
+	private Integer cantidadDulcesAbajo;
+	private Integer cantidadDulcesIzquierda;
 	
 	
 	
@@ -59,16 +65,6 @@ public class CaperucitaEstado extends SearchBasedAgentState {
 	}
 	
 
-	public CaperucitaPercepcion getPercepcion() {
-		return percepcion;
-	}
-
-
-	public void setPercepcion(CaperucitaPercepcion percepcion) {
-		this.percepcion = percepcion;
-	}
-
-
 	@Override
 	public void initState() {
 		this.cantidadVidas = 3;
@@ -81,6 +77,15 @@ public class CaperucitaEstado extends SearchBasedAgentState {
 				this.mapaConocidoAgente[i][j] = ContenidoCelda.DESCONOCIDO;
 			}
 		}
+		
+		this.cantidadDulcesAbajo = 0;
+		this.cantidadDulcesArriba = 0;
+		this.cantidadDulcesDerecha = 0;
+		this.cantidadDulcesIzquierda = 0;
+		this.hayLoboAbajo = false;
+		this.hayLoboArriba = false;
+		this.hayLoboDerecha = false;
+		this.hayLoboIzquierda = false;
 	}
 
 	@Override
@@ -91,7 +96,7 @@ public class CaperucitaEstado extends SearchBasedAgentState {
 		if (this == o) return true;
 		if (o == null || getClass() != o.getClass()) return false;
 		CaperucitaEstado that = (CaperucitaEstado) o;
-		return Objects.equals(cantidadVidas, that.cantidadVidas) && Objects.equals(cantidadDulces, that.cantidadDulces) && Objects.equals(posicionActual, that.posicionActual) && Arrays.equals(mapaConocidoAgente, that.mapaConocidoAgente) && Objects.equals(percepcion, that.percepcion);
+		return Objects.equals(cantidadVidas, that.cantidadVidas) && Objects.equals(cantidadDulces, that.cantidadDulces) && Objects.equals(posicionActual, that.posicionActual) && Arrays.equals(mapaConocidoAgente, that.mapaConocidoAgente);
 	}
 
 	@Override
@@ -102,7 +107,7 @@ public class CaperucitaEstado extends SearchBasedAgentState {
     	
 		newState.setCantidadVidas(this.cantidadVidas);
 		newState.setCantidadDulces(this.cantidadDulces);
-		newState.setPercepcion(this.percepcion);
+		//TODO hay que clonar las variables relacionadas a la percepcion  tambien?
 		
 		//Los atributos que son objetos se pasan por
     	//referencia; luego, es necesario clonarlos
@@ -129,9 +134,60 @@ public class CaperucitaEstado extends SearchBasedAgentState {
 		//Esto e ejecuta en el see(Percepcion) de GoalBasedAgentSimulator, cada vez que percibe el agente.
 		//TODO Acá hay que actualizar el estado de caperucita (principalmente el mapa), con los datos que hay en la percepción
 		
-		percepcion=(CaperucitaPercepcion)p;
+		CaperucitaPercepcion percepcion = (CaperucitaPercepcion)p;
+		
+		actualizarMapaCaminoArriba(percepcion.getCantidadCeldasLibresArriba());
+		actualizarMapaCaminoDerecha(percepcion.getCantidadCeldasLibresDerecha());
+		actualizarMapaCaminoAbajo(percepcion.getCantidadCeldasLibresAbajo());
+		actualizarMapaCaminoIzquierda(percepcion.getCantidadCeldasLibresIzquierda());
+		this.hayLoboArriba = percepcion.getHayLoboArriba();
+		this.hayLoboDerecha = percepcion.getHayLoboDerecha();
+		this.hayLoboAbajo = percepcion.getHayLoboAbajo();
+		this.hayLoboIzquierda = percepcion.getHayLoboIzquierda();
+		this.cantidadDulcesArriba = percepcion.getCantidadDulcesArriba();
+		this.cantidadDulcesDerecha = percepcion.getCantidadDulcesDerecha();
+		this.cantidadDulcesAbajo = percepcion.getCantidadDulcesAbajo();
+		this.cantidadDulcesIzquierda = percepcion.getCantidadDulcesIzquierda();
 		
 	}
+
+	private void actualizarMapaCaminoDerecha(Integer cantidadCeldasLibresDerecha) {
+		int primerCelda = this.posicionActual.getPosicionColumna(), ultimaCelda = primerCelda+cantidadCeldasLibresDerecha, fila=this.posicionActual.getPosicionFila();
+		for(int i = primerCelda+1; i<=ultimaCelda;i++) {
+			this.mapaConocidoAgente[fila][i] = ContenidoCelda.LIBRE;
+		}
+		
+	}
+
+
+	private void actualizarMapaCaminoIzquierda(Integer cantidadCeldasLibresIzquierda) {
+		int primerCelda = this.posicionActual.getPosicionColumna(), ultimaCelda = primerCelda-cantidadCeldasLibresIzquierda, fila=this.posicionActual.getPosicionFila();
+		for(int i = primerCelda-1; i>=ultimaCelda;i--) {
+			this.mapaConocidoAgente[fila][i] = ContenidoCelda.LIBRE;
+		}
+		
+	}
+
+
+	private void actualizarMapaCaminoAbajo(Integer cantidadCeldasLibresAbajo) {
+		int primerCelda = this.posicionActual.getPosicionFila(), ultimaCelda = primerCelda+cantidadCeldasLibresAbajo, columna=this.posicionActual.getPosicionColumna();
+		for(int i = primerCelda+1; i<=ultimaCelda;i++) {
+			this.mapaConocidoAgente[i][columna] = ContenidoCelda.LIBRE;
+		}
+		
+	}
+
+
+	private void actualizarMapaCaminoArriba(Integer cantidadCeldasLibresArriba) {
+		
+		int primerCelda = this.posicionActual.getPosicionFila(), ultimaCelda = primerCelda-cantidadCeldasLibresArriba, columna=this.posicionActual.getPosicionColumna();
+		for(int i = primerCelda-1; i>=ultimaCelda;i--) {
+			this.mapaConocidoAgente[i][columna] = ContenidoCelda.LIBRE;
+		}
+		
+		
+	}
+
 
 	@Override
 	public String toString() {
@@ -156,59 +212,85 @@ public class CaperucitaEstado extends SearchBasedAgentState {
 				", cantidadDulces=" + cantidadDulces +
 				", posicionActual=" + posicionActual +
 				", mapaConocidoAgente=" + mapaString +
-				", percepcion=" + percepcion +
 				'}';
 	}
 
 	//Estos no pueden ser variables, porque hay que calcularlo según la posición de caperucita.
 	public int getCantidadCeldasArriba() {
 		//TODO calcular la cantidad de celdas libres arriba según la posición de caperucita y el mapa.
-		return 0;
+		int cantidadCeldasLibres = 0,filaActual=this.posicionActual.getPosicionFila(), columnaActual = this.posicionActual.getPosicionColumna();
+		
+		while(filaActual>0 && mapaConocidoAgente[filaActual-1][columnaActual]==ContenidoCelda.LIBRE) {
+			filaActual--;
+			cantidadCeldasLibres++;
+		}
+		
+		return cantidadCeldasLibres;
 	}
 	public int getCantidadCeldasAbajo() {
 		//TODO calcular la cantidad de celdas libres abajo según la posición de caperucita y el mapa.
-		return 0;
+		int cantidadCeldasLibres = 0, ultimaFila = mapaConocidoAgente.length, filaActual=this.posicionActual.getPosicionFila(), columnaActual = this.posicionActual.getPosicionColumna();
+		
+		while(filaActual<ultimaFila && mapaConocidoAgente[filaActual+1][columnaActual]==ContenidoCelda.LIBRE) {
+			filaActual++;
+			cantidadCeldasLibres++;
+		}
+	
+		return cantidadCeldasLibres;
 	}
 	public int getCantidadCeldasIzquierda() {
-		//TODO calcular la cantidad de celdas libres a la izquierda según la posición de caperucita y el mapa.
-		return 0;
+		int cantidadCeldasLibres = 0,filaActual=this.posicionActual.getPosicionFila(), columnaActual = this.posicionActual.getPosicionColumna();
+		
+		
+		while(columnaActual>0 && mapaConocidoAgente[filaActual][columnaActual-1]==ContenidoCelda.LIBRE) {
+			columnaActual--;
+			cantidadCeldasLibres++;
+		}
+		
+		return cantidadCeldasLibres;
 	}
 	public int getCantidadCeldasDerecha() {
-		//TODO calcular la cantidad de celdas libres a la derecha según la posición de caperucita y el mapa.
-		return 0;
+		int cantidadCeldasLibres = 0, ultimaColumna = mapaConocidoAgente[0].length, filaActual=this.posicionActual.getPosicionFila(), columnaActual = this.posicionActual.getPosicionColumna();
+		
+		while(columnaActual < ultimaColumna && mapaConocidoAgente[filaActual][columnaActual+1]==ContenidoCelda.LIBRE) {
+			columnaActual++;
+			cantidadCeldasLibres++;
+		}
+		
+		return cantidadCeldasLibres;
 	}
 
 	public int getCantidadDulcesArriba() {
 		//TODO calcular la cantidad de dulces arriba según el mapa y la posición de caperucita.
-		return 0;
+		return this.cantidadDulcesArriba;
 	}
 	public int getCantidadDulcesAbajo() {
 		//TODO calcular la cantidad de dulces abajo según el mapa y la posición de caperucita.
-		return 0;
+		return this.cantidadDulcesAbajo;
 	}
 	public int getCantidadDulcesIzquierda() {
 		//TODO calcular la cantidad de dulces a la izquierda según el mapa y la posición de caperucita.
-		return 0;
+		return this.cantidadDulcesIzquierda;
 	}
 	public int getCantidadDulcesDerecha() {
 		//TODO calcular la cantidad de dulces a la derecha según el mapa y la posición de caperucita.
-		return 0;
+		return this.cantidadDulcesDerecha;
 	}
 
 	public boolean getHayLoboArriba() {
 		//TODO, al igual que los otros, hay que ver si el lobo está arriba de caperucita en el mapa, o ver una variable que se actualiza en updateState()
-		return false;
+		return this.hayLoboArriba;
 	}
 	public boolean getHayLoboAbajo() {
 		//TODO, al igual que los otros, hay que ver si el lobo está abajo de caperucita en el mapa, o ver una variable que se actualiza en updateState()
-		return false;
+		return this.hayLoboAbajo;
 	}
 	public boolean getHayLoboIzquierda() {
 		//TODO, al igual que los otros, hay que ver si el lobo está a la izquierda de caperucita en el mapa, o ver una variable que se actualiza en updateState()
-		return false;
+		return this.hayLoboIzquierda;
 	}
 	public boolean getHayLoboDerecha() {
 		//TODO, al igual que los otros, hay que ver si el lobo está a la derecha de caperucita en el mapa, o ver una variable que se actualiza en updateState()
-		return false;
+		return this.hayLoboDerecha;
 	}
 }
