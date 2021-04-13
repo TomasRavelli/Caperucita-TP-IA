@@ -17,11 +17,13 @@ public class CaperucitaEstado extends SearchBasedAgentState {
 	
 	
 	//Variables que se actualizan en updateState cada vez que se obtiene una percepcion.
+	//TODO refactorizar esto, no hay que usar variables, se tienen que calcular según las posiciones de las cosas en el mapa.
 	private Boolean hayLoboArriba;
 	private Boolean hayLoboDerecha;
 	private Boolean hayLoboAbajo;
-	private Integer cantidadDulcesArriba;
 	private Boolean hayLoboIzquierda;
+
+	private Integer cantidadDulcesArriba;
 	private Integer cantidadDulcesDerecha;
 	private Integer cantidadDulcesAbajo;
 	private Integer cantidadDulcesIzquierda;
@@ -112,9 +114,10 @@ public class CaperucitaEstado extends SearchBasedAgentState {
 		//Los atributos que son objetos se pasan por
     	//referencia; luego, es necesario clonarlos
 		newState.setPosicionActual(this.posicionActual.clone());
-    	
+
+		//TODO cambiar tamaño del mapa hardcodeado
 		ContenidoCelda[][] newMapaConocidoAgente = new ContenidoCelda[9][14];
-		
+
 		for (int i = 0 ; i<9; i++) {
 			for(int j=0;j<14; j++) {
 				newMapaConocidoAgente[i][j]= mapaConocidoAgente[i][j];
@@ -132,10 +135,11 @@ public class CaperucitaEstado extends SearchBasedAgentState {
 	public void updateState(Perception p) {
 		
 		//Esto e ejecuta en el see(Percepcion) de GoalBasedAgentSimulator, cada vez que percibe el agente.
-		//TODO Acá hay que actualizar el estado de caperucita (principalmente el mapa), con los datos que hay en la percepción
+		//TODO Actualizar el mapa con las listas de celdas que va a tener la percepción
 		
-		CaperucitaPercepcion percepcion = (CaperucitaPercepcion)p;
-		
+		CaperucitaPercepcion percepcion = (CaperucitaPercepcion) p;
+
+		//deprecated
 		actualizarMapaCaminoArriba(percepcion.getCantidadCeldasLibresArriba());
 		actualizarMapaCaminoDerecha(percepcion.getCantidadCeldasLibresDerecha());
 		actualizarMapaCaminoAbajo(percepcion.getCantidadCeldasLibresAbajo());
@@ -230,7 +234,9 @@ public class CaperucitaEstado extends SearchBasedAgentState {
 	public int getCantidadCeldasAbajo() {
 		//TODO calcular la cantidad de celdas libres abajo según la posición de caperucita y el mapa.
 		int cantidadCeldasLibres = 0, ultimaFila = mapaConocidoAgente.length, filaActual=this.posicionActual.getPosicionFila(), columnaActual = this.posicionActual.getPosicionColumna();
-		
+
+		//TODO hay que sumar celdas libres mientras no llegue a un obstaculo.
+		//TODO Si la próxima celda es una flor, sumo uno y corto el while. Para poder llegar a la flor pero no pasarme.
 		while(filaActual<ultimaFila && mapaConocidoAgente[filaActual+1][columnaActual]==ContenidoCelda.LIBRE) {
 			filaActual++;
 			cantidadCeldasLibres++;
