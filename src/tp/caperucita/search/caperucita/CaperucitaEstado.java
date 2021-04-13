@@ -140,6 +140,7 @@ public class CaperucitaEstado extends SearchBasedAgentState {
 		CaperucitaPercepcion percepcion = (CaperucitaPercepcion) p;
 
 		//deprecated
+		//TODO cambiar para que reciban La lista que va a tener la percepción.
 		actualizarMapaCaminoArriba(percepcion.getCantidadCeldasLibresArriba());
 		actualizarMapaCaminoDerecha(percepcion.getCantidadCeldasLibresDerecha());
 		actualizarMapaCaminoAbajo(percepcion.getCantidadCeldasLibresAbajo());
@@ -223,7 +224,9 @@ public class CaperucitaEstado extends SearchBasedAgentState {
 	public int getCantidadCeldasArriba() {
 		//TODO calcular la cantidad de celdas libres arriba según la posición de caperucita y el mapa.
 		int cantidadCeldasLibres = 0,filaActual=this.posicionActual.getPosicionFila(), columnaActual = this.posicionActual.getPosicionColumna();
-		
+
+		//TODO hay que sumar celdas libres mientras no llegue a un obstaculo.
+		//TODO Si la próxima celda es una flor, sumo uno y corto el while. Para poder llegar a la flor pero no pasarme.
 		while(filaActual>0 && mapaConocidoAgente[filaActual-1][columnaActual]==ContenidoCelda.LIBRE) {
 			filaActual--;
 			cantidadCeldasLibres++;
@@ -233,7 +236,7 @@ public class CaperucitaEstado extends SearchBasedAgentState {
 	}
 	public int getCantidadCeldasAbajo() {
 		//TODO calcular la cantidad de celdas libres abajo según la posición de caperucita y el mapa.
-		int cantidadCeldasLibres = 0, ultimaFila = mapaConocidoAgente.length, filaActual=this.posicionActual.getPosicionFila(), columnaActual = this.posicionActual.getPosicionColumna();
+		int cantidadCeldasLibres = 0, ultimaFila = mapaConocidoAgente.length - 1, filaActual=this.posicionActual.getPosicionFila(), columnaActual = this.posicionActual.getPosicionColumna();
 
 		//TODO hay que sumar celdas libres mientras no llegue a un obstaculo.
 		//TODO Si la próxima celda es una flor, sumo uno y corto el while. Para poder llegar a la flor pero no pasarme.
@@ -246,18 +249,22 @@ public class CaperucitaEstado extends SearchBasedAgentState {
 	}
 	public int getCantidadCeldasIzquierda() {
 		int cantidadCeldasLibres = 0,filaActual=this.posicionActual.getPosicionFila(), columnaActual = this.posicionActual.getPosicionColumna();
-		
-		
-		while(columnaActual>0 && mapaConocidoAgente[filaActual][columnaActual-1]==ContenidoCelda.LIBRE) {
+
+		while(columnaActual>0 && mapaConocidoAgente[filaActual][columnaActual-1] != ContenidoCelda.OBSTACULO) {
 			columnaActual--;
 			cantidadCeldasLibres++;
+			if(mapaConocidoAgente[filaActual][columnaActual] == ContenidoCelda.FLORES){
+				return cantidadCeldasLibres;
+			}
 		}
 		
 		return cantidadCeldasLibres;
 	}
 	public int getCantidadCeldasDerecha() {
-		int cantidadCeldasLibres = 0, ultimaColumna = mapaConocidoAgente[0].length, filaActual=this.posicionActual.getPosicionFila(), columnaActual = this.posicionActual.getPosicionColumna();
-		
+		int cantidadCeldasLibres = 0, ultimaColumna = mapaConocidoAgente[0].length - 1, filaActual=this.posicionActual.getPosicionFila(), columnaActual = this.posicionActual.getPosicionColumna();
+
+		//TODO hay que sumar celdas libres mientras no llegue a un obstaculo.
+		//TODO Si la próxima celda es una flor, sumo uno y corto el while. Para poder llegar a la flor pero no pasarme.
 		while(columnaActual < ultimaColumna && mapaConocidoAgente[filaActual][columnaActual+1]==ContenidoCelda.LIBRE) {
 			columnaActual++;
 			cantidadCeldasLibres++;
@@ -268,7 +275,17 @@ public class CaperucitaEstado extends SearchBasedAgentState {
 
 	public int getCantidadDulcesArriba() {
 		//TODO calcular la cantidad de dulces arriba según el mapa y la posición de caperucita.
-		return this.cantidadDulcesArriba;
+
+		int cantidadDulcesArriba = 0, fila = posicionActual.getPosicionFila(), columna = posicionActual.getPosicionColumna();
+
+		while(fila > 0 && !mapaConocidoAgente[fila-1][columna].equals(ContenidoCelda.OBSTACULO)){
+			fila--;
+			if(mapaConocidoAgente[fila][columna].equals(ContenidoCelda.DULCE)) {
+				cantidadDulcesArriba++;
+			}
+		}
+
+		return cantidadDulcesArriba;
 	}
 	public int getCantidadDulcesAbajo() {
 		//TODO calcular la cantidad de dulces abajo según el mapa y la posición de caperucita.

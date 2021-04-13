@@ -1,6 +1,9 @@
 package tp.caperucita.search.caperucita;
 
 
+import java.util.ArrayList;
+import java.util.List;
+
 import frsf.cidisi.faia.agent.Agent;
 import frsf.cidisi.faia.agent.Perception;
 import frsf.cidisi.faia.environment.Environment;
@@ -12,6 +15,11 @@ import tp.caperucita.search.auxiliar.PosicionCelda;
 public class CaperucitaPercepcion extends Perception {
 
 	//TODO Refactorizar, la percepción tiene que devolver 4 listas de celdas, con lo que haya en esas celdas para cada dirección desde la posición actual de caperucita hasta el final del mapa.
+
+	private List<ContenidoCelda> celdasArriba;
+	private List<ContenidoCelda> celdasAbajo;
+	private List<ContenidoCelda> celdasIzquierda;
+	private List<ContenidoCelda> celdasDerecha;
 	
 	private Integer cantidadCeldasLibresArriba;
 	private Integer cantidadCeldasLibresDerecha;
@@ -37,7 +45,17 @@ public class CaperucitaPercepcion extends Perception {
 	
 	@Override
 	public void initPerception(Agent agentIn, Environment environmentIn) {
-		
+
+		//TODO Inicializar las 4 listas.
+
+		celdasArriba = new ArrayList<>();
+		celdasAbajo = new ArrayList<>();
+		celdasIzquierda = new ArrayList<>();
+		celdasDerecha = new ArrayList<>();
+
+
+
+		//TODO borrar
 		cantidadCeldasLibresArriba=0;
 		cantidadCeldasLibresDerecha=0;
 		cantidadCeldasLibresAbajo = 0;
@@ -64,6 +82,35 @@ public class CaperucitaPercepcion extends Perception {
       
 	}
 
+	private void calcularCeldasArriba(){
+		//TODO implementar
+	}
+	private void calcularCeldasAbajo(){
+		//TODO implementar
+	}
+	private void calcularCeldasIzquierda(){
+		//TODO implementar
+	}
+	private void calcularCeldasDerecha(){
+		//TODO implementar
+	}
+
+	public List<ContenidoCelda> getCeldasArriba(){
+		return celdasArriba;
+	}
+	public List<ContenidoCelda> getCeldasAbajo(){
+		return celdasAbajo;
+	}
+	public List<ContenidoCelda> getCeldasIzquierda(){
+		return celdasIzquierda;
+	}
+	public List<ContenidoCelda> getCeldasDerecha(){
+		return celdasDerecha;
+	}
+
+
+	//TODO borrar todo desde acá
+
 	public void contarCeldasLibresYDulces(ContenidoCelda[][] mapaAmbiente, PosicionCelda posicionCaperucita){
 		//inicializar parametros
 		cantidadCeldasLibresArriba=0;
@@ -82,7 +129,7 @@ public class CaperucitaPercepcion extends Perception {
 	private void contarCeldasLibresYDulces(int orientacion, ContenidoCelda[][] mapaAmbiente, PosicionCelda posicionCaperucita ) {
 		int filaActual = posicionCaperucita.getPosicionFila();
 		int columnaActual = posicionCaperucita.getPosicionColumna();
-		int ultimaFila = mapaAmbiente.length, ultimaColumna = mapaAmbiente[0].length;
+		int ultimaFila = mapaAmbiente.length-1, ultimaColumna = mapaAmbiente[0].length-1;
 		
 		switch(orientacion){
 			case 0:{//Arriba
@@ -101,7 +148,7 @@ public class CaperucitaPercepcion extends Perception {
 			}
 			case 1:{//Derecha
 
-				//TODO esto genera un out of bounds, porque cuando columnaActual es ultimaColumna-1 (el último valor válido), intenta accesder a la posicion ultimaColumna (columnaActual+1)
+				//TODO esto genera un out of bounds, porque cuando columnaActual es ultimaColumna-1 (el último valor válido), intenta acceder a la posición ultimaColumna (columnaActual+1)
 				while(columnaActual < ultimaColumna && !mapaAmbiente[filaActual][columnaActual+1].equals(ContenidoCelda.OBSTACULO) && !hayLoboDerecha) {
 					if(mapaAmbiente[filaActual][columnaActual+1].equals(ContenidoCelda.LOBO)) {
 						hayLoboDerecha = true;
@@ -217,21 +264,5 @@ public class CaperucitaPercepcion extends Perception {
 		this.hayLoboIzquierda = hayLoboIzquierda;
 	}
 
-	@Override
-	public String toString() {
-		return "CaperucitaPercepcion{" +
-				"cantidadCeldasLibresArriba=" + cantidadCeldasLibresArriba +
-				", cantidadCeldasLibresDerecha=" + cantidadCeldasLibresDerecha +
-				", cantidadCeldasLibresAbajo=" + cantidadCeldasLibresAbajo +
-				", cantidadCeldasLibresIzquierda=" + cantidadCeldasLibresIzquierda +
-				", cantidadDulcesArriba=" + cantidadDulcesArriba +
-				", cantidadDulcesDerecha=" + cantidadDulcesDerecha +
-				", cantidadDulcesAbajo=" + cantidadDulcesAbajo +
-				", cantidadDulcesIzquierda=" + cantidadDulcesIzquierda +
-				", hayLoboArriba=" + hayLoboArriba +
-				", hayLoboDerecha=" + hayLoboDerecha +
-				", hayLoboAbajo=" + hayLoboAbajo +
-				", hayLoboIzquierda=" + hayLoboIzquierda +
-				'}';
-	}
+
 }

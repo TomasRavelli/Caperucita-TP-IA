@@ -6,8 +6,7 @@ public enum ContenidoCelda {
 	LOBO, 
 	OBSTACULO, 
 	DULCE, 
-	FLORES,
-	CONOCIDO;
+	FLORES;
 
 	@Override
 	public String toString() {
