@@ -17,7 +17,7 @@ public class IrAbajo extends SearchAction{
 		PosicionCelda nuevaPosicion = new PosicionCelda(), posicionActual = estadoCaperucita.getPosicionActual();
 		int cantidadCeldasAbajo = estadoCaperucita.getCantidadCeldasAbajo();
 		int cantidadDulces = estadoCaperucita.getCantidadDulcesAbajo();
-		boolean hayLobo = estadoCaperucita.getHayLoboAbajo();;
+		boolean hayLobo = estadoCaperucita.getHayLoboAbajo();
 
 		if(cantidadCeldasAbajo > 0 && cantidadDulces == 0){
 			//Se cumplen las precondiciones
