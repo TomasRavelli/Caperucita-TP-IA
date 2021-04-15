@@ -1,6 +1,7 @@
 package tp.caperucita.search.caperucita;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.Objects;
 
 import frsf.cidisi.faia.agent.Perception;
@@ -14,21 +15,6 @@ public class CaperucitaEstado extends SearchBasedAgentState {
 	private Integer cantidadDulces;
 	private PosicionCelda posicionActual;
 	private ContenidoCelda[][] mapaConocidoAgente;
-	
-	
-	//Variables que se actualizan en updateState cada vez que se obtiene una percepcion.
-	//TODO refactorizar esto, no hay que usar variables, se tienen que calcular según las posiciones de las cosas en el mapa.
-	private Boolean hayLoboArriba;
-	private Boolean hayLoboDerecha;
-	private Boolean hayLoboAbajo;
-	private Boolean hayLoboIzquierda;
-
-	private Integer cantidadDulcesArriba;
-	private Integer cantidadDulcesDerecha;
-	private Integer cantidadDulcesAbajo;
-	private Integer cantidadDulcesIzquierda;
-	
-	
 	
 	public CaperucitaEstado() {
 		this.mapaConocidoAgente = new ContenidoCelda[9][14];
@@ -79,15 +65,7 @@ public class CaperucitaEstado extends SearchBasedAgentState {
 				this.mapaConocidoAgente[i][j] = ContenidoCelda.DESCONOCIDO;
 			}
 		}
-		
-		this.cantidadDulcesAbajo = 0;
-		this.cantidadDulcesArriba = 0;
-		this.cantidadDulcesDerecha = 0;
-		this.cantidadDulcesIzquierda = 0;
-		this.hayLoboAbajo = false;
-		this.hayLoboArriba = false;
-		this.hayLoboDerecha = false;
-		this.hayLoboIzquierda = false;
+
 	}
 
 	@Override
@@ -138,58 +116,56 @@ public class CaperucitaEstado extends SearchBasedAgentState {
 		//TODO Actualizar el mapa con las listas de celdas que va a tener la percepción
 		
 		CaperucitaPercepcion percepcion = (CaperucitaPercepcion) p;
+		
+		//El mapa de caperucita se actualiza con los caminos que percibe desde el ambiente.
+		actualizarMapaCaminoArriba(percepcion.getCeldasArriba());
+		actualizarMapaCaminoDerecha(percepcion.getCeldasDerecha());
+		actualizarMapaCaminoAbajo(percepcion.getCeldasAbajo());
+		actualizarMapaCaminoIzquierda(percepcion.getCeldasIzquierda());
+		
+	}
+	
+	private void actualizarMapaCaminoArriba(List<ContenidoCelda> celdasArriba) {
+		//TODO debo inicializar celdasArriba como ArrayList?
+		int primerFila = this.posicionActual.getPosicionFila()-1, columna=this.posicionActual.getPosicionColumna(), index = 0;
 
-		//deprecated
-		//TODO cambiar para que reciban La lista que va a tener la percepción.
-		actualizarMapaCaminoArriba(percepcion.getCantidadCeldasLibresArriba());
-		actualizarMapaCaminoDerecha(percepcion.getCantidadCeldasLibresDerecha());
-		actualizarMapaCaminoAbajo(percepcion.getCantidadCeldasLibresAbajo());
-		actualizarMapaCaminoIzquierda(percepcion.getCantidadCeldasLibresIzquierda());
-		this.hayLoboArriba = percepcion.getHayLoboArriba();
-		this.hayLoboDerecha = percepcion.getHayLoboDerecha();
-		this.hayLoboAbajo = percepcion.getHayLoboAbajo();
-		this.hayLoboIzquierda = percepcion.getHayLoboIzquierda();
-		this.cantidadDulcesArriba = percepcion.getCantidadDulcesArriba();
-		this.cantidadDulcesDerecha = percepcion.getCantidadDulcesDerecha();
-		this.cantidadDulcesAbajo = percepcion.getCantidadDulcesAbajo();
-		this.cantidadDulcesIzquierda = percepcion.getCantidadDulcesIzquierda();
+		//TODO que posicion de caperucita hay que usar? El ambiente devuelve la lista de caminos con la posicion que conoce de caperucita. Y caperucita actualiza su mapa a partir de su posicion actual. Estas dos posiciones deberian ser siempre las mismas, sino no anda.
+		for(int i = primerFila-1; i>=0;i--) {
+			this.mapaConocidoAgente[i][columna] = celdasArriba.get(index);
+			index++;
+		}
 		
 	}
 
-	private void actualizarMapaCaminoDerecha(Integer cantidadCeldasLibresDerecha) {
-		int primerCelda = this.posicionActual.getPosicionColumna(), ultimaCelda = primerCelda+cantidadCeldasLibresDerecha, fila=this.posicionActual.getPosicionFila();
-		for(int i = primerCelda+1; i<=ultimaCelda;i++) {
-			this.mapaConocidoAgente[fila][i] = ContenidoCelda.LIBRE;
+	private void actualizarMapaCaminoDerecha(List<ContenidoCelda> celdasDerecha) {
+		
+		int columnaActual = this.posicionActual.getPosicionColumna(), ultimaColumna = this.mapaConocidoAgente[0].length-1, filaActual=this.posicionActual.getPosicionFila();
+	
+		for(int i = columnaActual+1; i<=ultimaColumna;i--) {
+			this.mapaConocidoAgente[filaActual][i] = celdasDerecha.get(i);
 		}
 		
 	}
 
 
-	private void actualizarMapaCaminoIzquierda(Integer cantidadCeldasLibresIzquierda) {
-		int primerCelda = this.posicionActual.getPosicionColumna(), ultimaCelda = primerCelda-cantidadCeldasLibresIzquierda, fila=this.posicionActual.getPosicionFila();
-		for(int i = primerCelda-1; i>=ultimaCelda;i--) {
-			this.mapaConocidoAgente[fila][i] = ContenidoCelda.LIBRE;
+	private void actualizarMapaCaminoIzquierda(List<ContenidoCelda> celdasIzquierda) {
+		int columnaActual = this.posicionActual.getPosicionColumna(),  filaActual=this.posicionActual.getPosicionFila(), index=0;
+		
+		for(int i = columnaActual-1; i>=0;i--) {
+			this.mapaConocidoAgente[filaActual][i] = celdasIzquierda.get(index);
+			index++;
 		}
 		
 	}
 
 
-	private void actualizarMapaCaminoAbajo(Integer cantidadCeldasLibresAbajo) {
-		int primerCelda = this.posicionActual.getPosicionFila(), ultimaCelda = primerCelda+cantidadCeldasLibresAbajo, columna=this.posicionActual.getPosicionColumna();
-		for(int i = primerCelda+1; i<=ultimaCelda;i++) {
-			this.mapaConocidoAgente[i][columna] = ContenidoCelda.LIBRE;
+	private void actualizarMapaCaminoAbajo(List<ContenidoCelda> celdasAbajo) {
+		int primerFila = this.posicionActual.getPosicionFila(), ultimaFila = mapaConocidoAgente.length-1, columnaActual=this.posicionActual.getPosicionColumna(), index = 0;
+		
+		for(int i = primerFila+1; i<=ultimaFila;i++) {
+			this.mapaConocidoAgente[i][columnaActual] = celdasAbajo.get(index);
+			index++;
 		}
-		
-	}
-
-
-	private void actualizarMapaCaminoArriba(Integer cantidadCeldasLibresArriba) {
-		
-		int primerCelda = this.posicionActual.getPosicionFila(), ultimaCelda = primerCelda-cantidadCeldasLibresArriba, columna=this.posicionActual.getPosicionColumna();
-		for(int i = primerCelda-1; i>=ultimaCelda;i--) {
-			this.mapaConocidoAgente[i][columna] = ContenidoCelda.LIBRE;
-		}
-		
 		
 	}
 
@@ -220,16 +196,20 @@ public class CaperucitaEstado extends SearchBasedAgentState {
 				'}';
 	}
 
-	//Estos no pueden ser variables, porque hay que calcularlo según la posición de caperucita.
+
 	public int getCantidadCeldasArriba() {
 		//TODO calcular la cantidad de celdas libres arriba según la posición de caperucita y el mapa.
 		int cantidadCeldasLibres = 0,filaActual=this.posicionActual.getPosicionFila(), columnaActual = this.posicionActual.getPosicionColumna();
 
 		//TODO hay que sumar celdas libres mientras no llegue a un obstaculo.
 		//TODO Si la próxima celda es una flor, sumo uno y corto el while. Para poder llegar a la flor pero no pasarme.
-		while(filaActual>0 && mapaConocidoAgente[filaActual-1][columnaActual]==ContenidoCelda.LIBRE) {
+		while(filaActual > 0 && mapaConocidoAgente[filaActual-1][columnaActual] != ContenidoCelda.OBSTACULO) {
 			filaActual--;
 			cantidadCeldasLibres++;
+			if(mapaConocidoAgente[filaActual][columnaActual] == ContenidoCelda.FLORES) {
+				//Salgo del while para quedar en una celda con flores.
+				return cantidadCeldasLibres;
+			}
 		}
 		
 		return cantidadCeldasLibres;
@@ -240,9 +220,14 @@ public class CaperucitaEstado extends SearchBasedAgentState {
 
 		//TODO hay que sumar celdas libres mientras no llegue a un obstaculo.
 		//TODO Si la próxima celda es una flor, sumo uno y corto el while. Para poder llegar a la flor pero no pasarme.
-		while(filaActual<ultimaFila && mapaConocidoAgente[filaActual+1][columnaActual]==ContenidoCelda.LIBRE) {
+		while(filaActual<ultimaFila && mapaConocidoAgente[filaActual+1][columnaActual] != ContenidoCelda.OBSTACULO) {
 			filaActual++;
 			cantidadCeldasLibres++;
+			
+			if(mapaConocidoAgente[filaActual][columnaActual]==ContenidoCelda.FLORES) {
+				//Salgo del while porque ya estoy en una celda con flores.
+				return cantidadCeldasLibres;
+			}
 		}
 	
 		return cantidadCeldasLibres;
@@ -265,9 +250,12 @@ public class CaperucitaEstado extends SearchBasedAgentState {
 
 		//TODO hay que sumar celdas libres mientras no llegue a un obstaculo.
 		//TODO Si la próxima celda es una flor, sumo uno y corto el while. Para poder llegar a la flor pero no pasarme.
-		while(columnaActual < ultimaColumna && mapaConocidoAgente[filaActual][columnaActual+1]==ContenidoCelda.LIBRE) {
+		while(columnaActual < ultimaColumna && mapaConocidoAgente[filaActual][columnaActual+1] != ContenidoCelda.OBSTACULO) {
 			columnaActual++;
 			cantidadCeldasLibres++;
+			if(mapaConocidoAgente[filaActual][columnaActual] == ContenidoCelda.FLORES) {
+				return cantidadCeldasLibres;
+			}
 		}
 		
 		return cantidadCeldasLibres;
