@@ -262,8 +262,7 @@ public class CaperucitaEstado extends SearchBasedAgentState {
 	}
 
 	public int getCantidadDulcesArriba() {
-		//TODO calcular la cantidad de dulces arriba según el mapa y la posición de caperucita.
-
+		
 		int cantidadDulcesArriba = 0, fila = posicionActual.getPosicionFila(), columna = posicionActual.getPosicionColumna();
 
 		while(fila > 0 && !mapaConocidoAgente[fila-1][columna].equals(ContenidoCelda.OBSTACULO)){
@@ -276,32 +275,88 @@ public class CaperucitaEstado extends SearchBasedAgentState {
 		return cantidadDulcesArriba;
 	}
 	public int getCantidadDulcesAbajo() {
-		//TODO calcular la cantidad de dulces abajo según el mapa y la posición de caperucita.
-		return this.cantidadDulcesAbajo;
+
+		int cantidadDulcesAbajo = 0, fila = posicionActual.getPosicionFila(), ultimaFila = mapaConocidoAgente.length-1, columna = posicionActual.getPosicionColumna();
+
+		while(fila < ultimaFila && !mapaConocidoAgente[fila+1][columna].equals(ContenidoCelda.OBSTACULO)){
+			fila++;
+			if(mapaConocidoAgente[fila][columna].equals(ContenidoCelda.DULCE)) {
+				cantidadDulcesAbajo++;
+			}
+		}
+		return cantidadDulcesAbajo;
 	}
 	public int getCantidadDulcesIzquierda() {
-		//TODO calcular la cantidad de dulces a la izquierda según el mapa y la posición de caperucita.
-		return this.cantidadDulcesIzquierda;
+
+		int cantidadDulcesIzquierda = 0, fila = posicionActual.getPosicionFila(), columna = posicionActual.getPosicionColumna();
+
+		while(columna > 0 && !mapaConocidoAgente[fila][columna-1].equals(ContenidoCelda.OBSTACULO)){
+			columna--;
+			if(mapaConocidoAgente[fila][columna].equals(ContenidoCelda.DULCE)) {
+				cantidadDulcesIzquierda++;
+			}
+		}
+		return cantidadDulcesIzquierda;
 	}
 	public int getCantidadDulcesDerecha() {
-		//TODO calcular la cantidad de dulces a la derecha según el mapa y la posición de caperucita.
-		return this.cantidadDulcesDerecha;
+
+		int cantidadDulcesDerecha = 0, fila = posicionActual.getPosicionFila(), ultimaColumna = mapaConocidoAgente[0].length-1, columna = posicionActual.getPosicionColumna();
+
+		while(columna < ultimaColumna && !mapaConocidoAgente[fila][columna+1].equals(ContenidoCelda.OBSTACULO)){
+			columna++;
+			if(mapaConocidoAgente[fila][columna].equals(ContenidoCelda.DULCE)) {
+				cantidadDulcesDerecha++;
+			}
+		}
+		return cantidadDulcesDerecha;
 	}
 
 	public boolean getHayLoboArriba() {
-		//TODO, al igual que los otros, hay que ver si el lobo está arriba de caperucita en el mapa, o ver una variable que se actualiza en updateState()
-		return this.hayLoboArriba;
+		boolean hayLoboArriba = false;
+		int fila = posicionActual.getPosicionFila(), columna = posicionActual.getPosicionColumna();
+
+		while(fila > 0 && !mapaConocidoAgente[fila-1][columna].equals(ContenidoCelda.OBSTACULO) && !hayLoboArriba){
+			fila--;
+			if(mapaConocidoAgente[fila][columna].equals(ContenidoCelda.LOBO)) {
+				hayLoboArriba=true;
+			}
+		}
+		return hayLoboArriba;
 	}
 	public boolean getHayLoboAbajo() {
-		//TODO, al igual que los otros, hay que ver si el lobo está abajo de caperucita en el mapa, o ver una variable que se actualiza en updateState()
-		return this.hayLoboAbajo;
+	
+		int  fila = posicionActual.getPosicionFila(), ultimaFila = mapaConocidoAgente.length-1, columna = posicionActual.getPosicionColumna();
+		boolean hayLoboAbajo = false;
+		
+		while(fila < ultimaFila && !mapaConocidoAgente[fila+1][columna].equals(ContenidoCelda.OBSTACULO) && !hayLoboAbajo){
+			fila++;
+			if(mapaConocidoAgente[fila][columna].equals(ContenidoCelda.LOBO)) {
+				hayLoboAbajo = true;
+			}
+		}
+		return hayLoboAbajo;
 	}
 	public boolean getHayLoboIzquierda() {
-		//TODO, al igual que los otros, hay que ver si el lobo está a la izquierda de caperucita en el mapa, o ver una variable que se actualiza en updateState()
-		return this.hayLoboIzquierda;
+		int fila = posicionActual.getPosicionFila(), columna = posicionActual.getPosicionColumna();
+		boolean hayLoboIzquierda = false;
+	
+		while(columna > 0 && !mapaConocidoAgente[fila][columna-1].equals(ContenidoCelda.OBSTACULO) && !hayLoboIzquierda){
+			columna--;
+			if(mapaConocidoAgente[fila][columna].equals(ContenidoCelda.LOBO)) {
+				hayLoboIzquierda = true;
+			}
+		}
+		return hayLoboIzquierda;
 	}
 	public boolean getHayLoboDerecha() {
-		//TODO, al igual que los otros, hay que ver si el lobo está a la derecha de caperucita en el mapa, o ver una variable que se actualiza en updateState()
-		return this.hayLoboDerecha;
+		int fila = posicionActual.getPosicionFila(), ultimaColumna = mapaConocidoAgente[0].length-1, columna = posicionActual.getPosicionColumna();
+		boolean hayLoboDerecha = false;
+		while(columna < ultimaColumna && !mapaConocidoAgente[fila][columna+1].equals(ContenidoCelda.OBSTACULO) && !hayLoboDerecha){
+			columna++;
+			if(mapaConocidoAgente[fila][columna].equals(ContenidoCelda.LOBO)) {
+				hayLoboDerecha = true;
+			}
+		}
+		return hayLoboDerecha;
 	}
 }
