@@ -1,5 +1,7 @@
 package tp.caperucita.search.ambiente;
 
+import java.util.ArrayList;
+
 import frsf.cidisi.faia.agent.Perception;
 import frsf.cidisi.faia.environment.Environment;
 import tp.caperucita.search.auxiliar.ContenidoCelda;
@@ -27,15 +29,11 @@ public class AmbienteCaperucita extends Environment {
 		ContenidoCelda[][] mapa = ((AmbienteEstado)environmentState).getMapaAmbiente();
 
 		//TODO esto hay que cambiarlo por los valores reales (fijándose en el mapa del ambiente)
-		percepcion.setCantidadDulcesAbajo(0);
-		percepcion.setCantidadDulcesArriba(0);
-		percepcion.setCantidadDulcesIzquierda(0);
-		percepcion.setCantidadDulcesDerecha(0);
-		percepcion.setHayLoboAbajo(false);
-		percepcion.setHayLoboArriba(false);
-		percepcion.setHayLoboIzquierda(false);
-		percepcion.setHayLoboDerecha(false);
-
+//		percepcion.setCeldasArriba(new ArrayList<>());
+//		percepcion.setCeldasDerecha(new ArrayList<>());
+//		percepcion.setCeldasAbajo(new ArrayList<>());
+//		percepcion.setCeldasIzquierda(new ArrayList<>());
+		
 		percepcion.contarCeldasLibresYDulces(mapa, posicionCaperucita);
 
 	 	return percepcion;

@@ -130,7 +130,7 @@ public class CaperucitaEstado extends SearchBasedAgentState {
 		int primerFila = this.posicionActual.getPosicionFila()-1, columna=this.posicionActual.getPosicionColumna(), index = 0;
 
 		//TODO que posicion de caperucita hay que usar? El ambiente devuelve la lista de caminos con la posicion que conoce de caperucita. Y caperucita actualiza su mapa a partir de su posicion actual. Estas dos posiciones deberian ser siempre las mismas, sino no anda.
-		for(int i = primerFila-1; i>=0;i--) {
+		for(int i = primerFila; i>=0;i--) {
 			this.mapaConocidoAgente[i][columna] = celdasArriba.get(index);
 			index++;
 		}
@@ -139,10 +139,11 @@ public class CaperucitaEstado extends SearchBasedAgentState {
 
 	private void actualizarMapaCaminoDerecha(List<ContenidoCelda> celdasDerecha) {
 		
-		int columnaActual = this.posicionActual.getPosicionColumna(), ultimaColumna = this.mapaConocidoAgente[0].length-1, filaActual=this.posicionActual.getPosicionFila();
+		int index = 0, columnaActual = this.posicionActual.getPosicionColumna(), ultimaColumna = this.mapaConocidoAgente[0].length-1, filaActual=this.posicionActual.getPosicionFila();
 	
-		for(int i = columnaActual+1; i<=ultimaColumna;i--) {
-			this.mapaConocidoAgente[filaActual][i] = celdasDerecha.get(i);
+		for(int i = columnaActual + 1; i<=ultimaColumna;i++) {
+			this.mapaConocidoAgente[filaActual][i] = celdasDerecha.get(index);
+			index++;
 		}
 		
 	}
@@ -160,9 +161,9 @@ public class CaperucitaEstado extends SearchBasedAgentState {
 
 
 	private void actualizarMapaCaminoAbajo(List<ContenidoCelda> celdasAbajo) {
-		int primerFila = this.posicionActual.getPosicionFila(), ultimaFila = mapaConocidoAgente.length-1, columnaActual=this.posicionActual.getPosicionColumna(), index = 0;
+		int primerFila = this.posicionActual.getPosicionFila()+1, ultimaFila = mapaConocidoAgente.length-1, columnaActual=this.posicionActual.getPosicionColumna(), index = 0;
 		
-		for(int i = primerFila+1; i<=ultimaFila;i++) {
+		for(int i = primerFila; i<=ultimaFila;i++) {
 			this.mapaConocidoAgente[i][columnaActual] = celdasAbajo.get(index);
 			index++;
 		}
