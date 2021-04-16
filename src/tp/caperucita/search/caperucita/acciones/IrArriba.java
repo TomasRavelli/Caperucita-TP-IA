@@ -72,6 +72,8 @@ public class IrArriba extends SearchAction {
 				//TODO Cuidado! la nueva posición puede tener valores negativos is caperucita está en el 0. Hay que validar las precondiciones para evitar esto
 				estadoCaperucita.setPosicionActual(nuevaPosicion);
 				estadoAmbiente.setPosicionCaperucita(estadoCaperucita.getPosicionActual());
+				
+				//TODO Entrega-19-14. setear la posicion del lobo en el ambiente
 				return estadoAmbiente;
 			}
 			//Esta el lobo, caperucita pierde una vida y todos los dulces
@@ -81,6 +83,8 @@ public class IrArriba extends SearchAction {
 			estadoCaperucita.setPosicionActual(posicionActual);
 			estadoCaperucita.setCantidadVidas(estadoCaperucita.getCantidadVidas()-1);
 			estadoAmbiente.setPosicionCaperucita(estadoCaperucita.getPosicionActual());
+			
+			//TODO Entrega-19-14. Setear a estadoAmbiente la nueva posicion del lobo
 			return estadoAmbiente;
 		
 		}

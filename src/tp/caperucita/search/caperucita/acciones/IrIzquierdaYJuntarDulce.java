@@ -72,6 +72,8 @@ public class IrIzquierdaYJuntarDulce extends SearchAction {
 				estadoCaperucita.setCantidadVidas(estadoCaperucita.getCantidadVidas()-1);
 				//Si ahy lobo el estado del ambiente no cambia, pero hay que setearle la nueva posicion de caperucita.
 				estadoAmbiente.setPosicionCaperucita(estadoCaperucita.getPosicionActual());
+				
+				//TODO Entrega-19-14. setear la posicion del lobo en el ambiente
 				return estadoAmbiente;
 			}
 			//No hay lobo, me puedo mover y juntar dulces
@@ -84,6 +86,8 @@ public class IrIzquierdaYJuntarDulce extends SearchAction {
 			estadoAmbiente.eliminarDulcesEnCamino(posicionActual, nuevaPosicion);
 		
 			estadoAmbiente.setPosicionCaperucita(estadoCaperucita.getPosicionActual());
+			
+			//TODO Entrega-19-14. setear la posicion del lobo en el ambiente
 			return estadoAmbiente;
 		}
 

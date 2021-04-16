@@ -68,6 +68,7 @@ public class IrAbajo extends SearchAction{
 				//Actualizo el ambiente
 				estadoAmbiente.setPosicionCaperucita(nuevaPosicion);
 
+				//TODO Entrega-19-14. setear la posicion del lobo en el ambiente
 				return estadoAmbiente;
 			}
 			//no hay lobo, entonces se mueve.
@@ -77,6 +78,8 @@ public class IrAbajo extends SearchAction{
 			//Actualizo el ambiente
 			estadoAmbiente.setPosicionCaperucita(nuevaPosicion);
 
+			
+			//TODO Entrega-19-14. setear la posicion del lobo en el ambiente
 			return estadoAmbiente;
 		}
 		//No se cumplen las precondiciones, esta acción no es válida

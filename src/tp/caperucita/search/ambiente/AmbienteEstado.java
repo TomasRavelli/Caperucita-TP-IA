@@ -8,6 +8,8 @@ import tp.caperucita.search.auxiliar.PosicionCelda;
 
 public class AmbienteEstado extends EnvironmentState {
 	
+	
+	//TODO Entrega-19-14. Estado del ambiente.
 	private PosicionCelda posicionCaperucita;
 	
 	//Solo te deja inicializar con constantes aca.
@@ -30,9 +32,10 @@ public class AmbienteEstado extends EnvironmentState {
 
 	@Override
 	public void initState() {
-		// TODO Auto-generated method stub
 		this.posicionCaperucita.setPosicionFila(0);
 		this.posicionCaperucita.setPosicionColumna(0);
+		
+		//TODO Entrega-19-14. Setear posisicon aleatoria del lobo.
 	}
 
 	@Override

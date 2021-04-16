@@ -13,6 +13,8 @@ public class CaperucitaMain {
         SearchBasedAgentSimulator simulator =
                 new SearchBasedAgentSimulator(environment, agent);
         
+        
+        ////TODO Entrega-19-14. Aca esta el clico percepcion-accion?
         simulator.start();
 		//CaperucitaPercepcion percepcion = new CaperucitaPercepcion(agent, environment);
 

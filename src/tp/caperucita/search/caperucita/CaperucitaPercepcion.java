@@ -81,6 +81,8 @@ public class CaperucitaPercepcion extends Perception {
 	}
 
 	public void contarCeldasLibresYDulces(ContenidoCelda[][] mapaAmbiente, PosicionCelda posicionCaperucita){
+		
+		//TODO Entrega-19-14. Implementacion de las percepciones.
 		//inicializar parametros
 		celdasArriba = new ArrayList<>();
 		celdasDerecha = new ArrayList<>();
