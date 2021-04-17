@@ -93,8 +93,8 @@ public class CaperucitaPercepcion extends Perception {
 		
 		int filaActual = posicionCaperucita.getPosicionFila();
 		int columnaActual = posicionCaperucita.getPosicionColumna();
-		
-		for(int i = filaActual-1; i >= 0; i-- ) {
+		//Empiezo a ver desde la celda actual porque el lobo puede estar en la misma celda que caperucita, y así va a ver al lobo en todos los caminos.
+		for(int i = filaActual; i >= 0; i-- ) {
 			celdasArriba.add(mapaAmbiente[i][columnaActual]);
 		}
 	}
@@ -104,7 +104,7 @@ public class CaperucitaPercepcion extends Perception {
 		int columnaActual = posicionCaperucita.getPosicionColumna();
 		int ultimaFila = mapaAmbiente.length-1;
 		
-		for(int i = filaActual+1; i <= ultimaFila; i++ ) {
+		for(int i = filaActual; i <= ultimaFila; i++ ) {
 			celdasAbajo.add(mapaAmbiente[i][columnaActual]);
 		}
 	}
@@ -113,7 +113,7 @@ public class CaperucitaPercepcion extends Perception {
 		int filaActual = posicionCaperucita.getPosicionFila();
 		int columnaActual = posicionCaperucita.getPosicionColumna();
 	
-		for(int i = columnaActual-1; i >= 0; i-- ) {
+		for(int i = columnaActual; i >= 0; i-- ) {
 			celdasIzquierda.add(mapaAmbiente[filaActual][i]);
 		}
 	}
@@ -123,7 +123,7 @@ public class CaperucitaPercepcion extends Perception {
 		int columnaActual = posicionCaperucita.getPosicionColumna();
 		int ultimaColumna = mapaAmbiente[0].length-1;
 		
-		for(int i = columnaActual+1; i <= ultimaColumna; i++ ) {
+		for(int i = columnaActual; i <= ultimaColumna; i++ ) {
 			celdasDerecha.add(mapaAmbiente[filaActual][i]);
 		}
 	}

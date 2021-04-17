@@ -197,11 +197,11 @@ public class CaperucitaEstado extends SearchBasedAgentState {
 
 
 	public int getCantidadCeldasArriba() {
-		//TODO calcular la cantidad de celdas libres arriba según la posición de caperucita y el mapa.
+		//calcular la cantidad de celdas libres arriba según la posición de caperucita y el mapa.
 		int cantidadCeldasLibres = 0,filaActual=this.posicionActual.getPosicionFila(), columnaActual = this.posicionActual.getPosicionColumna();
 
-		//TODO hay que sumar celdas libres mientras no llegue a un obstaculo.
-		//TODO Si la próxima celda es una flor, sumo uno y corto el while. Para poder llegar a la flor pero no pasarme.
+		//hay que sumar celdas libres mientras no llegue a un obstaculo.
+		//Si la próxima celda es una flor, sumo uno y corto el while. Para poder llegar a la flor pero no pasarme.
 		while(filaActual > 0 && mapaConocidoAgente[filaActual-1][columnaActual] != ContenidoCelda.OBSTACULO) {
 			filaActual--;
 			cantidadCeldasLibres++;
@@ -214,11 +214,8 @@ public class CaperucitaEstado extends SearchBasedAgentState {
 		return cantidadCeldasLibres;
 	}
 	public int getCantidadCeldasAbajo() {
-		//TODO calcular la cantidad de celdas libres abajo según la posición de caperucita y el mapa.
 		int cantidadCeldasLibres = 0, ultimaFila = mapaConocidoAgente.length - 1, filaActual=this.posicionActual.getPosicionFila(), columnaActual = this.posicionActual.getPosicionColumna();
 
-		//TODO hay que sumar celdas libres mientras no llegue a un obstaculo.
-		//TODO Si la próxima celda es una flor, sumo uno y corto el while. Para poder llegar a la flor pero no pasarme.
 		while(filaActual<ultimaFila && mapaConocidoAgente[filaActual+1][columnaActual] != ContenidoCelda.OBSTACULO) {
 			filaActual++;
 			cantidadCeldasLibres++;
@@ -247,8 +244,6 @@ public class CaperucitaEstado extends SearchBasedAgentState {
 	public int getCantidadCeldasDerecha() {
 		int cantidadCeldasLibres = 0, ultimaColumna = mapaConocidoAgente[0].length - 1, filaActual=this.posicionActual.getPosicionFila(), columnaActual = this.posicionActual.getPosicionColumna();
 
-		//TODO hay que sumar celdas libres mientras no llegue a un obstaculo.
-		//TODO Si la próxima celda es una flor, sumo uno y corto el while. Para poder llegar a la flor pero no pasarme.
 		while(columnaActual < ultimaColumna && mapaConocidoAgente[filaActual][columnaActual+1] != ContenidoCelda.OBSTACULO) {
 			columnaActual++;
 			cantidadCeldasLibres++;
@@ -313,8 +308,8 @@ public class CaperucitaEstado extends SearchBasedAgentState {
 	public boolean getHayLoboArriba() {
 		boolean hayLoboArriba = false;
 		int fila = posicionActual.getPosicionFila(), columna = posicionActual.getPosicionColumna();
-
-		while(fila > 0 && !mapaConocidoAgente[fila-1][columna].equals(ContenidoCelda.OBSTACULO) && !hayLoboArriba){
+		//Empiezo a ver desde la celda actual porque el lobo puede estar en la misma celda que caperucita, y así va a ver al lobo en todos los caminos.
+		while(fila > 0 && !mapaConocidoAgente[fila][columna].equals(ContenidoCelda.OBSTACULO) && !hayLoboArriba){
 			fila--;
 			if(mapaConocidoAgente[fila][columna].equals(ContenidoCelda.LOBO)) {
 				hayLoboArriba=true;
@@ -326,8 +321,8 @@ public class CaperucitaEstado extends SearchBasedAgentState {
 	
 		int  fila = posicionActual.getPosicionFila(), ultimaFila = mapaConocidoAgente.length-1, columna = posicionActual.getPosicionColumna();
 		boolean hayLoboAbajo = false;
-		
-		while(fila < ultimaFila && !mapaConocidoAgente[fila+1][columna].equals(ContenidoCelda.OBSTACULO) && !hayLoboAbajo){
+
+		while(fila < ultimaFila && !mapaConocidoAgente[fila][columna].equals(ContenidoCelda.OBSTACULO) && !hayLoboAbajo){
 			fila++;
 			if(mapaConocidoAgente[fila][columna].equals(ContenidoCelda.LOBO)) {
 				hayLoboAbajo = true;
@@ -339,7 +334,7 @@ public class CaperucitaEstado extends SearchBasedAgentState {
 		int fila = posicionActual.getPosicionFila(), columna = posicionActual.getPosicionColumna();
 		boolean hayLoboIzquierda = false;
 	
-		while(columna > 0 && !mapaConocidoAgente[fila][columna-1].equals(ContenidoCelda.OBSTACULO) && !hayLoboIzquierda){
+		while(columna > 0 && !mapaConocidoAgente[fila][columna].equals(ContenidoCelda.OBSTACULO) && !hayLoboIzquierda){
 			columna--;
 			if(mapaConocidoAgente[fila][columna].equals(ContenidoCelda.LOBO)) {
 				hayLoboIzquierda = true;
@@ -350,7 +345,7 @@ public class CaperucitaEstado extends SearchBasedAgentState {
 	public boolean getHayLoboDerecha() {
 		int fila = posicionActual.getPosicionFila(), ultimaColumna = mapaConocidoAgente[0].length-1, columna = posicionActual.getPosicionColumna();
 		boolean hayLoboDerecha = false;
-		while(columna < ultimaColumna && !mapaConocidoAgente[fila][columna+1].equals(ContenidoCelda.OBSTACULO) && !hayLoboDerecha){
+		while(columna < ultimaColumna && !mapaConocidoAgente[fila][columna].equals(ContenidoCelda.OBSTACULO) && !hayLoboDerecha){
 			columna++;
 			if(mapaConocidoAgente[fila][columna].equals(ContenidoCelda.LOBO)) {
 				hayLoboDerecha = true;
