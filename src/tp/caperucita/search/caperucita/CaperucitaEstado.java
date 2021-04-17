@@ -65,18 +65,19 @@ public class CaperucitaEstado extends SearchBasedAgentState {
 				this.mapaConocidoAgente[i][j] = ContenidoCelda.DESCONOCIDO;
 			}
 		}
+		mapaConocidoAgente[8][10] = ContenidoCelda.FLORES;
 
 	}
 
 	@Override
 	public boolean equals(Object o) {
 		//TODO creo que el equals no debería tener en cuenta la cantidad de dulces y vidas.
-		//porque lo usa el framework para saber si el ya paso por este estado, si ya pasoi pero junto dulces en el medio,
+		// porque lo usa el framework para saber si el agente ya pasó por este estado, si ya pasó pero junto dulces en el medio,
 		// va a creer que puede volver a este estado y se va a provocar un bucle infinito
 		if (this == o) return true;
 		if (o == null || getClass() != o.getClass()) return false;
 		CaperucitaEstado that = (CaperucitaEstado) o;
-		return Objects.equals(cantidadVidas, that.cantidadVidas) && Objects.equals(cantidadDulces, that.cantidadDulces) && Objects.equals(posicionActual, that.posicionActual) && Arrays.equals(mapaConocidoAgente, that.mapaConocidoAgente);
+		return this.posicionActual.equals(that.posicionActual);
 	}
 
 	@Override
@@ -126,8 +127,10 @@ public class CaperucitaEstado extends SearchBasedAgentState {
 	}
 	
 	private void actualizarMapaCaminoArriba(List<ContenidoCelda> celdasArriba) {
-		int primerFila = this.posicionActual.getPosicionFila()-1, columna=this.posicionActual.getPosicionColumna(), index = 0;
+		int primerFila = this.posicionActual.getPosicionFila(), columna=this.posicionActual.getPosicionColumna(), index = 0;
 
+		//Acá hay que actualizar desde primerFila, no desde primerFila-1,
+		// porque la lista que nos da la percepción incluye la celda donde está caperucita (primerFila,columna)
 		for(int i = primerFila; i>=0;i--) {
 			this.mapaConocidoAgente[i][columna] = celdasArriba.get(index);
 			index++;
@@ -139,7 +142,7 @@ public class CaperucitaEstado extends SearchBasedAgentState {
 		
 		int index = 0, columnaActual = this.posicionActual.getPosicionColumna(), ultimaColumna = this.mapaConocidoAgente[0].length-1, filaActual=this.posicionActual.getPosicionFila();
 	
-		for(int i = columnaActual + 1; i<=ultimaColumna;i++) {
+		for(int i = columnaActual; i<=ultimaColumna;i++) {
 			this.mapaConocidoAgente[filaActual][i] = celdasDerecha.get(index);
 			index++;
 		}
@@ -149,8 +152,8 @@ public class CaperucitaEstado extends SearchBasedAgentState {
 
 	private void actualizarMapaCaminoIzquierda(List<ContenidoCelda> celdasIzquierda) {
 		int columnaActual = this.posicionActual.getPosicionColumna(),  filaActual=this.posicionActual.getPosicionFila(), index=0;
-		
-		for(int i = columnaActual-1; i>=0;i--) {
+
+		for(int i = columnaActual; i>=0;i--) {
 			this.mapaConocidoAgente[filaActual][i] = celdasIzquierda.get(index);
 			index++;
 		}
@@ -159,7 +162,7 @@ public class CaperucitaEstado extends SearchBasedAgentState {
 
 
 	private void actualizarMapaCaminoAbajo(List<ContenidoCelda> celdasAbajo) {
-		int primerFila = this.posicionActual.getPosicionFila()+1, ultimaFila = mapaConocidoAgente.length-1, columnaActual=this.posicionActual.getPosicionColumna(), index = 0;
+		int primerFila = this.posicionActual.getPosicionFila(), ultimaFila = mapaConocidoAgente.length-1, columnaActual=this.posicionActual.getPosicionColumna(), index = 0;
 		
 		for(int i = primerFila; i<=ultimaFila;i++) {
 			this.mapaConocidoAgente[i][columnaActual] = celdasAbajo.get(index);
@@ -188,11 +191,11 @@ public class CaperucitaEstado extends SearchBasedAgentState {
 		}
 
 		return "CaperucitaEstado{" +
-				"cantidadVidas=" + cantidadVidas +
-				", cantidadDulces=" + cantidadDulces +
-				", posicionActual=" + posicionActual +
-				", mapaConocidoAgente=" + mapaString +
-				'}';
+				"\ncantidadVidas=" + cantidadVidas +
+				"\n, cantidadDulces=" + cantidadDulces +
+				"\n, posicionActual=" + posicionActual +
+				"\n, mapaConocidoAgente=" + mapaString +
+				"} fin CaperucitaEstado";
 	}
 
 

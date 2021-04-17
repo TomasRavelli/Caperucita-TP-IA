@@ -128,5 +128,13 @@ public class CaperucitaPercepcion extends Perception {
 		}
 	}
 
-
+	@Override
+	public String toString() {
+		return "CaperucitaPercepcion{" +
+				"\nceldasArriba=" + celdasArriba +
+				"\n, celdasAbajo=" + celdasAbajo +
+				"\n, celdasIzquierda=" + celdasIzquierda +
+				"\n, celdasDerecha=" + celdasDerecha +
+				"\n} fin CaperucitaPercepcion";
+	}
 }

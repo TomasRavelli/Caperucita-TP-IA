@@ -25,7 +25,7 @@ public class AmbienteEstado extends EnvironmentState {
 			{ContenidoCelda.LIBRE, ContenidoCelda.LIBRE, ContenidoCelda.LIBRE, ContenidoCelda.LIBRE, ContenidoCelda.LIBRE,ContenidoCelda.LIBRE, ContenidoCelda.LIBRE,ContenidoCelda.LIBRE, ContenidoCelda.LIBRE, ContenidoCelda.LIBRE,ContenidoCelda.LIBRE,ContenidoCelda.LIBRE, ContenidoCelda.LIBRE,ContenidoCelda.LIBRE},
 			{ContenidoCelda.LIBRE, ContenidoCelda.LIBRE, ContenidoCelda.LIBRE, ContenidoCelda.LIBRE, ContenidoCelda.LIBRE,ContenidoCelda.LIBRE, ContenidoCelda.LIBRE,ContenidoCelda.LIBRE, ContenidoCelda.LIBRE, ContenidoCelda.LIBRE,ContenidoCelda.LIBRE,ContenidoCelda.LIBRE, ContenidoCelda.LIBRE,ContenidoCelda.LIBRE},
 			{ContenidoCelda.LIBRE, ContenidoCelda.LIBRE, ContenidoCelda.LIBRE, ContenidoCelda.LIBRE, ContenidoCelda.LIBRE,ContenidoCelda.LIBRE, ContenidoCelda.LIBRE,ContenidoCelda.LIBRE, ContenidoCelda.LIBRE, ContenidoCelda.LIBRE,ContenidoCelda.LIBRE,ContenidoCelda.LIBRE, ContenidoCelda.LIBRE,ContenidoCelda.LIBRE},
-			{ContenidoCelda.LIBRE, ContenidoCelda.LIBRE, ContenidoCelda.LIBRE, ContenidoCelda.LIBRE, ContenidoCelda.LIBRE,ContenidoCelda.LIBRE, ContenidoCelda.LIBRE,ContenidoCelda.LIBRE, ContenidoCelda.LIBRE, ContenidoCelda.LIBRE,ContenidoCelda.LIBRE,ContenidoCelda.LIBRE, ContenidoCelda.LIBRE,ContenidoCelda.LIBRE}
+			{ContenidoCelda.LIBRE, ContenidoCelda.LIBRE, ContenidoCelda.LIBRE, ContenidoCelda.LIBRE, ContenidoCelda.LIBRE,ContenidoCelda.LIBRE, ContenidoCelda.LIBRE,ContenidoCelda.LIBRE, ContenidoCelda.LIBRE, ContenidoCelda.LIBRE,ContenidoCelda.FLORES,ContenidoCelda.LIBRE, ContenidoCelda.LIBRE,ContenidoCelda.LIBRE}
 	};
 
 	private PosicionCelda posicionLobo = null;

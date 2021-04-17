@@ -1,5 +1,7 @@
 package tp.caperucita.search.auxiliar;
 
+import java.util.Objects;
+
 public class PosicionCelda {
 	
 	private Integer posicionFila;
@@ -38,4 +40,13 @@ public class PosicionCelda {
 				", posicionColumna=" + posicionColumna + "\n" +
 				"} fin PosicionCelda";
 	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+		PosicionCelda that = (PosicionCelda) o;
+		return posicionFila.equals(that.posicionFila) && posicionColumna.equals(that.posicionColumna);
+	}
+
 }
