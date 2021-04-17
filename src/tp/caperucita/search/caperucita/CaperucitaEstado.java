@@ -126,10 +126,8 @@ public class CaperucitaEstado extends SearchBasedAgentState {
 	}
 	
 	private void actualizarMapaCaminoArriba(List<ContenidoCelda> celdasArriba) {
-		//TODO debo inicializar celdasArriba como ArrayList?
 		int primerFila = this.posicionActual.getPosicionFila()-1, columna=this.posicionActual.getPosicionColumna(), index = 0;
 
-		//TODO que posicion de caperucita hay que usar? El ambiente devuelve la lista de caminos con la posicion que conoce de caperucita. Y caperucita actualiza su mapa a partir de su posicion actual. Estas dos posiciones deberian ser siempre las mismas, sino no anda.
 		for(int i = primerFila; i>=0;i--) {
 			this.mapaConocidoAgente[i][columna] = celdasArriba.get(index);
 			index++;

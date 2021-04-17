@@ -56,8 +56,7 @@ public class IrDerecha extends SearchAction {
 				nuevaPosicion.setPosicionFila(posicionActual.getPosicionFila());
 				estadoCaperucita.setPosicionActual(nuevaPosicion);
 				estadoAmbiente.setPosicionCaperucita(estadoCaperucita.getPosicionActual());
-				
-				//TODO Entrega-19-14. setear la posicion del lobo en el ambiente
+
 				return estadoAmbiente;
 			}
 			//Esta el lobo, caperucita pierde una vida y todos los dulces

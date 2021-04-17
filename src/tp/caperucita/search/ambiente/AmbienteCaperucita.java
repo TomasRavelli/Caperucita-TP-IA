@@ -28,15 +28,14 @@ public class AmbienteCaperucita extends Environment {
 
 	 	CaperucitaPercepcion percepcion = new CaperucitaPercepcion();
 
-		PosicionCelda posicionCaperucita = ((AmbienteEstado)environmentState).getPosicionCaperucita();
-		ContenidoCelda[][] mapa = ((AmbienteEstado)environmentState).getMapaAmbiente();
+	 	AmbienteEstado estadoAmbiente = (AmbienteEstado)environmentState;
 
-		//TODO esto hay que cambiarlo por los valores reales (fijándose en el mapa del ambiente)
-//		percepcion.setCeldasArriba(new ArrayList<>());
-//		percepcion.setCeldasDerecha(new ArrayList<>());
-//		percepcion.setCeldasAbajo(new ArrayList<>());
-//		percepcion.setCeldasIzquierda(new ArrayList<>());
-		
+		//setear la posición del lobo antes de actualizar la percepción.
+	 	estadoAmbiente.moverLobo();
+
+		PosicionCelda posicionCaperucita = estadoAmbiente.getPosicionCaperucita();
+		ContenidoCelda[][] mapa = estadoAmbiente.getMapaAmbiente();
+
 		percepcion.contarCeldasLibresYDulces(mapa, posicionCaperucita);
 
 	 	return percepcion;

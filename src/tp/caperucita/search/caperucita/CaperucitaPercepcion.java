@@ -32,13 +32,6 @@ public class CaperucitaPercepcion extends Perception {
 	@Override
 	public void initPerception(Agent agentIn, Environment environmentIn) {
 
-		//TODO Inicializar las 4 listas.
-
-		celdasArriba = new ArrayList<>();
-		celdasAbajo = new ArrayList<>();
-		celdasIzquierda = new ArrayList<>();
-		celdasDerecha = new ArrayList<>();
-		
 		Caperucita agent = (Caperucita) agentIn;
         AmbienteCaperucita ambiente = (AmbienteCaperucita) environmentIn;
         AmbienteEstado environmentState = ambiente.getEnvironmentState();
@@ -82,7 +75,7 @@ public class CaperucitaPercepcion extends Perception {
 
 	public void contarCeldasLibresYDulces(ContenidoCelda[][] mapaAmbiente, PosicionCelda posicionCaperucita){
 		
-		//TODO Entrega-19-14. Implementacion de las percepciones.
+		//Entrega-19-14. Implementacion de las percepciones.
 		//inicializar parametros
 		celdasArriba = new ArrayList<>();
 		celdasDerecha = new ArrayList<>();

@@ -8,17 +8,16 @@ public class CaperucitaObjetivo extends GoalTest{
 
 	@Override
 	public boolean isGoalState(AgentState agentState) {
-		
+
 		CaperucitaEstado estadoCaperucita = (CaperucitaEstado) agentState;
 		boolean objetivoCumplido = false;
-		
-		ContenidoCelda[][] mapaAgente = estadoCaperucita.getMapaConocidoAgente();
-		
-		
-		if(mapaAgente[estadoCaperucita.getPosicionActual().getPosicionFila()][estadoCaperucita.getPosicionActual().getPosicionColumna()].equals(ContenidoCelda.FLORES) && estadoCaperucita.getCantidadVidas()>0) {
-			objetivoCumplido = true;
-		}
-		return objetivoCumplido;
-	}
 
+		ContenidoCelda[][] mapaAgente = estadoCaperucita.getMapaConocidoAgente();
+
+
+		int posicionFila = estadoCaperucita.getPosicionActual().getPosicionFila();
+		int posicionColumna = estadoCaperucita.getPosicionActual().getPosicionColumna();
+		int cantidadVidas = estadoCaperucita.getCantidadVidas();
+		return mapaAgente[posicionFila][posicionColumna].equals(ContenidoCelda.FLORES) && cantidadVidas > 0;
+	}
 }

@@ -71,11 +71,9 @@ public class IrAbajoYJuntarDulce extends SearchAction{
 				estadoCaperucita.setPosicionActual(nuevaPosicion);
 				estadoCaperucita.setCantidadVidas(estadoCaperucita.getCantidadVidas() - 1);
 				estadoCaperucita.setCantidadDulces(0);
-				// TODO que pasa con los dulces del ambiente acá, ¿quedan ahí o se eliminan?
 				//Si ahy lobo el estado del ambiente no cambia, pero hay que setearle la nueva posicion de caperucita.
 				estadoAmbiente.setPosicionCaperucita(estadoCaperucita.getPosicionActual());
-				
-				//TODO Entrega-19-14. setear la posicion del lobo en el ambiente
+
 				return estadoAmbiente;
 			}
 			//no hay lobo, entonces se mueve y junta dulces.
@@ -88,8 +86,7 @@ public class IrAbajoYJuntarDulce extends SearchAction{
 			//Elimino los dulces en el que camino que recorrió caperucita.
 			estadoAmbiente.eliminarDulcesEnCamino(posicionActual, nuevaPosicion);
 			estadoAmbiente.setPosicionCaperucita(estadoCaperucita.getPosicionActual());
-			
-			//TODO Entrega-19-14. setear la posicion del lobo en el ambiente
+
 			return estadoAmbiente;
 		}
 

@@ -1,18 +1,21 @@
 package tp.caperucita.search.ambiente;
 
 import java.util.Arrays;
+import java.util.Random;
 
 import frsf.cidisi.faia.state.EnvironmentState;
+import javafx.geometry.Pos;
 import tp.caperucita.search.auxiliar.ContenidoCelda;
 import tp.caperucita.search.auxiliar.PosicionCelda;
 
 public class AmbienteEstado extends EnvironmentState {
 	
 	
-	//TODO Entrega-19-14. Estado del ambiente.
+	//Entrega-19-14. Estado del ambiente.
 	private PosicionCelda posicionCaperucita;
 	
 	//Solo te deja inicializar con constantes aca.
+	//TODO Arreglar este hardcodeo.
 	private ContenidoCelda[][] mapaAmbiente= {
 			{ContenidoCelda.LIBRE, ContenidoCelda.LIBRE, ContenidoCelda.LIBRE, ContenidoCelda.LIBRE, ContenidoCelda.LIBRE,ContenidoCelda.LIBRE, ContenidoCelda.LIBRE,ContenidoCelda.LIBRE, ContenidoCelda.LIBRE, ContenidoCelda.LIBRE,ContenidoCelda.LIBRE,ContenidoCelda.LIBRE, ContenidoCelda.LIBRE,ContenidoCelda.LIBRE},
 			{ContenidoCelda.LIBRE, ContenidoCelda.LIBRE, ContenidoCelda.LIBRE, ContenidoCelda.LIBRE, ContenidoCelda.LIBRE,ContenidoCelda.LIBRE, ContenidoCelda.LIBRE,ContenidoCelda.LIBRE, ContenidoCelda.LIBRE, ContenidoCelda.LIBRE,ContenidoCelda.LIBRE,ContenidoCelda.LIBRE, ContenidoCelda.LIBRE,ContenidoCelda.LIBRE},
@@ -23,8 +26,10 @@ public class AmbienteEstado extends EnvironmentState {
 			{ContenidoCelda.LIBRE, ContenidoCelda.LIBRE, ContenidoCelda.LIBRE, ContenidoCelda.LIBRE, ContenidoCelda.LIBRE,ContenidoCelda.LIBRE, ContenidoCelda.LIBRE,ContenidoCelda.LIBRE, ContenidoCelda.LIBRE, ContenidoCelda.LIBRE,ContenidoCelda.LIBRE,ContenidoCelda.LIBRE, ContenidoCelda.LIBRE,ContenidoCelda.LIBRE},
 			{ContenidoCelda.LIBRE, ContenidoCelda.LIBRE, ContenidoCelda.LIBRE, ContenidoCelda.LIBRE, ContenidoCelda.LIBRE,ContenidoCelda.LIBRE, ContenidoCelda.LIBRE,ContenidoCelda.LIBRE, ContenidoCelda.LIBRE, ContenidoCelda.LIBRE,ContenidoCelda.LIBRE,ContenidoCelda.LIBRE, ContenidoCelda.LIBRE,ContenidoCelda.LIBRE},
 			{ContenidoCelda.LIBRE, ContenidoCelda.LIBRE, ContenidoCelda.LIBRE, ContenidoCelda.LIBRE, ContenidoCelda.LIBRE,ContenidoCelda.LIBRE, ContenidoCelda.LIBRE,ContenidoCelda.LIBRE, ContenidoCelda.LIBRE, ContenidoCelda.LIBRE,ContenidoCelda.LIBRE,ContenidoCelda.LIBRE, ContenidoCelda.LIBRE,ContenidoCelda.LIBRE}
-	};;
-	
+	};
+
+	private PosicionCelda posicionLobo = null;
+
 	public AmbienteEstado() {
 		this.posicionCaperucita = new PosicionCelda();
 		this.initState();
@@ -35,7 +40,28 @@ public class AmbienteEstado extends EnvironmentState {
 		this.posicionCaperucita.setPosicionFila(0);
 		this.posicionCaperucita.setPosicionColumna(0);
 		
-		//TODO Entrega-19-14. Setear posisicon aleatoria del lobo.
+		//Setear posisicon aleatoria del lobo.
+		moverLobo();
+	}
+
+	public void moverLobo(){
+		int filaLobo;
+		int columnaLobo;
+		if(posicionLobo != null){
+			filaLobo = posicionLobo.getPosicionFila();
+			columnaLobo = posicionLobo.getPosicionColumna();
+			mapaAmbiente[filaLobo][columnaLobo] = ContenidoCelda.LIBRE;
+		}
+		//elegir una nueva posición
+		Random ran = new Random();
+		do {
+			filaLobo = ran.nextInt(mapaAmbiente.length);
+			columnaLobo = ran.nextInt(mapaAmbiente[0].length);
+		} while (!mapaAmbiente[filaLobo][columnaLobo].equals(ContenidoCelda.LIBRE));
+
+		posicionLobo = new PosicionCelda(filaLobo, columnaLobo);
+		mapaAmbiente[filaLobo][columnaLobo] = ContenidoCelda.LOBO;
+
 	}
 
 	@Override

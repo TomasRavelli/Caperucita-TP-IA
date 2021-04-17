@@ -60,8 +60,7 @@ public class IrDerechaYJuntarDulce extends SearchAction{
 				estadoCaperucita.setPosicionActual(new PosicionCelda(0, 0));
 				estadoCaperucita.setCantidadVidas(estadoCaperucita.getCantidadVidas() - 1);
 				estadoAmbiente.setPosicionCaperucita(estadoCaperucita.getPosicionActual());
-				
-				//TODO Entrega-19-14. setear la posicion del lobo en el ambiente
+
 				return estadoAmbiente;
 			}
 
@@ -70,8 +69,7 @@ public class IrDerechaYJuntarDulce extends SearchAction{
 
 			estadoAmbiente.eliminarDulcesEnCamino(posicionActual, nuevaPosicion);
 			estadoAmbiente.setPosicionCaperucita(estadoCaperucita.getPosicionActual());
-			
-			//TODO Entrega-19-14. setear la posicion del lobo en el ambiente
+
 			return estadoAmbiente;
 		}
 
