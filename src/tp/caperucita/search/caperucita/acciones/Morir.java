@@ -19,6 +19,11 @@ public class Morir extends SearchAction {
     }
 
     @Override
+    public Double getCost() {
+        return null;
+    }
+
+    @Override
     public EnvironmentState execute(AgentState ast, EnvironmentState est) {
         CaperucitaEstado estadoCaperucita = (CaperucitaEstado) ast;
 
