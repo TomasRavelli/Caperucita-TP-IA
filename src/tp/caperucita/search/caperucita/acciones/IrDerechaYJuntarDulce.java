@@ -17,12 +17,13 @@ public class IrDerechaYJuntarDulce extends SearchAction{
 		PosicionCelda posicionActual = estadoCaperucita.getPosicionActual();
 		int cantCeldasDerecha = estadoCaperucita.getCantidadCeldasDerecha();
 		int cantDulcesDerecha = estadoCaperucita.getCantidadDulcesDerecha();
+		int cantidadVidas = estadoCaperucita.getCantidadVidas();
 		boolean hayLoboDerecha = estadoCaperucita.getHayLoboDerecha();
 
 		nuevaPosicion.setPosicionFila(posicionActual.getPosicionFila());
 		nuevaPosicion.setPosicionColumna(posicionActual.getPosicionColumna() + cantCeldasDerecha);
 
-		if (cantCeldasDerecha > 0 && cantDulcesDerecha > 0) {
+		if (cantidadVidas > 0 && cantCeldasDerecha > 0 && cantDulcesDerecha > 0) {
 			if (hayLoboDerecha) {
 				estadoCaperucita.setCantidadDulces(0);
 				estadoCaperucita.setPosicionActual(new PosicionCelda(0, 0));
@@ -47,12 +48,13 @@ public class IrDerechaYJuntarDulce extends SearchAction{
 		PosicionCelda posicionActual = estadoCaperucita.getPosicionActual();
 		int cantCeldasDerecha = estadoCaperucita.getCantidadCeldasDerecha();
 		int cantDulcesDerecha = estadoCaperucita.getCantidadDulcesDerecha();
+		int cantidadVidas = estadoCaperucita.getCantidadVidas();
 		boolean hayLoboDerecha = estadoCaperucita.getHayLoboDerecha();
 
 		nuevaPosicion.setPosicionFila(posicionActual.getPosicionFila());
 		nuevaPosicion.setPosicionColumna(posicionActual.getPosicionColumna() + cantCeldasDerecha);
 
-		if (cantCeldasDerecha > 0 && cantDulcesDerecha > 0) {
+		if (cantidadVidas > 0 && cantCeldasDerecha > 0 && cantDulcesDerecha > 0) {
 			if (hayLoboDerecha) {
 				estadoCaperucita.setCantidadDulces(0);
 				estadoCaperucita.setPosicionActual(new PosicionCelda(0, 0));

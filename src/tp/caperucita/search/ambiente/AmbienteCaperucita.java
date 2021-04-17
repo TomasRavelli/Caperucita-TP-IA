@@ -5,10 +5,12 @@ import java.util.ArrayList;
 import frsf.cidisi.faia.agent.Action;
 import frsf.cidisi.faia.agent.Perception;
 import frsf.cidisi.faia.environment.Environment;
+import frsf.cidisi.faia.state.AgentState;
 import tp.caperucita.search.auxiliar.ContenidoCelda;
 import tp.caperucita.search.auxiliar.PosicionCelda;
 import tp.caperucita.search.caperucita.Caperucita;
 import tp.caperucita.search.caperucita.CaperucitaPercepcion;
+import tp.caperucita.search.caperucita.acciones.Morir;
 
 public class AmbienteCaperucita extends Environment {
 	
@@ -48,12 +50,9 @@ public class AmbienteCaperucita extends Environment {
 	}
 	
 	@Override
-	  public boolean agentFailed(Action actionReturned) {
-       
-		//TODO Entrega-19-14. Implementar la condicion de falla.
-		//Segun AmbienteAspiradora, se puede cambiar el argumento para que reciba un AgentState.
-		//Entonces aca debemos verificar que la cantidad de vidas sea mayor a 0 del agente.
-		//Y agregar alguna otra verificacion si es necesario.
-		return false;
+	public boolean agentFailed(Action actionReturned) {
+		//Solo falla si la acción que tomó es Morir, que solo se puede tomar si tiene 0 vidas.
+		return actionReturned instanceof Morir;
     }
+
 }

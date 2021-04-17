@@ -32,7 +32,7 @@ public class Caperucita extends SearchBasedAgent{
         operators.addElement(new IrDerechaYJuntarDulce());	
         operators.addElement(new IrAbajoYJuntarDulce());
         operators.addElement(new IrIzquierdaYJuntarDulce());
-        
+        operators.addElement(new Morir());
 
         // Create the Problem which the agent will resolve
         Problem problem = new Problem(agGoal, agState, operators);

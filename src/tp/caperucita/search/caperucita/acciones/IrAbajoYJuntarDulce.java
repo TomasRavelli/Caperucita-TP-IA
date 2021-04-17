@@ -17,9 +17,10 @@ public class IrAbajoYJuntarDulce extends SearchAction{
 		PosicionCelda nuevaPosicion = new PosicionCelda(), posicionActual = estadoCaperucita.getPosicionActual();
 		int cantidadCeldasAbajo = estadoCaperucita.getCantidadCeldasAbajo();
 		int cantidadDulces = estadoCaperucita.getCantidadDulcesAbajo();
+		int cantidadVidas = estadoCaperucita.getCantidadVidas();
 		boolean hayLobo = estadoCaperucita.getHayLoboAbajo();
 
-		if(cantidadCeldasAbajo > 0 && cantidadDulces > 0){
+		if(cantidadVidas > 0 && cantidadCeldasAbajo > 0 && cantidadDulces > 0){
 			//Se cumplen las precondiciones
 			if(hayLobo){
 				//Está el lobo, entonces pierde una vida y vuelve al principio.
@@ -58,9 +59,10 @@ public class IrAbajoYJuntarDulce extends SearchAction{
 		PosicionCelda nuevaPosicion = new PosicionCelda(), posicionActual = estadoCaperucita.getPosicionActual();
 		int cantidadCeldasAbajo = estadoCaperucita.getCantidadCeldasAbajo();
 		int cantidadDulces = estadoCaperucita.getCantidadDulcesAbajo();
+		int cantidadVidas = estadoCaperucita.getCantidadVidas();
 		boolean hayLobo = estadoCaperucita.getHayLoboAbajo();
 
-		if(cantidadCeldasAbajo > 0 && cantidadDulces > 0) {
+		if(cantidadVidas > 0 && cantidadCeldasAbajo > 0 && cantidadDulces > 0) {
 			//Se cumplen las precondiciones
 			if (hayLobo){
 				//Está el lobo, entonces pierde una vida y vuelve al principio.

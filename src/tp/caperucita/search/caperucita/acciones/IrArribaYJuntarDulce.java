@@ -19,6 +19,7 @@ public class IrArribaYJuntarDulce extends SearchAction{
 		PosicionCelda nuevaPosicion = new PosicionCelda(), posicionActual = estadoCaperucita.getPosicionActual();
 		int cantCeldasArriba = estadoCaperucita.getCantidadCeldasArriba();
 		int cantDulces = estadoCaperucita.getCantidadDulcesArriba();
+		int cantidadVidas = estadoCaperucita.getCantidadVidas();
 		boolean hayLobo = estadoCaperucita.getHayLoboArriba();
 		// La nueva posición es "cantidad de celdas libres" arriba de caperucita (arriba es restar filas)
 		//No hay que usar la percepción acá, porque este método se llama varias veces sin percibir antes, entonces la percepción no es válida.
@@ -26,7 +27,7 @@ public class IrArribaYJuntarDulce extends SearchAction{
 		nuevaPosicion.setPosicionFila(posicionActual.getPosicionFila() - cantCeldasArriba);
 		nuevaPosicion.setPosicionColumna(posicionActual.getPosicionColumna()); //la columna no cambia.
 
-		if(cantCeldasArriba > 0 && cantDulces > 0) {
+		if(cantidadVidas > 0 && cantCeldasArriba > 0 && cantDulces > 0) {
 			//Hay celdas arriba y hay dulces, se cumplen las precondiciones.
 			if (hayLobo) {
 				//Hay lobo pierdo una vida
@@ -65,6 +66,7 @@ public class IrArribaYJuntarDulce extends SearchAction{
 		PosicionCelda nuevaPosicion = new PosicionCelda(), posicionActual = estadoCaperucita.getPosicionActual();
 		int cantCeldasArriba = estadoCaperucita.getCantidadCeldasArriba();
 		int cantDulces = estadoCaperucita.getCantidadDulcesArriba();
+		int cantidadVidas = estadoCaperucita.getCantidadVidas();
 		boolean hayLobo = estadoCaperucita.getHayLoboArriba();
 		// La nueva posición es "cantidad de celdas libres" arriba de caperucita (arriba es restar filas)
 		//No hay que usar la percepción acá, porque este método se llama varias veces sin percibir antes, entonces la percepción no es válida.
@@ -72,7 +74,7 @@ public class IrArribaYJuntarDulce extends SearchAction{
 		nuevaPosicion.setPosicionFila(posicionActual.getPosicionFila() - cantCeldasArriba);
 		nuevaPosicion.setPosicionColumna(posicionActual.getPosicionColumna()); //la columna no cambia.
 
-		if(cantCeldasArriba > 0 && cantDulces > 0) {
+		if(cantidadVidas > 0 && cantCeldasArriba > 0 && cantDulces > 0) {
 			//Hay celdas arriba y hay dulces, se cumplen las precondiciones.
 			if (hayLobo) {
 				//Hay lobo pierdo una vida

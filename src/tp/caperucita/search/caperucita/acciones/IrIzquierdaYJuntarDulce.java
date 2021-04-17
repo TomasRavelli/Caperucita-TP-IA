@@ -16,12 +16,13 @@ public class IrIzquierdaYJuntarDulce extends SearchAction {
 		PosicionCelda nuevaPosicion = new PosicionCelda(), posicionActual = estadoCaperucita.getPosicionActual();
 		int cantCeldasIquierda = estadoCaperucita.getCantidadCeldasIzquierda();
 		int cantDulces = estadoCaperucita.getCantidadDulcesIzquierda();
+		int cantidadVidas = estadoCaperucita.getCantidadVidas();
 		boolean hayLoboIzquierda = estadoCaperucita.getHayLoboIzquierda();
 		
 		nuevaPosicion.setPosicionFila(posicionActual.getPosicionFila()); //la fila no cambia.
 		nuevaPosicion.setPosicionColumna(posicionActual.getPosicionColumna()  - cantCeldasIquierda); 
 
-		if(cantCeldasIquierda > 0 && cantDulces > 0) {
+		if(cantidadVidas > 0 && cantCeldasIquierda > 0 && cantDulces > 0) {
 			//Hay celdas a la izquierda y hay dulces, se cumplen las precondiciones.
 			if (hayLoboIzquierda) {
 				//Hay lobo, pierdo una vida
@@ -56,13 +57,14 @@ public class IrIzquierdaYJuntarDulce extends SearchAction {
 		PosicionCelda nuevaPosicion = new PosicionCelda(), posicionActual = estadoCaperucita.getPosicionActual();
 		int cantCeldasIzquierda = estadoCaperucita.getCantidadCeldasIzquierda();
 		int cantDulcesIzquierda = estadoCaperucita.getCantidadDulcesIzquierda();
+		int cantidadVidas = estadoCaperucita.getCantidadVidas();
 		boolean hayLoboIzquierda = estadoCaperucita.getHayLoboIzquierda();
 	
 		nuevaPosicion.setPosicionFila(posicionActual.getPosicionFila());//la fila no cambia.
 
 		nuevaPosicion.setPosicionColumna(posicionActual.getPosicionColumna() - cantCeldasIzquierda); 
 		
-		if(cantCeldasIzquierda > 0 && cantDulcesIzquierda > 0) {
+		if(cantidadVidas > 0 && cantCeldasIzquierda > 0 && cantDulcesIzquierda > 0) {
 			//Hay celdas a la izquierda y hay dulces, se cumplen las precondiciones.
 			if (hayLoboIzquierda) {
 				//Hay lobo pierdo una vida
