@@ -4,6 +4,7 @@ import frsf.cidisi.faia.agent.search.SearchAction;
 import frsf.cidisi.faia.agent.search.SearchBasedAgentState;
 import frsf.cidisi.faia.state.AgentState;
 import frsf.cidisi.faia.state.EnvironmentState;
+import tp.caperucita.search.Configuracion;
 import tp.caperucita.search.ambiente.AmbienteEstado;
 import tp.caperucita.search.auxiliar.PosicionCelda;
 import tp.caperucita.search.caperucita.CaperucitaEstado;
@@ -24,8 +25,8 @@ public class IrAbajoYJuntarDulce extends SearchAction{
 			//Se cumplen las precondiciones
 			if(hayLobo){
 				//Está el lobo, entonces pierde una vida y vuelve al principio.
-				nuevaPosicion.setPosicionFila(0);
-				nuevaPosicion.setPosicionColumna(0);
+				nuevaPosicion.setPosicionFila(Configuracion.filaInicialCaperucita);
+				nuevaPosicion.setPosicionColumna(Configuracion.columnaInicialCaperucita);
 				estadoCaperucita.setPosicionActual(nuevaPosicion);
 				estadoCaperucita.setCantidadVidas(estadoCaperucita.getCantidadVidas() - 1);
 				estadoCaperucita.setCantidadDulces(0);
@@ -66,8 +67,8 @@ public class IrAbajoYJuntarDulce extends SearchAction{
 			//Se cumplen las precondiciones
 			if (hayLobo){
 				//Está el lobo, entonces pierde una vida y vuelve al principio.
-				nuevaPosicion.setPosicionFila(0);
-				nuevaPosicion.setPosicionColumna(0);
+				nuevaPosicion.setPosicionFila(Configuracion.filaInicialCaperucita);
+				nuevaPosicion.setPosicionColumna(Configuracion.columnaInicialCaperucita);
 				estadoCaperucita.setPosicionActual(nuevaPosicion);
 				estadoCaperucita.setCantidadVidas(estadoCaperucita.getCantidadVidas() - 1);
 				estadoCaperucita.setCantidadDulces(0);

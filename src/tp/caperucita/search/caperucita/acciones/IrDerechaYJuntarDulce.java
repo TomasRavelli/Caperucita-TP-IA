@@ -4,6 +4,7 @@ import frsf.cidisi.faia.agent.search.SearchAction;
 import frsf.cidisi.faia.agent.search.SearchBasedAgentState;
 import frsf.cidisi.faia.state.AgentState;
 import frsf.cidisi.faia.state.EnvironmentState;
+import tp.caperucita.search.Configuracion;
 import tp.caperucita.search.ambiente.AmbienteEstado;
 import tp.caperucita.search.auxiliar.PosicionCelda;
 import tp.caperucita.search.caperucita.CaperucitaEstado;
@@ -26,7 +27,7 @@ public class IrDerechaYJuntarDulce extends SearchAction{
 		if (cantidadVidas > 0 && cantCeldasDerecha > 0 && cantDulcesDerecha > 0) {
 			if (hayLoboDerecha) {
 				estadoCaperucita.setCantidadDulces(0);
-				estadoCaperucita.setPosicionActual(new PosicionCelda(0, 0));
+				estadoCaperucita.setPosicionActual(new PosicionCelda(Configuracion.filaInicialCaperucita, Configuracion.columnaInicialCaperucita));
 				estadoCaperucita.setCantidadVidas(estadoCaperucita.getCantidadVidas() - 1);
 				return estadoCaperucita;
 			}
@@ -57,7 +58,7 @@ public class IrDerechaYJuntarDulce extends SearchAction{
 		if (cantidadVidas > 0 && cantCeldasDerecha > 0 && cantDulcesDerecha > 0) {
 			if (hayLoboDerecha) {
 				estadoCaperucita.setCantidadDulces(0);
-				estadoCaperucita.setPosicionActual(new PosicionCelda(0, 0));
+				estadoCaperucita.setPosicionActual(new PosicionCelda(Configuracion.filaInicialCaperucita, Configuracion.columnaInicialCaperucita));
 				estadoCaperucita.setCantidadVidas(estadoCaperucita.getCantidadVidas() - 1);
 				estadoAmbiente.setPosicionCaperucita(estadoCaperucita.getPosicionActual());
 
