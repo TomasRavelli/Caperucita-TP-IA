@@ -37,6 +37,8 @@ public class IrDerechaYJuntarDulce extends SearchAction{
 
 			estadoCaperucita.setCantidadDulces(estadoCaperucita.getCantidadDulces() + cantDulcesDerecha);
 			estadoCaperucita.setPosicionActual(nuevaPosicion);
+			//Actualizamos el mapa de caperucita para que, cuando esta realizando la busqueda, no vuelva a elegir este camino ya que tendra un costo muy bajo porque caperucita sigue pensando que el dulce sigue estando.
+			estadoCaperucita.eliminarDulcesEnCamino(nuevaPosicion, posicionActual);
 			
 			return estadoCaperucita;
 		}

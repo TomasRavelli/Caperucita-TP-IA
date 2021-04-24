@@ -147,7 +147,7 @@ public class AmbienteEstado extends EnvironmentState {
 			}
 			//columnaInicio > columnaFin, no pueden ser iguales.
 			//Es derecha -> izquierda
-			eliminarDulcesHorizontal(filaFin, filaInicio, columnaInicio);
+			eliminarDulcesVertical(filaFin, filaInicio, columnaInicio);
 			return;
 		}
 		//Si llega acá no es un camino válido porque no es ni vertical ni horizontal, puede ser un diagonal pero caperucita no se puede mover en diagonal
@@ -158,12 +158,14 @@ public class AmbienteEstado extends EnvironmentState {
 			//No debería pasar, pero por las dudas. Es inválido.
 			return;
 		}
-
+	
 		for(int i = inicio; i <= fin; i++){
 			if(mapaAmbiente[i][columna] == ContenidoCelda.DULCE){
+				
 				mapaAmbiente[i][columna] = ContenidoCelda.LIBRE;
 			}
 		}
+		
 
 	}
 
@@ -172,9 +174,10 @@ public class AmbienteEstado extends EnvironmentState {
 			//No debería pasar, pero por las dudas. Es inválido.
 			return;
 		}
-
+		
 		for(int j = inicio; j <= fin; j++){
 			if(mapaAmbiente[fila][j] == ContenidoCelda.DULCE){
+				
 				//Si en esta posición del mapa había un dulce lo quito
 				mapaAmbiente[fila][j] = ContenidoCelda.LIBRE;
 			}

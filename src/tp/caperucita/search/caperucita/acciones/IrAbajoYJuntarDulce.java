@@ -42,6 +42,8 @@ public class IrAbajoYJuntarDulce extends SearchAction{
 			//Junta los dulces
 			estadoCaperucita.setCantidadDulces(estadoCaperucita.getCantidadDulces()+cantidadDulces);
 
+			//Actualizamos el mapa de caperucita para que, cuando esta realizando la busqueda, no vuelva a elegir este camino ya que tendra un costo muy bajo porque caperucita sigue pensando que el dulce sigue estando.
+			estadoCaperucita.eliminarDulcesEnCamino(nuevaPosicion, posicionActual);
 			return estadoCaperucita;
 		}
 
@@ -51,8 +53,9 @@ public class IrAbajoYJuntarDulce extends SearchAction{
 
 	@Override
 	public Double getCost() {
-		// TODO Auto-generated method stub
-		return (double)cantidadCeldasAbajo-(cantidadDulces*(hayLobo?1:0));
+		
+		//TODO corregir en los otros.
+		return (double)cantidadCeldasAbajo-(cantidadDulces*((!hayLobo)?1:0));
 	}
 
 	@Override

@@ -16,6 +16,7 @@ public class Heuristica implements IEstimatedCostFunction {
 		CaperucitaEstado estadoCaperucita =(CaperucitaEstado)node.getAgentState();
 		int fila = estadoCaperucita.getPosicionActual().getPosicionFila();
 		int columna = estadoCaperucita.getPosicionActual().getPosicionColumna();
+	
 		ContenidoCelda posicionCaperucita = estadoCaperucita.getMapaConocidoAgente()[fila][columna];
 		
 		if(posicionCaperucita.equals(ContenidoCelda.FLORES)) {
@@ -47,13 +48,13 @@ public class Heuristica implements IEstimatedCostFunction {
 			distanciasEntreNodos.add(calcularDistanciaLineaRecta(estadoCaperucita.getPosicionActual(),pos)); 
 		}
 		
-		for(Double d: distanciasEntreNodos) {
-			System.out.println(d);
-		}
+//		for(Double d: distanciasEntreNodos) {
+//			System.out.println(d);
+//		}
 		Collections.sort(distanciasEntreNodos); //Ordenar el array
-		System.out.println("Calculo de las distancias");
+//		System.out.println("Calculo de las distancias");
 		
-		System.out.println("Distancia minima = " + distanciasEntreNodos.get(0));
+//		System.out.println("Distancia minima = " + distanciasEntreNodos.get(0));
 		return distanciasEntreNodos.get(0); //Retorno la distancia minima.
 	}
 

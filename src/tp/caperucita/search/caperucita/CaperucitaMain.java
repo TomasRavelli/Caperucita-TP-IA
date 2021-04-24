@@ -19,6 +19,7 @@ public class CaperucitaMain {
         
         //Acá esta el clico percepcion-accion
         simulator.start();
+        System.out.println(agent.getAgentState().toString());
 		//CaperucitaPercepcion percepcion = new CaperucitaPercepcion(agent, environment);
 
     }
