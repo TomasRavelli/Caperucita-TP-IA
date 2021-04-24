@@ -35,6 +35,7 @@ public class AmbienteCaperucita extends Environment {
 
 		PosicionCelda posicionCaperucita = estadoAmbiente.getPosicionCaperucita();
 		ContenidoCelda[][] mapa = estadoAmbiente.getMapaAmbiente();
+		
 
 		percepcion.contarCeldasLibresYDulces(mapa, posicionCaperucita);
 

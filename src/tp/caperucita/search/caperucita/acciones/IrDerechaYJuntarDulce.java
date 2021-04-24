@@ -5,30 +5,34 @@ import frsf.cidisi.faia.agent.search.SearchBasedAgentState;
 import frsf.cidisi.faia.state.AgentState;
 import frsf.cidisi.faia.state.EnvironmentState;
 import tp.caperucita.search.ambiente.AmbienteEstado;
+import tp.caperucita.search.auxiliar.ConfiguracionInicial;
 import tp.caperucita.search.auxiliar.PosicionCelda;
 import tp.caperucita.search.caperucita.CaperucitaEstado;
 
 public class IrDerechaYJuntarDulce extends SearchAction{
-
+	private int  cantCeldasDerecha;
+	private int cantDulcesDerecha;
+	private boolean hayLoboDerecha;
 	@Override
 	public SearchBasedAgentState execute(SearchBasedAgentState s) {
 		CaperucitaEstado estadoCaperucita = (CaperucitaEstado) s;
 		PosicionCelda nuevaPosicion = new PosicionCelda();
 		PosicionCelda posicionActual = estadoCaperucita.getPosicionActual();
-		int cantCeldasDerecha = estadoCaperucita.getCantidadCeldasDerecha();
-		int cantDulcesDerecha = estadoCaperucita.getCantidadDulcesDerecha();
+		cantCeldasDerecha = estadoCaperucita.getCantidadCeldasDerecha();
+		cantDulcesDerecha = estadoCaperucita.getCantidadDulcesDerecha();
 		int cantidadVidas = estadoCaperucita.getCantidadVidas();
-		boolean hayLoboDerecha = estadoCaperucita.getHayLoboDerecha();
+		hayLoboDerecha = estadoCaperucita.getHayLoboDerecha();
 
 		nuevaPosicion.setPosicionFila(posicionActual.getPosicionFila());
 		nuevaPosicion.setPosicionColumna(posicionActual.getPosicionColumna() + cantCeldasDerecha);
 
 		if (cantidadVidas > 0 && cantCeldasDerecha > 0 && cantDulcesDerecha > 0) {
 			if (hayLoboDerecha) {
-				estadoCaperucita.setCantidadDulces(0);
-				estadoCaperucita.setPosicionActual(new PosicionCelda(0, 0));
-				estadoCaperucita.setCantidadVidas(estadoCaperucita.getCantidadVidas() - 1);
-				return estadoCaperucita;
+				cantDulcesDerecha=0;
+//				estadoCaperucita.setCantidadDulces(0);
+//				estadoCaperucita.setPosicionActual(new PosicionCelda(0, 0));
+//				estadoCaperucita.setCantidadVidas(estadoCaperucita.getCantidadVidas() - 1);
+//				return estadoCaperucita;
 			}
 
 			estadoCaperucita.setCantidadDulces(estadoCaperucita.getCantidadDulces() + cantDulcesDerecha);
@@ -46,18 +50,19 @@ public class IrDerechaYJuntarDulce extends SearchAction{
 		AmbienteEstado estadoAmbiente = (AmbienteEstado) est;
 		PosicionCelda nuevaPosicion = new PosicionCelda();
 		PosicionCelda posicionActual = estadoCaperucita.getPosicionActual();
-		int cantCeldasDerecha = estadoCaperucita.getCantidadCeldasDerecha();
-		int cantDulcesDerecha = estadoCaperucita.getCantidadDulcesDerecha();
+		cantCeldasDerecha = estadoCaperucita.getCantidadCeldasDerecha();
+		cantDulcesDerecha = estadoCaperucita.getCantidadDulcesDerecha();
 		int cantidadVidas = estadoCaperucita.getCantidadVidas();
-		boolean hayLoboDerecha = estadoCaperucita.getHayLoboDerecha();
+		hayLoboDerecha = estadoCaperucita.getHayLoboDerecha();
 
 		nuevaPosicion.setPosicionFila(posicionActual.getPosicionFila());
 		nuevaPosicion.setPosicionColumna(posicionActual.getPosicionColumna() + cantCeldasDerecha);
 
 		if (cantidadVidas > 0 && cantCeldasDerecha > 0 && cantDulcesDerecha > 0) {
 			if (hayLoboDerecha) {
+				cantDulcesDerecha = 0;
 				estadoCaperucita.setCantidadDulces(0);
-				estadoCaperucita.setPosicionActual(new PosicionCelda(0, 0));
+				estadoCaperucita.setPosicionActual(ConfiguracionInicial.posicionInicialCaperucita);
 				estadoCaperucita.setCantidadVidas(estadoCaperucita.getCantidadVidas() - 1);
 				estadoAmbiente.setPosicionCaperucita(estadoCaperucita.getPosicionActual());
 
@@ -79,7 +84,7 @@ public class IrDerechaYJuntarDulce extends SearchAction{
 	@Override
 	public Double getCost() {
 		// TODO Auto-generated method stub
-		return null;
+		return (double)cantCeldasDerecha-(cantDulcesDerecha*(hayLoboDerecha?1:0));
 	}
 
 	@Override

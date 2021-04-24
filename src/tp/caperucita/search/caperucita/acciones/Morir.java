@@ -20,7 +20,7 @@ public class Morir extends SearchAction {
 
     @Override
     public Double getCost() {
-        return null;
+        return 0.0;
     }
 
     @Override
