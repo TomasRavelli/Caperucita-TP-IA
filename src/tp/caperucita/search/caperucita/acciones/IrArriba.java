@@ -4,7 +4,6 @@ import frsf.cidisi.faia.agent.search.SearchAction;
 import frsf.cidisi.faia.agent.search.SearchBasedAgentState;
 import frsf.cidisi.faia.state.AgentState;
 import frsf.cidisi.faia.state.EnvironmentState;
-import tp.caperucita.search.Configuracion;
 import tp.caperucita.search.ambiente.AmbienteEstado;
 import tp.caperucita.search.auxiliar.ContenidoCelda;
 import tp.caperucita.search.auxiliar.PosicionCelda;
@@ -36,8 +35,8 @@ public class IrArriba extends SearchAction {
 			
 			}
 			//Esta el lobo, caperucita piede una vida y todos los dulces.
-			nuevaPosicion.setPosicionFila(Configuracion.filaInicialCaperucita);
-			nuevaPosicion.setPosicionColumna(Configuracion.columnaInicialCaperucita);
+			nuevaPosicion.setPosicionColumna(0);
+			nuevaPosicion.setPosicionFila(0);
 			estadoCaperucita.setCantidadDulces(0);
 			estadoCaperucita.setPosicionActual(nuevaPosicion);
 			estadoCaperucita.setCantidadVidas(estadoCaperucita.getCantidadVidas()-1);
@@ -80,8 +79,8 @@ public class IrArriba extends SearchAction {
 			}
 			//Esta el lobo, caperucita pierde una vida y todos los dulces
 			estadoCaperucita.setCantidadDulces(0);
-			posicionActual.setPosicionFila(Configuracion.filaInicialCaperucita);
-			posicionActual.setPosicionColumna(Configuracion.columnaInicialCaperucita);
+			posicionActual.setPosicionColumna(0);
+			posicionActual.setPosicionFila(0);
 			estadoCaperucita.setPosicionActual(posicionActual);
 			estadoCaperucita.setCantidadVidas(estadoCaperucita.getCantidadVidas()-1);
 			estadoAmbiente.setPosicionCaperucita(estadoCaperucita.getPosicionActual());

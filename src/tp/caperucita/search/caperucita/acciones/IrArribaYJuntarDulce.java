@@ -4,7 +4,6 @@ import frsf.cidisi.faia.agent.search.SearchAction;
 import frsf.cidisi.faia.agent.search.SearchBasedAgentState;
 import frsf.cidisi.faia.state.AgentState;
 import frsf.cidisi.faia.state.EnvironmentState;
-import tp.caperucita.search.Configuracion;
 import tp.caperucita.search.ambiente.AmbienteEstado;
 import tp.caperucita.search.auxiliar.ContenidoCelda;
 import tp.caperucita.search.auxiliar.PosicionCelda;
@@ -33,7 +32,8 @@ public class IrArribaYJuntarDulce extends SearchAction{
 			if (hayLobo) {
 				//Hay lobo pierdo una vida
 				estadoCaperucita.setCantidadDulces(0);
-				estadoCaperucita.setPosicionActual(new PosicionCelda(Configuracion.filaInicialCaperucita, Configuracion.columnaInicialCaperucita));
+				//TODO cambiar posición 0,0 por la posición inicial.
+				estadoCaperucita.setPosicionActual(new PosicionCelda(0, 0));
 				estadoCaperucita.setCantidadVidas(estadoCaperucita.getCantidadVidas()-1);
 				
 				
@@ -79,7 +79,8 @@ public class IrArribaYJuntarDulce extends SearchAction{
 			if (hayLobo) {
 				//Hay lobo pierdo una vida
 				estadoCaperucita.setCantidadDulces(0);
-				estadoCaperucita.setPosicionActual(new PosicionCelda(Configuracion.filaInicialCaperucita, Configuracion.columnaInicialCaperucita));
+				//TODO cambiar posición 0,0 por la posición inicial.
+				estadoCaperucita.setPosicionActual(new PosicionCelda(0, 0));
 				estadoCaperucita.setCantidadVidas(estadoCaperucita.getCantidadVidas()-1);
 				//Si ahy lobo el estado del ambiente no cambia, pero hay que setearle la nueva posicion de caperucita.
 				estadoAmbiente.setPosicionCaperucita(estadoCaperucita.getPosicionActual());
