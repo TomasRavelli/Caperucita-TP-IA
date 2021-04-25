@@ -18,6 +18,6 @@ public class CaperucitaObjetivo extends GoalTest{
 		int posicionFila = estadoCaperucita.getPosicionActual().getPosicionFila();
 		int posicionColumna = estadoCaperucita.getPosicionActual().getPosicionColumna();
 		int cantidadVidas = estadoCaperucita.getCantidadVidas();
-		return mapaAgente[posicionFila][posicionColumna].equals(ContenidoCelda.FLORES) && cantidadVidas > 0;
+		return mapaAgente[posicionFila][posicionColumna].equals(ContenidoCelda.FLORES) || cantidadVidas <= 0;
 	}
 }

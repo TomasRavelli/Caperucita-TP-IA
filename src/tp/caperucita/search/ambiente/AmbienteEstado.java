@@ -65,6 +65,8 @@ public class AmbienteEstado extends EnvironmentState {
 
 		posicionLobo = new PosicionCelda(filaLobo, columnaLobo);
 		mapaAmbiente[filaLobo][columnaLobo] = ContenidoCelda.LOBO;
+//		posicionLobo = ConfiguracionInicial.posicionInicialCaperucita;
+//		mapaAmbiente[posicionLobo.getPosicionFila()][posicionLobo.getPosicionColumna()] = ContenidoCelda.LOBO;
 
 	}
 
