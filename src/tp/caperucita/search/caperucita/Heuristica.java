@@ -28,7 +28,7 @@ public class Heuristica implements IEstimatedCostFunction {
 	}
 
 	private double calcularDistanciaDirectaAlObjetivo(CaperucitaEstado estadoCaperucita) {
-		// TODO Auto-generated method stub
+
 		ContenidoCelda[][] mapaCaperucita = estadoCaperucita.getMapaConocidoAgente();
 		
 		ArrayList<PosicionCelda> listaDeCeldasConFlores = new ArrayList();
@@ -44,23 +44,19 @@ public class Heuristica implements IEstimatedCostFunction {
 		
 		ArrayList<Double> distanciasEntreNodos = new ArrayList<>();
 		for(PosicionCelda pos: listaDeCeldasConFlores) {
-			//Para cada celda con flores, calculo la distancia entre esta, y la posicion de caperucita.
+			//Para cada celda con flores, calculo la distancia en linea recta entre esta, y la posicion de caperucita.
 			distanciasEntreNodos.add(calcularDistanciaLineaRecta(estadoCaperucita.getPosicionActual(),pos)); 
 		}
 		
-//		for(Double d: distanciasEntreNodos) {
-//			System.out.println(d);
-//		}
-		Collections.sort(distanciasEntreNodos); //Ordenar el array
-//		System.out.println("Calculo de las distancias");
-		
-//		System.out.println("Distancia minima = " + distanciasEntreNodos.get(0));
+		Collections.sort(distanciasEntreNodos); //Ordenar el array de menor a mayor
+
 		return distanciasEntreNodos.get(0); //Retorno la distancia minima.
 	}
 
 	private double calcularDistanciaLineaRecta(PosicionCelda posicionActual, PosicionCelda pos) {
 		// Calculo de la distancia entre dos puntos. Cada celda se considera un punto
 		int x1 = pos.getPosicionFila(), x0 = posicionActual.getPosicionColumna(), y1 = pos.getPosicionColumna(), y0 = posicionActual.getPosicionColumna();
+		
 		return Math.sqrt(Math.pow((x1-x0), 2)+Math.pow((y1-y0), 2));
 	}
 

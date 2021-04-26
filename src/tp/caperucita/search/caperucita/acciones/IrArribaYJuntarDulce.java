@@ -32,18 +32,9 @@ public class IrArribaYJuntarDulce extends SearchAction{
 		nuevaPosicion.setPosicionColumna(posicionActual.getPosicionColumna()); //la columna no cambia.
 
 		if(cantidadVidas > 0 && cantCeldasArriba > 0 && cantDulces > 0) {
-			//Hay celdas arriba y hay dulces, se cumplen las precondiciones.
-//			if (hayLobo) {
-//				//Hay lobo pierdo una vida
-//				estadoCaperucita.setCantidadDulces(0);
-//				//TODO cambiar posición 0,0 por la posición inicial.
-//				estadoCaperucita.setPosicionActual(new PosicionCelda(0, 0));
-//				estadoCaperucita.setCantidadVidas(estadoCaperucita.getCantidadVidas()-1);
-//				
-//				
-//				return estadoCaperucita;
-//			}
-			//No hay lobo, me puedo mover y juntar dulces
+			//No se verifica que este el lobo, porque si el lobo está el algoritmo en Search.java no funciona porque solo retorna acciones que le permitan a caperucita llegar al objetivo, y mientras es buscando, el lobo no cambia su posicion.
+			//Entonces, mientras esta realizando busqueda, caperucita piensa que el lobo no esta en ningun lado, pero en el mundo real aparecera y perdera una vida.
+
 			estadoCaperucita.setCantidadDulces(estadoCaperucita.getCantidadDulces() + cantDulces);
 			estadoCaperucita.setPosicionActual(nuevaPosicion);
 			

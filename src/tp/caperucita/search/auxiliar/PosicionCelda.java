@@ -13,7 +13,7 @@ public class PosicionCelda {
 	}
 	
 	public PosicionCelda() {
-		// TODO Auto-generated constructor stub
+	
 	}
 
 	public Integer getPosicionFila() {

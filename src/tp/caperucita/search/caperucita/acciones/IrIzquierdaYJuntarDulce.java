@@ -27,15 +27,10 @@ public class IrIzquierdaYJuntarDulce extends SearchAction {
 
 		if(cantidadVidas > 0 && cantCeldasIzquierda > 0 && cantDulces > 0) {
 			//Hay celdas a la izquierda y hay dulces, se cumplen las precondiciones.
-			if (hayLoboIzquierda) {
-//				//Hay lobo, pierdo una vida
-//				estadoCaperucita.setCantidadDulces(0);
-//				//TODO cambiar posición 0,0 por la posición inicial.
-//				estadoCaperucita.setPosicionActual(ConfiguracionInicial.posicionInicialCaperucita);
-//				estadoCaperucita.setCantidadVidas(estadoCaperucita.getCantidadVidas()-1);
-//				return estadoCaperucita;
-				cantDulces = 0;
-			}
+	
+			//No se verifica que este el lobo, porque si el lobo está el algoritmo en Search.java no funciona porque solo retorna acciones que le permitan a caperucita llegar al objetivo, y mientras es buscando, el lobo no cambia su posicion.
+			//Entonces, mientras esta realizando busqueda, caperucita piensa que el lobo no esta en ningun lado, pero en el mundo real aparecera y perdera una vida.
+		
 			//No hay lobo, me puedo mover y juntar dulces
 			estadoCaperucita.setCantidadDulces(estadoCaperucita.getCantidadDulces() + cantDulces);
 			estadoCaperucita.setPosicionActual(nuevaPosicion);

@@ -27,14 +27,10 @@ public class IrDerechaYJuntarDulce extends SearchAction{
 		nuevaPosicion.setPosicionColumna(posicionActual.getPosicionColumna() + cantCeldasDerecha);
 
 		if (cantidadVidas > 0 && cantCeldasDerecha > 0 && cantDulcesDerecha > 0) {
-			if (hayLoboDerecha) {
-				cantDulcesDerecha=0;
-//				estadoCaperucita.setCantidadDulces(0);
-//				estadoCaperucita.setPosicionActual(new PosicionCelda(0, 0));
-//				estadoCaperucita.setCantidadVidas(estadoCaperucita.getCantidadVidas() - 1);
-//				return estadoCaperucita;
-			}
-
+			
+			//No se verifica que este el lobo, porque si el lobo está el algoritmo en Search.java no funciona porque solo retorna acciones que le permitan a caperucita llegar al objetivo, y mientras es buscando, el lobo no cambia su posicion.
+			//Entonces, mientras esta realizando busqueda, caperucita piensa que el lobo no esta en ningun lado, pero en el mundo real aparecera y perdera una vida.
+		
 			estadoCaperucita.setCantidadDulces(estadoCaperucita.getCantidadDulces() + cantDulcesDerecha);
 			estadoCaperucita.setPosicionActual(nuevaPosicion);
 			//Actualizamos el mapa de caperucita para que, cuando esta realizando la busqueda, no vuelva a elegir este camino ya que tendra un costo muy bajo porque caperucita sigue pensando que el dulce sigue estando.

@@ -14,8 +14,7 @@ import tp.caperucita.search.auxiliar.PosicionCelda;
 
 public class CaperucitaPercepcion extends Perception {
 
-	//TODO Refactorizar, la percepción tiene que devolver 4 listas de celdas, con lo que haya en esas celdas para cada dirección desde la posición actual de caperucita hasta el final del mapa.
-
+	
 	private List<ContenidoCelda> celdasArriba;
 	private List<ContenidoCelda> celdasAbajo;
 	private List<ContenidoCelda> celdasIzquierda;

@@ -19,38 +19,15 @@ public class CaperucitaEstado extends SearchBasedAgentState {
 	private PosicionCelda posicionActual;
 	private ContenidoCelda[][] mapaConocidoAgente;
 	
-//	= {
-//			{ContenidoCelda.OBSTACULO, ContenidoCelda.OBSTACULO, ContenidoCelda.OBSTACULO, ContenidoCelda.FLORES,    ContenidoCelda.OBSTACULO, ContenidoCelda.OBSTACULO, ContenidoCelda.OBSTACULO, ContenidoCelda.OBSTACULO, ContenidoCelda.OBSTACULO, ContenidoCelda.OBSTACULO, ContenidoCelda.OBSTACULO, ContenidoCelda.OBSTACULO, ContenidoCelda.OBSTACULO, ContenidoCelda.OBSTACULO},
-//			{ContenidoCelda.OBSTACULO, ContenidoCelda.OBSTACULO, ContenidoCelda.OBSTACULO, ContenidoCelda.FLORES,    ContenidoCelda.OBSTACULO, ContenidoCelda.LIBRE,     ContenidoCelda.LIBRE,     ContenidoCelda.LIBRE,     ContenidoCelda.OBSTACULO, ContenidoCelda.OBSTACULO, ContenidoCelda.OBSTACULO, ContenidoCelda.LIBRE,     ContenidoCelda.OBSTACULO, ContenidoCelda.OBSTACULO},
-//			{ContenidoCelda.OBSTACULO, ContenidoCelda.OBSTACULO, ContenidoCelda.OBSTACULO, ContenidoCelda.LIBRE,     ContenidoCelda.OBSTACULO, ContenidoCelda.LIBRE,     ContenidoCelda.OBSTACULO, ContenidoCelda.LIBRE,     ContenidoCelda.OBSTACULO, ContenidoCelda.LIBRE,     ContenidoCelda.OBSTACULO, ContenidoCelda.OBSTACULO, ContenidoCelda.OBSTACULO, ContenidoCelda.OBSTACULO},
-//			{ContenidoCelda.OBSTACULO, ContenidoCelda.OBSTACULO, ContenidoCelda.OBSTACULO, ContenidoCelda.LIBRE,     ContenidoCelda.LIBRE,     ContenidoCelda.LIBRE,     ContenidoCelda.LIBRE,     ContenidoCelda.LIBRE,     ContenidoCelda.LIBRE,     ContenidoCelda.OBSTACULO, ContenidoCelda.LIBRE,     ContenidoCelda.OBSTACULO, ContenidoCelda.OBSTACULO, ContenidoCelda.OBSTACULO},
-//			{ContenidoCelda.OBSTACULO, ContenidoCelda.OBSTACULO, ContenidoCelda.OBSTACULO, ContenidoCelda.OBSTACULO, ContenidoCelda.OBSTACULO, ContenidoCelda.LIBRE,     ContenidoCelda.LIBRE,     ContenidoCelda.LIBRE,     ContenidoCelda.LIBRE,     ContenidoCelda.LIBRE,     ContenidoCelda.LIBRE,     ContenidoCelda.LIBRE,     ContenidoCelda.OBSTACULO, ContenidoCelda.OBSTACULO},
-//			{ContenidoCelda.OBSTACULO, ContenidoCelda.OBSTACULO, ContenidoCelda.OBSTACULO, ContenidoCelda.LIBRE,     ContenidoCelda.LIBRE,     ContenidoCelda.LIBRE,     ContenidoCelda.LIBRE,     ContenidoCelda.OBSTACULO, ContenidoCelda.LIBRE,     ContenidoCelda.OBSTACULO, ContenidoCelda.LIBRE,     ContenidoCelda.LIBRE,     ContenidoCelda.OBSTACULO, ContenidoCelda.OBSTACULO},
-//			{ContenidoCelda.OBSTACULO, ContenidoCelda.OBSTACULO, ContenidoCelda.OBSTACULO, ContenidoCelda.LIBRE,     ContenidoCelda.LIBRE,     ContenidoCelda.LIBRE,     ContenidoCelda.LIBRE,     ContenidoCelda.OBSTACULO, ContenidoCelda.LIBRE,     ContenidoCelda.LIBRE,     ContenidoCelda.OBSTACULO, ContenidoCelda.LIBRE,     ContenidoCelda.OBSTACULO, ContenidoCelda.OBSTACULO},
-//			{ContenidoCelda.OBSTACULO, ContenidoCelda.OBSTACULO, ContenidoCelda.OBSTACULO, ContenidoCelda.OBSTACULO, ContenidoCelda.OBSTACULO, ContenidoCelda.OBSTACULO, ContenidoCelda.LIBRE,     ContenidoCelda.LIBRE,     ContenidoCelda.LIBRE,     ContenidoCelda.OBSTACULO, ContenidoCelda.OBSTACULO, ContenidoCelda.OBSTACULO, ContenidoCelda.OBSTACULO, ContenidoCelda.OBSTACULO},
-//			{ContenidoCelda.OBSTACULO, ContenidoCelda.OBSTACULO, ContenidoCelda.OBSTACULO, ContenidoCelda.OBSTACULO, ContenidoCelda.OBSTACULO, ContenidoCelda.OBSTACULO, ContenidoCelda.OBSTACULO, ContenidoCelda.OBSTACULO, ContenidoCelda.OBSTACULO, ContenidoCelda.OBSTACULO, ContenidoCelda.OBSTACULO, ContenidoCelda.OBSTACULO, ContenidoCelda.OBSTACULO, ContenidoCelda.OBSTACULO}
-//	};;
-	private Integer[][] cantidadVisitasPorCelda; 
-	
-	public Integer[][] getCantidadVisitasPorCelda() {
-		return cantidadVisitasPorCelda;
-	}
-
-
-	public void setCantidadVisitasPorCelda(Integer[][] cantidadVisitasPorCelda) {
-		this.cantidadVisitasPorCelda = cantidadVisitasPorCelda;
-	}
 
 	public void sumarVisitaACelda(PosicionCelda posicion) {
 			
 		int fila = posicion.getPosicionFila();
 		int columna = posicion.getPosicionColumna();
-		this.cantidadVisitasPorCelda[fila][columna]++;
 	}
 	public CaperucitaEstado() {
 		this.mapaConocidoAgente = new ContenidoCelda[ConfiguracionInicial.mapaAmbiente.length][ConfiguracionInicial.mapaAmbiente[0].length];
 		this.posicionActual = new PosicionCelda();
-		cantidadVisitasPorCelda = new Integer[9][14];
 		this.initState();
 	}
 	
@@ -90,35 +67,10 @@ public class CaperucitaEstado extends SearchBasedAgentState {
 		this.cantidadVidas = ConfiguracionInicial.cantidadDeVidas;
 		this.cantidadDulces = ConfiguracionInicial.cantidadDulces;
 		this.posicionActual = ConfiguracionInicial.posicionInicialCaperucita;
+		
+		//Al principio, Caperucita conoce todo el mapa.
 		this.mapaConocidoAgente = ConfiguracionInicial.mapaAmbiente;
-		for (int i = 0 ; i<9; i++) {
-			for(int j=0;j<14; j++) {
-				
-//				mapaConocidoAgente[i][j] = ContenidoCelda.DESCONOCIDO;
-			
-				cantidadVisitasPorCelda[i][j]= 0;
-			}
-		}
 	
-
-		//ESCENARIO 1
-//		this.posicionActual.setPosicionFila(5);
-//		this.posicionActual.setPosicionColumna(11);
-//		mapaConocidoAgente[7][7] = ContenidoCelda.FLORES;
-//		mapaConocidoAgente[8][7] = ContenidoCelda.FLORES;
-//	
-		//ESCENARIO 2
-//		this.posicionActual.setPosicionFila(6);
-//		this.posicionActual.setPosicionColumna(3);
-//		mapaConocidoAgente[7][6] = ContenidoCelda.FLORES;
-//		mapaConocidoAgente[8][6] = ContenidoCelda.FLORES;
-	
-		//ESCENARIO 3
-//		this.posicionActual.setPosicionFila(4);
-//		this.posicionActual.setPosicionColumna(11);
-//		mapaConocidoAgente[0][3] = ContenidoCelda.FLORES;
-//		mapaConocidoAgente[1][3] = ContenidoCelda.FLORES;
-
 	}
 	
 	@Override
@@ -130,31 +82,9 @@ public class CaperucitaEstado extends SearchBasedAgentState {
 		if (o == null || getClass() != o.getClass()) return false;
 		
 		CaperucitaEstado that = (CaperucitaEstado) o;
-//		System.out.println(this.getCantidadVisitasPorCelda()[ConfiguracionInicial.posicionInicialCaperucita.getPosicionFila()][ConfiguracionInicial.posicionInicialCaperucita.getPosicionColumna()]);
+
 		return  (this.posicionActual.equals(that.posicionActual) && that.getCantidadVidas().equals(this.cantidadVidas))  ;
 	}
-
-	private boolean compararMapas(ContenidoCelda[][] mapaConocidoAgente2) {
-		// TODO Auto-generated method stub
-		ContenidoCelda[][] auxiliar = mapaConocidoAgente;
-		ContenidoCelda[][] auxiliar2 = mapaConocidoAgente2;
-		for(int i = 0; i<0; i++) {
-			for(int j = 0 ; j<14; j++) {
-				if(auxiliar[i][j].equals(ContenidoCelda.LOBO) || auxiliar[i][j].equals(ContenidoCelda.DULCE)) {
-					auxiliar[i][j] = ContenidoCelda.LIBRE;
-				}
-				if(auxiliar2[i][j].equals(ContenidoCelda.LOBO) || auxiliar2[i][j].equals(ContenidoCelda.DULCE)) {
-					auxiliar2[i][j] = ContenidoCelda.LIBRE;
-				}
-				if(!(auxiliar[i][j].equals(auxiliar2[i][j]))) {
-					return false;
-				}
-			}
-		}
-
-		return true;
-	}
-
 
 	@Override
 	public SearchBasedAgentState clone() {
@@ -165,25 +95,20 @@ public class CaperucitaEstado extends SearchBasedAgentState {
 		newState.setCantidadVidas(this.cantidadVidas);
 		newState.setCantidadDulces(this.cantidadDulces);
 		
-		//TODO hay que clonar las variables relacionadas a la percepcion  tambien?
 		
 		//Los atributos que son objetos se pasan por
     	//referencia; luego, es necesario clonarlos
 		newState.setPosicionActual(this.posicionActual.clone());
 
-		//TODO cambiar tamaño del mapa hardcodeado
-		ContenidoCelda[][] newMapaConocidoAgente = new ContenidoCelda[9][14];
-		 Integer[][] aux = new Integer[9][14];
-
+		ContenidoCelda[][] newMapaConocidoAgente = new ContenidoCelda[mapaConocidoAgente.length][mapaConocidoAgente[0].length];
+		
 		for (int i = 0 ; i<9; i++) {
 			for(int j=0;j<14; j++) {
 				newMapaConocidoAgente[i][j]= mapaConocidoAgente[i][j];
-				
-				aux[i][j] = this.cantidadVisitasPorCelda[i][j];
 			}
 		}
 		newState.setMapaConocidoAgente(newMapaConocidoAgente);
-		newState.setCantidadVisitasPorCelda(aux);		
+		
         return newState;
         
 	}
@@ -193,7 +118,6 @@ public class CaperucitaEstado extends SearchBasedAgentState {
 	public void updateState(Perception p) {
 		
 		//Esto e ejecuta en el see(Percepcion) de GoalBasedAgentSimulator, cada vez que percibe el agente.
-		//TODO Actualizar el mapa con las listas de celdas que va a tener la percepción
 		
 		CaperucitaPercepcion percepcion = (CaperucitaPercepcion) p;
 		

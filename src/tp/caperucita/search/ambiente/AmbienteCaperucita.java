@@ -10,7 +10,7 @@ import tp.caperucita.search.auxiliar.ContenidoCelda;
 import tp.caperucita.search.auxiliar.PosicionCelda;
 import tp.caperucita.search.caperucita.Caperucita;
 import tp.caperucita.search.caperucita.CaperucitaPercepcion;
-import tp.caperucita.search.caperucita.acciones.Morir;
+
 
 public class AmbienteCaperucita extends Environment {
 	
@@ -49,10 +49,6 @@ public class AmbienteCaperucita extends Environment {
 				"} fin AmbienteCaperucita\n";
 	}
 	
-	@Override
-	public boolean agentFailed(Action actionReturned) {
-		//Solo falla si la acción que tomó es Morir, que solo se puede tomar si tiene 0 vidas.
-		return actionReturned instanceof Morir;
-    }
+	
 
 }

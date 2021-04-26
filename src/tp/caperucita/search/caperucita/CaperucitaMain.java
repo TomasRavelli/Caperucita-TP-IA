@@ -22,6 +22,8 @@ public class CaperucitaMain {
         simulator.start();
         
         if(((CaperucitaEstado)agent.getAgentState()).getCantidadVidas() <= 0) {
+        	//Condicion de falla. Debido a las precondiciones que planteamos en las acciones, cuando el algoritmo de busqueda retorna NULL
+        	//es porque caperucita no puede ejecutar ninguna de las acciones y significa que la cantidad de vidas 0 (salvo que caperucita quede rodeada por obstaculo).
         	System.out.println("El lobo se ha comido a Caperucita tres veces.");
         }
         //CaperucitaPercepcion percepcion = new CaperucitaPercepcion(agent, environment);

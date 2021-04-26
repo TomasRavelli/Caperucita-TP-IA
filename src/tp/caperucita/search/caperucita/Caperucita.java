@@ -37,8 +37,7 @@ public class Caperucita extends SearchBasedAgent{
         operators.addElement(new IrDerechaYJuntarDulce());	
         operators.addElement(new IrAbajoYJuntarDulce());
         operators.addElement(new IrIzquierdaYJuntarDulce());
-        operators.addElement(new Morir());
-
+ 
         // Create the Problem which the agent will resolve
         Problem problem = new Problem(agGoal, agState, operators);
         this.setProblem(problem);
@@ -46,7 +45,6 @@ public class Caperucita extends SearchBasedAgent{
 
 	@Override
 	public void see(Perception p) {
-		//TODO ver si en este caso es necesario porque el agente en nuestro problema solo se actualiza cuando realiza una accion.
 		this.getAgentState().updateState(p);
 	}
 
@@ -56,16 +54,16 @@ public class Caperucita extends SearchBasedAgent{
     	//Esta busqueda genera problemas porque busca por una sola rama infinitamente.
 //		DepthFirstSearch strategy = new DepthFirstSearch(); 
 //    	BreathFirstSearch strategy = new BreathFirstSearch();
-    	
+//    	
     	// Uniform Cost:
-       IStepCostFunction costFunction = new FuncionCosto();
-       UniformCostSearch strategy = new UniformCostSearch(costFunction);
-       
+//       IStepCostFunction costFunction = new FuncionCosto();
+//       UniformCostSearch strategy = new UniformCostSearch(costFunction);
+//       
 
 //    	  A Star Search:
-//         IStepCostFunction cost = new FuncionCosto();
-//         IEstimatedCostFunction heuristic = new Heuristica();
-//         AStarSearch strategy = new AStarSearch(cost, heuristic);
+         IStepCostFunction cost = new FuncionCosto();
+         IEstimatedCostFunction heuristic = new Heuristica();
+         AStarSearch strategy = new AStarSearch(cost, heuristic);
         // Create a Search object with the strategy
         Search searchSolver = new Search(strategy);
 

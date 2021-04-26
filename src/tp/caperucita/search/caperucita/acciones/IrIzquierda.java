@@ -23,26 +23,17 @@ public class IrIzquierda extends SearchAction{
 		boolean hayLoboIzquierda = estadoCaperucita.getHayLoboIzquierda();
 	
 		if(cantidadVidas > 0 && cantidadCeldasLibreIzquierda > 0 && cantidadDulcesIzquierda==0) {
-//			if(!hayLoboIzquierda) {
-				
-				nuevaPosicion.setPosicionColumna(posicionActual.getPosicionColumna()-cantidadCeldasLibreIzquierda);
-				nuevaPosicion.setPosicionFila(posicionActual.getPosicionFila());
-				estadoCaperucita.setPosicionActual(nuevaPosicion);
-				
-				estadoCaperucita.sumarVisitaACelda(nuevaPosicion);
-				return estadoCaperucita;
-				
-//			}
-////			//Esta el lobo, caperucita piede una vida y todos los dulces.
-//			nuevaPosicion.setPosicionColumna(ConfiguracionInicial.posicionInicialCaperucita.getPosicionColumna());
-//			nuevaPosicion.setPosicionFila(ConfiguracionInicial.posicionInicialCaperucita.getPosicionFila());
-//			estadoCaperucita.setCantidadDulces(0);
-//			estadoCaperucita.setPosicionActual(nuevaPosicion);
-//			estadoCaperucita.setCantidadVidas(estadoCaperucita.getCantidadVidas()-1);
-//			estadoCaperucita.setCosto(cantidadCeldasLibreIzquierda*1.50);
-//			estadoCaperucita.sumarVisitaACelda(nuevaPosicion);
-//			return estadoCaperucita;
+
+			//No se verifica que este el lobo, porque si el lobo está el algoritmo en Search.java no funciona porque solo retorna acciones que le permitan a caperucita llegar al objetivo, y mientras es buscando, el lobo no cambia su posicion.
+			//Entonces, mientras esta realizando busqueda, caperucita piensa que el lobo no esta en ningun lado, pero en el mundo real aparecera y perdera una vida.
 		
+			nuevaPosicion.setPosicionColumna(posicionActual.getPosicionColumna()-cantidadCeldasLibreIzquierda);
+			nuevaPosicion.setPosicionFila(posicionActual.getPosicionFila());
+			estadoCaperucita.setPosicionActual(nuevaPosicion);
+			
+			estadoCaperucita.sumarVisitaACelda(nuevaPosicion);
+			return estadoCaperucita;
+						
 		}
 		
 		return null;
