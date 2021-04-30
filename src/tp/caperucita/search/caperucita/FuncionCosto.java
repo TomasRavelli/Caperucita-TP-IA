@@ -9,7 +9,13 @@ public class FuncionCosto implements IStepCostFunction {
 	public double calculateCost(NTree node) {
 		
 		CaperucitaEstado estadoActual = (CaperucitaEstado)node.getAgentState();
-		CaperucitaEstado estadoAnterior = (CaperucitaEstado)node.getParent().getAgentState();
+		CaperucitaEstado estadoAnterior;
+		NTree padre = node.getParent();
+		if(padre == null){
+			//Si el nodo no tiene padre quiere decir que es la raíz.
+			return 0.0;
+		}
+		estadoAnterior = (CaperucitaEstado) padre.getAgentState();
 		
 		//Verificamos el nodo actual y el nodo padre para ver si caperucita junto dulces en esa decision.
 		int cantidadDulcesRecogidos = estadoActual.getCantidadDulces()-estadoAnterior.getCantidadDulces();
