@@ -52,7 +52,6 @@ public class Caperucita extends SearchBasedAgent{
 	public Action selectAction() {
 		// elegir la estrategia de busqueda, en este caso, por profundidad
     	//Esta busqueda genera problemas porque busca por una sola rama infinitamente.
-//		DepthFirstSearch strategy = new DepthFirstSearch(); 
 //    	BreathFirstSearch strategy = new BreathFirstSearch();
 //    	
     	// Uniform Cost:

@@ -3,8 +3,6 @@ package tp.caperucita.search.caperucita;
 import frsf.cidisi.faia.exceptions.PrologConnectorException;
 import frsf.cidisi.faia.simulator.SearchBasedAgentSimulator;
 import tp.caperucita.search.ambiente.AmbienteCaperucita;
-import tp.caperucita.search.auxiliar.CaperucitaSimulator;
-import tp.caperucita.search.auxiliar.ConfiguracionInicial;
 
 public class CaperucitaMain {
 	public static void main(String[] args) throws PrologConnectorException {

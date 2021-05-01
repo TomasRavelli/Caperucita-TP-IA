@@ -101,10 +101,10 @@ public class CaperucitaEstado extends SearchBasedAgentState {
 		newState.setPosicionActual(this.posicionActual.clone());
 
 		ContenidoCelda[][] newMapaConocidoAgente = new ContenidoCelda[mapaConocidoAgente.length][mapaConocidoAgente[0].length];
-		
-		for (int i = 0 ; i<9; i++) {
-			for(int j=0;j<14; j++) {
-				newMapaConocidoAgente[i][j]= mapaConocidoAgente[i][j];
+
+		for (int i = 0; i < mapaConocidoAgente.length; i++) {
+			for (int j = 0; j < mapaConocidoAgente[i].length; j++) {
+				newMapaConocidoAgente[i][j] = mapaConocidoAgente[i][j];
 			}
 		}
 		newState.setMapaConocidoAgente(newMapaConocidoAgente);
