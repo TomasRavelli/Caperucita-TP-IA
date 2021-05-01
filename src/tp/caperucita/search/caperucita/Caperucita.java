@@ -14,7 +14,9 @@ import frsf.cidisi.faia.solver.search.DepthFirstSearch;
 import frsf.cidisi.faia.solver.search.IEstimatedCostFunction;
 import frsf.cidisi.faia.solver.search.IStepCostFunction;
 import frsf.cidisi.faia.solver.search.Search;
+import frsf.cidisi.faia.solver.search.Strategy;
 import frsf.cidisi.faia.solver.search.UniformCostSearch;
+import tp.caperucita.search.auxiliar.ConfiguracionInicial;
 import tp.caperucita.search.caperucita.acciones.*;
 
 public class Caperucita extends SearchBasedAgent{
@@ -51,18 +53,9 @@ public class Caperucita extends SearchBasedAgent{
 	@Override
 	public Action selectAction() {
 		// elegir la estrategia de busqueda, en este caso, por profundidad
-    	//Esta busqueda genera problemas porque busca por una sola rama infinitamente.
-//    	BreathFirstSearch strategy = new BreathFirstSearch();
-//    	
-    	// Uniform Cost:
-//       IStepCostFunction costFunction = new FuncionCosto();
-//       UniformCostSearch strategy = new UniformCostSearch(costFunction);
-//       
 
-//    	  A Star Search:
-         IStepCostFunction cost = new FuncionCosto();
-         IEstimatedCostFunction heuristic = new Heuristica();
-         AStarSearch strategy = new AStarSearch(cost, heuristic);
+        Strategy strategy = ConfiguracionInicial.getEstrategia();
+
         // Create a Search object with the strategy
         Search searchSolver = new Search(strategy);
 
