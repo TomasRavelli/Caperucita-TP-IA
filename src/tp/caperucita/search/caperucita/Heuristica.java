@@ -55,8 +55,8 @@ public class Heuristica implements IEstimatedCostFunction {
 
 	private double calcularDistanciaLineaRecta(PosicionCelda posicionActual, PosicionCelda pos) {
 		// Calculo de la distancia entre dos puntos. Cada celda se considera un punto
-		int x1 = pos.getPosicionFila(), x0 = posicionActual.getPosicionColumna(), y1 = pos.getPosicionColumna(), y0 = posicionActual.getPosicionColumna();
-		
+		int x0 = posicionActual.getPosicionFila(), y0 = posicionActual.getPosicionColumna(), x1 = pos.getPosicionFila(), y1 = pos.getPosicionColumna();
+				
 		return Math.sqrt(Math.pow((x1-x0), 2)+Math.pow((y1-y0), 2));
 	}
 
